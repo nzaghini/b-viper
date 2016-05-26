@@ -9,14 +9,12 @@
 /* Begin PBXBuildFile section */
 		0F601D60B5B70F936A917B34 /* Pods_Weather.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 32C7951405894CA57A4DD153 /* Pods_Weather.framework */; };
 		B35335191CF6F0EA00B915E8 /* WeatherListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B353350D1CF6F0EA00B915E8 /* WeatherListBuilder.swift */; };
-		B353351A1CF6F0EA00B915E8 /* WeatherListDefaultInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335101CF6F0EA00B915E8 /* WeatherListDefaultInteractor.swift */; };
 		B353351B1CF6F0EA00B915E8 /* WeatherListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335111CF6F0EA00B915E8 /* WeatherListInteractor.swift */; };
-		B353351C1CF6F0EA00B915E8 /* WeatherListDefaultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335131CF6F0EA00B915E8 /* WeatherListDefaultPresenter.swift */; };
 		B353351D1CF6F0EA00B915E8 /* WeatherListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335141CF6F0EA00B915E8 /* WeatherListPresenter.swift */; };
-		B353351E1CF6F0EA00B915E8 /* WeatherListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335151CF6F0EA00B915E8 /* WeatherListView.swift */; };
-		B353351F1CF6F0EA00B915E8 /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335171CF6F0EA00B915E8 /* WeatherListViewController.swift */; };
 		B35335211CF7018900B915E8 /* WeatherListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335201CF7018900B915E8 /* WeatherListRouter.swift */; };
 		B35335241CF702E100B915E8 /* WeatherListDefaultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335231CF702E100B915E8 /* WeatherListDefaultRouter.swift */; };
+		B35335261CF7492F00B915E8 /* WeatherListSwiftInjectBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335251CF7492F00B915E8 /* WeatherListSwiftInjectBuilder.swift */; };
+		B35335291CF74AD800B915E8 /* WeatherListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B35335281CF74AD800B915E8 /* WeatherListView.swift */; };
 		B36E11841CDDD3D6002BCC8D /* YahooWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E11831CDDD3D6002BCC8D /* YahooWeatherService.swift */; };
 		B3DDDB491CCD024300C71A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDDB481CCD024300C71A8F /* AppDelegate.swift */; };
 		B3DDDB501CCD024300C71A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DDDB4F1CCD024300C71A8F /* Assets.xcassets */; };
@@ -40,14 +38,12 @@
 		32C7951405894CA57A4DD153 /* Pods_Weather.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Weather.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		A9ECB7E45D8CCC7BA039E2A9 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
 		B353350D1CF6F0EA00B915E8 /* WeatherListBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListBuilder.swift; sourceTree = "<group>"; };
-		B35335101CF6F0EA00B915E8 /* WeatherListDefaultInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListDefaultInteractor.swift; sourceTree = "<group>"; };
 		B35335111CF6F0EA00B915E8 /* WeatherListInteractor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListInteractor.swift; sourceTree = "<group>"; };
-		B35335131CF6F0EA00B915E8 /* WeatherListDefaultPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListDefaultPresenter.swift; sourceTree = "<group>"; };
 		B35335141CF6F0EA00B915E8 /* WeatherListPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListPresenter.swift; sourceTree = "<group>"; };
-		B35335151CF6F0EA00B915E8 /* WeatherListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListView.swift; sourceTree = "<group>"; };
-		B35335171CF6F0EA00B915E8 /* WeatherListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListViewController.swift; sourceTree = "<group>"; };
 		B35335201CF7018900B915E8 /* WeatherListRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListRouter.swift; sourceTree = "<group>"; };
 		B35335231CF702E100B915E8 /* WeatherListDefaultRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListDefaultRouter.swift; sourceTree = "<group>"; };
+		B35335251CF7492F00B915E8 /* WeatherListSwiftInjectBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListSwiftInjectBuilder.swift; sourceTree = "<group>"; };
+		B35335281CF74AD800B915E8 /* WeatherListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListView.swift; sourceTree = "<group>"; };
 		B36E11831CDDD3D6002BCC8D /* YahooWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YahooWeatherService.swift; sourceTree = "<group>"; };
 		B3DDDB451CCD024300C71A8F /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DDDB481CCD024300C71A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -94,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				B353350D1CF6F0EA00B915E8 /* WeatherListBuilder.swift */,
+				B35335251CF7492F00B915E8 /* WeatherListSwiftInjectBuilder.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -101,9 +98,9 @@
 		B353350E1CF6F0EA00B915E8 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B35335271CF74AB700B915E8 /* View */,
 				B353350F1CF6F0EA00B915E8 /* Interactor */,
 				B35335121CF6F0EA00B915E8 /* Presenter */,
-				B35335161CF6F0EA00B915E8 /* View */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -111,7 +108,6 @@
 		B353350F1CF6F0EA00B915E8 /* Interactor */ = {
 			isa = PBXGroup;
 			children = (
-				B35335101CF6F0EA00B915E8 /* WeatherListDefaultInteractor.swift */,
 				B35335111CF6F0EA00B915E8 /* WeatherListInteractor.swift */,
 			);
 			path = Interactor;
@@ -120,20 +116,10 @@
 		B35335121CF6F0EA00B915E8 /* Presenter */ = {
 			isa = PBXGroup;
 			children = (
-				B35335131CF6F0EA00B915E8 /* WeatherListDefaultPresenter.swift */,
 				B35335141CF6F0EA00B915E8 /* WeatherListPresenter.swift */,
-				B35335151CF6F0EA00B915E8 /* WeatherListView.swift */,
 				B35335201CF7018900B915E8 /* WeatherListRouter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		B35335161CF6F0EA00B915E8 /* View */ = {
-			isa = PBXGroup;
-			children = (
-				B35335171CF6F0EA00B915E8 /* WeatherListViewController.swift */,
-			);
-			path = View;
 			sourceTree = "<group>";
 		};
 		B35335221CF702C900B915E8 /* Router */ = {
@@ -142,6 +128,14 @@
 				B35335231CF702E100B915E8 /* WeatherListDefaultRouter.swift */,
 			);
 			path = Router;
+			sourceTree = "<group>";
+		};
+		B35335271CF74AB700B915E8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B35335281CF74AD800B915E8 /* WeatherListView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		B3DDDB3C1CCD024300C71A8F = {
@@ -382,18 +376,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B353351E1CF6F0EA00B915E8 /* WeatherListView.swift in Sources */,
 				B3DDDB491CCD024300C71A8F /* AppDelegate.swift in Sources */,
 				B353351D1CF6F0EA00B915E8 /* WeatherListPresenter.swift in Sources */,
 				B36E11841CDDD3D6002BCC8D /* YahooWeatherService.swift in Sources */,
+				B35335291CF74AD800B915E8 /* WeatherListView.swift in Sources */,
 				B35335191CF6F0EA00B915E8 /* WeatherListBuilder.swift in Sources */,
 				B35335211CF7018900B915E8 /* WeatherListRouter.swift in Sources */,
-				B353351F1CF6F0EA00B915E8 /* WeatherListViewController.swift in Sources */,
 				B35335241CF702E100B915E8 /* WeatherListDefaultRouter.swift in Sources */,
 				C1AB6068EEAD9D8CC4F9B579 /* WeatherService.swift in Sources */,
-				B353351C1CF6F0EA00B915E8 /* WeatherListDefaultPresenter.swift in Sources */,
-				B353351A1CF6F0EA00B915E8 /* WeatherListDefaultInteractor.swift in Sources */,
 				B353351B1CF6F0EA00B915E8 /* WeatherListInteractor.swift in Sources */,
+				B35335261CF7492F00B915E8 /* WeatherListSwiftInjectBuilder.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

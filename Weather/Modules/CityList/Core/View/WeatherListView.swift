@@ -1,7 +1,16 @@
+import Foundation
 import UIKit
 
-class WeatherListViewController: UITableViewController, WeatherListView {
+protocol WeatherListView: class{
+    
+    func displayWeatherList(viewModel: WeatherListViewModel)
+    
+    func displayError(viewModel: String)
+    
+}
 
+class WeatherListViewController: UITableViewController, WeatherListView {
+    
     var viewModel: WeatherListViewModel?
     var presenter: WeatherListPresenter?
     
@@ -23,20 +32,20 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     func displayError(viewModel: String) {
         // display error
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let viewModel = self.viewModel {
             return viewModel.weatherItems.count
         }
         return 0;
     }
-
+    
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
