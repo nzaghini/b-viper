@@ -4,4 +4,3 @@ import UIKit
 protocol WeatherListBuilder {
     func buildWeatherListModule() -> UIViewController
 }
-

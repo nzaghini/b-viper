@@ -11,7 +11,7 @@ class YahooWeatherService: WeatherService {
     }
     
     func mockWeatherData(cityName: String) -> WeatherData{
-        return WeatherData(cityName: cityName, temperature: "18", forecastInDays: ["20","21","22"], temperatureUnit: "°C")
+        return WeatherData(cityName: cityName, temperature: "18", forecastInDays: ["20","21","22","19","20"], temperatureUnit: "°C")
     }
     
 }

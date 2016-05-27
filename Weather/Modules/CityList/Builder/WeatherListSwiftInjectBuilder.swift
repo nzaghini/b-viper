@@ -1,34 +1,35 @@
 import Foundation
 import Swinject
 
-struct WeatherListDefaultBuilder : WeatherListBuilder {
-    
-    let container = Container()
+struct WeatherListSwiftInjectBuilder : WeatherListBuilder {
     
     func buildWeatherListModule() -> UIViewController {
         
-        container.register(WeatherService.self){ _ in YahooWeatherService()}
-        
-        let viewDescription = container.register(WeatherListView.self){ _ in WeatherListViewController()}
+        let viewController = WeatherListViewController()
+        let viewDescription = Container.sharedContainer.register(WeatherListView.self){ _ in viewController}
         viewDescription.initCompleted { r, v in
             let view = v as! WeatherListViewController
             view.presenter = r.resolve(WeatherListPresenter.self)
         }
         
-        container.register(WeatherListInteractor.self){ r in
+        Container.sharedContainer.register(WeatherListInteractor.self){ r in
             WeatherListDefaultInteractor(weatherService: r.resolve(WeatherService.self)!)
         }
         
-        container.register(WeatherListRouter.self){ _ in WeatherListDefaultRouter()}
+        let routerDescription = Container.sharedContainer.register(WeatherListRouter.self){ _ in WeatherListDefaultRouter()}
+        routerDescription.initCompleted { r, router in
+            let listRouter = router as! WeatherListDefaultRouter
+            listRouter.viewController = viewController
+        }
         
-        let presenterDescription = container.register(WeatherListPresenter.self){ c in
+        let presenterDescription = Container.sharedContainer.register(WeatherListPresenter.self){ c in
             WeatherListDefaultPresenter(interactor: c.resolve(WeatherListInteractor.self)!, router:c.resolve(WeatherListRouter.self)!)}
         presenterDescription.initCompleted { r, p in
             let presenter = p as! WeatherListDefaultPresenter
             presenter.view = r.resolve(WeatherListView.self)
         }
         
-        return container.resolve(WeatherListView.self) as! UIViewController
+        return Container.sharedContainer.resolve(WeatherListView.self) as! UIViewController
         
     }
     
