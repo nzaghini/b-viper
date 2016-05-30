@@ -12,12 +12,8 @@ struct WeatherDetailForecastViewModel {
 }
 
 protocol WeatherDetailPresenter: class {
-    
     func loadContent()
-    
 }
-
-
 
 class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     
@@ -34,21 +30,19 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     // MARK: - WeatherDetailPresenter
     
     func loadContent() {
-        self.interactor.fetchCityWeather(self.city, completion: { (weatherData, error) in
-            if weatherData != nil {
-                let vm = self.buildViewModelWithData(weatherData!)
+        self.interactor.fetchCityWeather(self.city) { (result) in
+            switch result {
+            case .Success(let weather):
+                let vm = self.buildViewModel(weather)
                 self.view?.displayWeatherDetail(vm)
+                break
+            case .Failure(let reason):
+                self.view?.displayError(reason.localizedDescription)
             }
-            else if error != nil {
-                self.view?.displayError(error!.localizedDescription)
-            }
-            else {
-                self.view?.displayError("Error fetching city weather data")
-            }
-        })
+        }
     }
     
-    private func buildViewModelWithData(data: WeatherData) -> WeatherDetailViewModel {
+    private func buildViewModel(data: WeatherData) -> WeatherDetailViewModel {
         var forecasts = [WeatherDetailForecastViewModel]()
         
         let df = NSDateFormatter()

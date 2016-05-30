@@ -9,13 +9,9 @@ struct WeatherItem{
 }
 
 protocol WeatherListPresenter: class{
-    
     func loadContent()
-    
     func presentWeatherDetail(city: String)
-    
     func presentAddWeatherLocation()
-    
 }
 
 class WeatherListDefaultPresenter: WeatherListPresenter {
@@ -30,11 +26,15 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
     }
     
     func loadContent(){
-        self.interactor.fetchWeather({ (weatherData, error) in
-            if let fetchedWeatherData = weatherData {
-                self.view?.displayWeatherList(self.buildViewModelForWeatherData(fetchedWeatherData))
+        self.interactor.fetchWeather { (result) in
+            switch result{
+            case .Success(let fetchedWeather):
+                self.view?.displayWeatherList(self.buildViewModelForWeatherData(fetchedWeather))
+                break
+            case .Failure(let reason):
+                self.view?.displayError(reason.localizedDescription)
             }
-        })
+        }
     }
     
     func presentWeatherDetail(city: String){
@@ -46,12 +46,10 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
     }
     
     private func buildViewModelForWeatherData(weatherData: [WeatherData]) -> WeatherListViewModel {
-        
         let weatherItems = weatherData.map { (item) -> WeatherItem in
             return WeatherItem(cityName: item.cityName, temperature: item.temperature)
         }
         return WeatherListViewModel(weatherItems: weatherItems)
-        
     }
     
 }

@@ -1,14 +1,6 @@
 import Foundation
 import UIKit
 
-protocol WeatherListView: class{
-    
-    func displayWeatherList(viewModel: WeatherListViewModel)
-    
-    func displayError(viewModel: String)
-    
-}
-
 class WeatherListViewController: UITableViewController, WeatherListView {
     
     var viewModel: WeatherListViewModel?
@@ -29,8 +21,13 @@ class WeatherListViewController: UITableViewController, WeatherListView {
         self.tableView.reloadData()
     }
     
-    func displayError(viewModel: String) {
-        // display error
+    func displayError(errorMessage: String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+        alert.addAction(cancelAction)
+        
+        self.presentViewController(alert, animated: true, completion: nil)
+
     }
     
     // MARK: - Table view data source

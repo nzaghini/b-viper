@@ -2,12 +2,12 @@ import Foundation
 
 class YahooWeatherService: WeatherService {
     
-    func weatherData(cityName: String) -> WeatherData? {
-        return mockWeatherData(cityName)
+    func weatherData(cityName: String) -> WeatherServiceResult {
+        return WeatherServiceResult.Success(weather: self.mockWeatherData(cityName))
     }
     
-    func weatherData(cityName: String, completion:(weatherData: WeatherData?, error: NSError?)->()){
-        completion(weatherData: self.mockWeatherData(cityName), error: nil)
+    func weatherData(cityName: String, completion:(WeatherServiceResult)->()){
+        completion(WeatherServiceResult.Success(weather: self.mockWeatherData(cityName)))
     }
     
     func mockWeatherData(cityName: String) -> WeatherData{
