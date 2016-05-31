@@ -2,17 +2,21 @@ import Foundation
 import Swinject
 
 class WeatherListDefaultRouter: WeatherListRouter {
-    weak var viewController: WeatherListViewController?
+    
+    weak var viewController: UIViewController?
     
     func navigateToWeatherDetail(city: String) {
-        let builder = Container.sharedContainer.resolve(WeatherDetailBuilder.self)!
-        let vc = builder.buildWeatherDetailModuleWithCity(city)
-        
-        self.viewController?.navigationController?.pushViewController(vc, animated: true)
+        if let weatherDetailVC = self.weatherDetailBuilder()?.buildWeatherDetailModule(city){
+            self.viewController?.navigationController?.pushViewController(weatherDetailVC, animated: true)
+        }
     }
     
     func navigateToAddWeatherLocation() {
-        
+        // TODO
+    }
+    
+    private func weatherDetailBuilder() -> WeatherDetailBuilder?{
+        return Container.sharedContainer.resolve(WeatherDetailBuilder.self)
     }
     
 }

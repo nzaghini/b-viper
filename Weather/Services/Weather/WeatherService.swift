@@ -1,5 +1,10 @@
 import Foundation
 
+enum WeatherServiceResult {
+    case Success(weather: WeatherData)
+    case Failure(reason: NSError)
+}
+
 struct WeatherData{
     let cityName: String
     let temperature: String
@@ -8,8 +13,7 @@ struct WeatherData{
 }
 
 protocol WeatherService{
-    // NOTE: this is intentionally made synch for demo purpose, in need of SwiftRx or Promises to handle async calls
-    func weatherData(cityName: String) -> WeatherData?
-    
-    func weatherData(cityName: String, completion:(weatherData: WeatherData?, error: NSError?)->())
+    // NOTE: this is intentionally made synch for demo purpose
+    func weatherData(cityName: String) -> WeatherServiceResult
+    func weatherData(cityName: String, completion:(WeatherServiceResult)->())
 }

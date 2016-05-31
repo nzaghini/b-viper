@@ -3,6 +3,8 @@ import Swinject
 
 extension Container {
     
+    // Shared container
+    // We are still looking at the best way to achieve this with Swinject
     static let sharedContainer: Container = {
         let c = Container()
         

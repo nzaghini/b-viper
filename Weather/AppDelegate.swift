@@ -14,17 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let listBuilder = Container.sharedContainer.resolve(WeatherListBuilder.self)!
-        let rootVc = listBuilder.buildWeatherListModule()
+        guard let rootVc = self.weatherListBuilder()?.buildWeatherListModule() else {
+            print("Root Module failed to build. Check your DI setup.")
+            return false
+        }
         
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = UINavigationController(rootViewController: rootVc)
         self.window?.makeKeyWindow()
         
         return true
+    }
+    
+    private func weatherListBuilder() -> WeatherListBuilder? {
+        return Container.sharedContainer.resolve(WeatherListBuilder.self)
     }
 
     func applicationWillResignActive(application: UIApplication) {
