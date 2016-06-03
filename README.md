@@ -5,11 +5,9 @@ Collects experiments and ideas of application engineering with VIPER, Swift, Mic
 
 The goal is to showcase the (B)VIPER architecture on a simple Weather application.
 
-You can watch the full presentation here:   
-https://skillsmatter.com/skillscasts/7931-mastering-reuse-a-journey-into-application-modularization-with-viper
+You can watch the full presentation at [Skills Matter iOSCon 2016](https://skillsmatter.com/skillscasts/7931-mastering-reuse-a-journey-into-application-modularization-with-viper)
 
-You can download slides of the presentation here:   
-https://speakerdeck.com/nzaghini/mastering-reuse-a-journey-into-application-modularization-with-viper
+You can download slides of the presentation from [Speaker Deck]( https://speakerdeck.com/nzaghini/mastering-reuse-a-journey-into-application-modularization-with-viper)
 
 ## Usage
 
