@@ -13,13 +13,11 @@ You can download slides of the presentation from [Speaker Deck]( https://speaker
 
 To run the example project, clone the repo, and run `pod install` from the root directory first.
 
-## Features
-
-Currently supports three modules
+## Modules
 
 - [x] WeatherListModule: shows the list of cities with weather overview
 - [x] WeatherDetailModule: shows details of the weather and forecast for a specific city
-- [x] WeatheAddCityModule: allows the user to select a new city 
+- [ ] WeatheAddCityModule: allows the user to select a new city 
 
 ## Author
 
