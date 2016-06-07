@@ -1,31 +1,17 @@
 import Foundation
 
-struct WeatherListViewModel{
-    let weatherItems : [WeatherItem]
-}
-struct WeatherItem{
-    let cityName: String
-    let temperature: String
-}
-
-protocol WeatherListPresenter: class{
-    func loadContent()
-    func presentWeatherDetail(city: String)
-    func presentAddWeatherLocation()
-}
-
 class WeatherListDefaultPresenter: WeatherListPresenter {
     
     let interactor: WeatherListInteractor
     let router: WeatherListRouter
     weak var view: WeatherListView?
     
-    init(interactor: WeatherListInteractor, router: WeatherListRouter){
+    required init(interactor: WeatherListInteractor, router: WeatherListRouter) {
         self.interactor = interactor
         self.router = router
     }
     
-    func loadContent(){
+    func loadContent() {
         self.interactor.fetchWeather { (result) in
             switch result{
             case .Success(let fetchedWeather):
@@ -37,11 +23,11 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         }
     }
     
-    func presentWeatherDetail(city: String){
+    func presentWeatherDetail(city: String) {
         self.router.navigateToWeatherDetail(city)
     }
     
-    func presentAddWeatherLocation(){
+    func presentAddWeatherLocation() {
         self.router.navigateToAddWeatherLocation()
     }
     
@@ -51,5 +37,4 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         }
         return WeatherListViewModel(weatherItems: weatherItems)
     }
-    
 }

@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return false
         }
         
+        // Maybe we could implement it as some kind of router?:
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.rootViewController = UINavigationController(rootViewController: rootVc)
         self.window?.makeKeyWindow()

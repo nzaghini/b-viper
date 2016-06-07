@@ -5,15 +5,15 @@ enum WeatherServiceResult {
     case Failure(reason: NSError)
 }
 
-struct WeatherData{
+struct WeatherData {
     let cityName: String
     let temperature: String
     let forecastInDays: [String]
     let temperatureUnit: String
 }
 
-protocol WeatherService{
+protocol WeatherService {
     // NOTE: this is intentionally made synch for demo purpose
     func weatherData(cityName: String) -> WeatherServiceResult
-    func weatherData(cityName: String, completion:(WeatherServiceResult)->())
+    func weatherData(cityName: String, completion:(WeatherServiceResult) -> ())
 }

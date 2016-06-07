@@ -1,20 +1,5 @@
 import Foundation
 
-struct WeatherDetailViewModel {
-    let cityName: String
-    let temperature: String
-    let forecasts: [WeatherDetailForecastViewModel]
-}
-
-struct WeatherDetailForecastViewModel {
-    let day: String
-    let temp: String
-}
-
-protocol WeatherDetailPresenter: class {
-    func loadContent()
-}
-
 class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     
     let interactor: WeatherDetailInteractor
@@ -22,7 +7,7 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     
     weak var view: WeatherDetailView?
     
-    init(interactor: WeatherDetailInteractor, city: String) {
+    required init(interactor: WeatherDetailInteractor, city: String) {
         self.interactor = interactor
         self.city = city
     }

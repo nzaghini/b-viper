@@ -1,0 +1,12 @@
+PODS:
+  - Swinject (1.1.2)
+
+DEPENDENCIES:
+  - Swinject
+
+SPEC CHECKSUMS:
+  Swinject: 3debc5ac926dcd1be00947265a9db7a5f31b272a
+
+PODFILE CHECKSUM: d432c73813db0f6b09507b546cad8377fd6c9bb6
+
+COCOAPODS: 1.0.0
