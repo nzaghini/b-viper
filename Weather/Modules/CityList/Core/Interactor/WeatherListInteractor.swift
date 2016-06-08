@@ -3,13 +3,13 @@ import Foundation
 
 class WeatherListDefaultInteractor: WeatherListInteractor {
     
-    let weatherService: WeatherService
+    let weatherService: WeatherService;
     
     init(weatherService: WeatherService) {
         self.weatherService = weatherService
     }
     
-    func fetchWeather(completion: (FetchWeatherResult) -> ()) {
+    func fetchWeather(completion: (FetchWeatherResult) -> ()){
         
         let cities = self.allCities()
         
@@ -23,6 +23,7 @@ class WeatherListDefaultInteractor: WeatherListInteractor {
         }
         
         completion(FetchWeatherResult.Success(weather: citiesWeather))
+        
     }
     
     func allCities() -> [String] {

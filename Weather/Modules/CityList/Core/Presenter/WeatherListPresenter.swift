@@ -23,11 +23,11 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         }
     }
     
-    func presentWeatherDetail(city: String) {
+    func presentWeatherDetail(city: String){
         self.router.navigateToWeatherDetail(city)
     }
     
-    func presentAddWeatherLocation() {
+    func presentAddWeatherLocation(){
         self.router.navigateToAddWeatherLocation()
     }
     
@@ -37,4 +37,5 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         }
         return WeatherListViewModel(weatherItems: weatherItems)
     }
+    
 }
