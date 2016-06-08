@@ -5,7 +5,7 @@ class WeatherListDefaultInteractor: WeatherListInteractor {
     
     let weatherService: WeatherService;
     
-    init(weatherService: WeatherService) {
+    init(weatherService: WeatherService){
         self.weatherService = weatherService
     }
     
