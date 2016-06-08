@@ -52,6 +52,7 @@ protocol WeatherDetailPresenter: class {
     func loadContent()
 }
 
+
 // -- View:
 
 protocol WeatherDetailView: class {
