@@ -11,7 +11,7 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         self.router = router
     }
     
-    func loadContent() {
+    func loadContent(){
         self.interactor.fetchWeather { (result) in
             switch result{
             case .Success(let fetchedWeather):
