@@ -5,5 +5,5 @@ use_frameworks!
 source 'https://github.com/CocoaPods/Specs.git'
 
 target :Weather do
-    #pod 'Swinject'
+    pod 'Swinject'
 end
