@@ -13,5 +13,4 @@ struct WeatherDetailDefaultBuilder : WeatherDetailBuilder {
 
         return view       
     }
-    
 }

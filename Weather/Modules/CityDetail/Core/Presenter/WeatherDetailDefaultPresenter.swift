@@ -48,5 +48,4 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
                                       temperature: data.temperature + data.temperatureUnit,
                                       forecasts: forecasts)
     }
-    
 }

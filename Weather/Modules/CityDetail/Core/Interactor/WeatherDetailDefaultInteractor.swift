@@ -19,5 +19,4 @@ class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
             }
         }
     }
-    
 }

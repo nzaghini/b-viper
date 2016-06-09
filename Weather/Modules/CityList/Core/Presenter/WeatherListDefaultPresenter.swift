@@ -6,7 +6,7 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
     var         router      : WeatherListRouter
     unowned var view        : WeatherListView
     
-    init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView) {
+    required init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView) {
     
         self.interactor = interactor
         self.router     = router
@@ -39,5 +39,5 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         }
         return WeatherListViewModel(weatherItems: weatherItems)
     }
-    
 }
+
