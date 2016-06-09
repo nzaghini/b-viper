@@ -52,22 +52,23 @@ protocol WeatherListPresenter: class {
     
     /// Required dependencies for that presenter in VIPER architecture.
     /// The idea is to make it explicit in protocol what other components
-    /// are needed for this module presenter to function properly.
+    /// are needed for this module presenter to function.
     // ???: Is that a good idea to declare those dependencies in protocol?
     
     var         interactor  : WeatherListInteractor {get set}
     var         router      : WeatherListRouter     {get set}
     unowned var view        : WeatherListView       {get set}
     
-    /// A required initializer instantiating presenter with required dependencies.
-    /// The idea is to make it explicit what initializer should be used
-    /// To initialize all required & non-optional  properties properly.
-    // ???: Is that a good idea to declare those dependencies in protocol,
+    /// An initializer instantiating presenter with required dependencies.
+    /// The idea is to make it explicit what init should be used
+    /// to initialize all required & non-optional properties.
+    // ???: Is that a good idea to declare such initializer in protocol,
     // ???: Or should they be a part of contrete implementation instead?
     
     init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView)
     
     //Interface:
+    
     func loadContent()
     func presentWeatherDetail(city: String)
     func presentAddWeatherLocation()
@@ -102,6 +103,7 @@ protocol WeatherListView: class {
     var presenter: WeatherListPresenter? {get set}
     
     //Interface:
+    
     func displayWeatherList(viewModel: WeatherListViewModel)
     func displayError(errorMessage: String)
 }

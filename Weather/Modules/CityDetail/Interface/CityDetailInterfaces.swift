@@ -60,7 +60,7 @@ protocol WeatherDetailPresenter: class {
     
     /// Required dependencies for that presenter in VIPER architecture.
     /// The idea is to make it explicit in protocol what other components
-    /// are needed for this module presenter to function properly.
+    /// are needed for this module presenter to function.
     // ???: Is that a good idea to declare those dependencies in protocol,
     // ???: or should they be a part of contrete implementation instead?
     
@@ -68,8 +68,11 @@ protocol WeatherDetailPresenter: class {
     unowned var view        : WeatherDetailView         {get}
     
     
-    /// A required initializer instantiating presenter with required dependencies.
-    // ???: Is that a good idea to declare such initializer in protocol?
+    /// An initializer instantiating presenter with required dependencies.
+    /// The idea is to make it explicit what init should be used
+    /// to initialize all required & non-optional properties.
+    // ???: Is that a good idea to declare such initializer in protocol,
+    // ???: Or should they be a part of contrete implementation instead?
     
     init(interactor: WeatherDetailInteractor, city: String, view : WeatherDetailView)
     
