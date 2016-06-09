@@ -37,8 +37,8 @@ protocol WeatherListInteractor: class {
 
 struct WeatherItem {
     
-    let cityName: String
-    let temperature: String
+    let cityName    : String
+    let temperature : String
 }
 
 struct WeatherListViewModel {
@@ -50,11 +50,9 @@ struct WeatherListViewModel {
 
 protocol WeatherListPresenter: class {
     
-    var interactor  : WeatherListInteractor   {get}
-    var router      : WeatherListRouter       {get}
-    var view        : WeatherListView?        {get set}
-    
-    init(interactor: WeatherListInteractor, router: WeatherListRouter)
+    var         interactor  : WeatherListInteractor {get set}
+    var         router      : WeatherListRouter     {get set}
+    unowned var view        : WeatherListView       {get set}
     
     func loadContent()
     func presentWeatherDetail(city: String)
@@ -66,7 +64,6 @@ protocol WeatherListPresenter: class {
 
 protocol WeatherListView: class {
     
-    var viewModel: WeatherListViewModel? {get set}
     var presenter: WeatherListPresenter? {get set}
     
     func displayWeatherList(viewModel: WeatherListViewModel)

@@ -2,23 +2,25 @@ import Foundation
 
 class WeatherListDefaultPresenter: WeatherListPresenter {
     
-    let interactor: WeatherListInteractor
-    let router: WeatherListRouter
-    weak var view: WeatherListView?
+    var         interactor  : WeatherListInteractor
+    var         router      : WeatherListRouter
+    unowned var view        : WeatherListView
     
-    required init(interactor: WeatherListInteractor, router: WeatherListRouter) {
+    init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView) {
+    
         self.interactor = interactor
-        self.router = router
+        self.router     = router
+        self.view       = view
     }
     
     func loadContent(){
         self.interactor.fetchWeather { (result) in
             switch result{
             case .Success(let fetchedWeather):
-                self.view?.displayWeatherList(self.buildViewModelForWeatherData(fetchedWeather))
+                self.view.displayWeatherList(self.buildViewModelForWeatherData(fetchedWeather))
                 break
             case .Failure(let reason):
-                self.view?.displayError(reason.localizedDescription)
+                self.view.displayError(reason.localizedDescription)
             }
         }
     }

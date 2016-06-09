@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Swinject
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     private func weatherListBuilder() -> WeatherListBuilder? {
-        return Container.sharedContainer.resolve(WeatherListBuilder.self)
+        return WeatherListDefaultBuilder()
     }
 
     func applicationWillResignActive(application: UIApplication) {

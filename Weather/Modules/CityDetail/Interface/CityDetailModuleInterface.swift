@@ -28,13 +28,13 @@ protocol WeatherDetailInteractor {
 
 struct WeatherDetailViewModel {
     
-    let cityName: String
-    let temperature: String
-    let forecasts: [WeatherDetailForecastViewModel]
+    let cityName    : String
+    let temperature : String
+    let forecasts   : [WeatherDetailForecastViewModel]
 }
 
 struct WeatherDetailForecastViewModel {
-    let day: String
+    let day : String
     let temp: String
 }
 
@@ -43,11 +43,9 @@ struct WeatherDetailForecastViewModel {
 
 protocol WeatherDetailPresenter: class {
     
-    var         interactor: WeatherDetailInteractor {get}
-    var         city:       String {get}
-    weak var    view:       WeatherDetailView? {get set}
-    
-    init(interactor: WeatherDetailInteractor, city: String)
+    var         city        : String                    {get}
+    var         interactor  : WeatherDetailInteractor   {get set}
+    unowned var view        : WeatherDetailView         {get}
     
     func loadContent()
 }
@@ -58,7 +56,7 @@ protocol WeatherDetailPresenter: class {
 protocol WeatherDetailView: class {
     
     var presenter: WeatherDetailPresenter? {get set}
-    
+
     func displayWeatherDetail(viewModel: WeatherDetailViewModel)
     func displayError(errorMessage: String)
 }

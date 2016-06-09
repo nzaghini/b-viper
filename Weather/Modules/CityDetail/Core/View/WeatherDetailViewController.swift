@@ -8,7 +8,6 @@ class WeatherDetailViewController: UIViewController, WeatherDetailView {
     
     var presenter: WeatherDetailPresenter?
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         

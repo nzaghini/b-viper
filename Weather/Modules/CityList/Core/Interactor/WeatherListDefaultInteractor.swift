@@ -3,7 +3,7 @@ import Foundation
 
 class WeatherListDefaultInteractor: WeatherListInteractor {
     
-    let weatherService: WeatherService;
+    let weatherService: WeatherService
     
     init(weatherService: WeatherService){
         self.weatherService = weatherService
@@ -23,7 +23,6 @@ class WeatherListDefaultInteractor: WeatherListInteractor {
         }
         
         completion(FetchWeatherResult.Success(weather: citiesWeather))
-        
     }
     
     func allCities() -> [String] {
@@ -34,5 +33,4 @@ class WeatherListDefaultInteractor: WeatherListInteractor {
     func emptyWeatherData(cityName: String) -> WeatherData {
         return WeatherData(cityName: cityName, temperature: "n/a", forecastInDays: [], temperatureUnit: "n/a")
     }
-    
 }

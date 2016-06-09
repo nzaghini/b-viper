@@ -2,14 +2,15 @@ import Foundation
 
 class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     
-    let interactor: WeatherDetailInteractor
+    var interactor: WeatherDetailInteractor
     let city: String
     
-    weak var view: WeatherDetailView?
+    unowned var view: WeatherDetailView
     
-    required init(interactor: WeatherDetailInteractor, city: String) {
+    required init(interactor: WeatherDetailInteractor, city: String, view : WeatherDetailView) {
         self.interactor = interactor
-        self.city = city
+        self.city       = city
+        self.view       = view
     }
     
     // MARK: - WeatherDetailPresenter
@@ -19,10 +20,10 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
             switch result {
             case .Success(let weather):
                 let vm = self.buildViewModel(weather)
-                self.view?.displayWeatherDetail(vm)
+                self.view.displayWeatherDetail(vm)
                 break
             case .Failure(let reason):
-                self.view?.displayError(reason.localizedDescription)
+                self.view.displayError(reason.localizedDescription)
             }
         }
     }
