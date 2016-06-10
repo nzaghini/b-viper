@@ -7,9 +7,6 @@ struct WeatherListDefaultBuilder : WeatherListBuilder {
         
             let view            = WeatherListViewController()
             let router          = WeatherListDefaultRouter(viewController: view)
-        
-            router.viewController = view
-        
             let interactor      = WeatherListDefaultInteractor(weatherService: YahooWeatherService())
             let presenter       = WeatherListDefaultPresenter(interactor: interactor, router: router, view: view)
     
