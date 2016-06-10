@@ -19,7 +19,7 @@ class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
     
     func fetchCityWeather(city: String, completion: (FetchCityWeatherResult) -> ()) {
         self.weatherService.weatherData(city) { result in
-            switch result{
+            switch result {
             case .Success(let weather):
                 completion(FetchCityWeatherResult.Success(weather: weather))
                 break

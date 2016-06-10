@@ -1,0 +1,9 @@
+included:
+  - Weather
+  - WeatherTests
+opt_in_rules:
+  - empty_count
+disabled_rules: # rule identifiers to exclude from running
+   - line_length
+   - trailing_whitespace
+

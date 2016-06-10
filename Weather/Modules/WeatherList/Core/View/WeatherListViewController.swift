@@ -40,7 +40,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
         if let viewModel = self.viewModel {
             return viewModel.weatherItems.count
         }
-        return 0;
+        return 0
     }
     
     
@@ -62,7 +62,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     
     // MARK: - Utils
     
-    func addButtonItem() -> UIBarButtonItem{
+    func addButtonItem() -> UIBarButtonItem {
         return UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.addWeatherLocation))
     }
     

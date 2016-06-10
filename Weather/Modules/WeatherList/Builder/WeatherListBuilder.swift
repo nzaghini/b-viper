@@ -1,6 +1,6 @@
 import Foundation
 import UIKit
 
-protocol WeatherListBuilder {
+public protocol WeatherListBuilder {
     func buildWeatherListModule() -> UIViewController?    
 }

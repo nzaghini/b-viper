@@ -3,7 +3,7 @@ import Foundation
 
 
 class WeatherServiceMock: WeatherService {
-    var weatherData = WeatherData(cityName: "", temperature: "", forecastInDays: [], temperatureUnit: "")
+    var weatherDataList: [WeatherData] = []
     var error: NSError?
     
     var weatherDataSyncCalled = false
@@ -14,22 +14,28 @@ class WeatherServiceMock: WeatherService {
         self.cityNameCalled? = cityName
         self.weatherDataSyncCalled = true
         
-        return self.resultToReturn()
+        return self.resultToReturn(cityName)
     }
     
     func weatherData(cityName: String, completion: WeatherServiceCompletion) {
         self.cityNameCalled? = cityName
         self.weatherDataAsyncCalled = true
         
-        completion(self.resultToReturn())
+        completion(self.resultToReturn(cityName))
     }
     
-    private func resultToReturn() -> WeatherServiceResult {
-        if self.error != nil {
-            return WeatherServiceResult.Failure(reason: self.error!)
+    private func resultToReturn(cityName: String) -> WeatherServiceResult {
+        if let error = self.error {
+            return WeatherServiceResult.Failure(reason: error)
         }
-        
-        return WeatherServiceResult.Success(weather: self.weatherData)
+        if let weatherForCity = findWeather(forCity: cityName) {
+            return WeatherServiceResult.Success(weather: weatherForCity)
+        }
+        return WeatherServiceResult.Failure(reason: NSError(domain: "WeatherServiceMock", code: 0, userInfo: ["reason":"no mock city found on weatherDataList matching your cityName request: \(weatherDataList)"]))
     }
     
+    private func findWeather(forCity cityName: String) -> WeatherData? {
+        let weather = self.weatherDataList.filter({$0.cityName == cityName})
+        return weather.isEmpty ? nil : weather.first
+    }
 }

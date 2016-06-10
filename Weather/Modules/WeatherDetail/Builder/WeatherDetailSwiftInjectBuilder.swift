@@ -1,7 +1,7 @@
 import Foundation
 import Swinject
 
-struct WeatherDetailSwiftInjectBuilder : WeatherDetailBuilder {
+struct WeatherDetailSwiftInjectBuilder: WeatherDetailBuilder {
     
     func buildWeatherDetailModule(city: String) -> UIViewController? {
         registerView()
@@ -16,24 +16,27 @@ struct WeatherDetailSwiftInjectBuilder : WeatherDetailBuilder {
             WeatherDetailViewController()
         }
         viewDescription.initCompleted { r, v in
-            let view = v as! WeatherDetailViewController
-            view.presenter = r.resolve(WeatherDetailPresenter.self)
+            if let view = v as? WeatherDetailViewController {
+                view.presenter = r.resolve(WeatherDetailPresenter.self)
+            }
         }
     }
     
     private func registerInteractor() {
-        Container.sharedContainer.register(WeatherDetailInteractor.self){ r in
+        Container.sharedContainer.register(WeatherDetailInteractor.self) { r in
             WeatherDetailDefaultInteractor(weatherService: r.resolve(WeatherService.self)!)
         }
     }
     
     private func registerPresenterWithCity(city: String) {
-        let presenterDescription = Container.sharedContainer.register(WeatherDetailPresenter.self){ c in
+        let presenterDescription = Container.sharedContainer.register(WeatherDetailPresenter.self) { c in
             WeatherDetailDefaultPresenter(interactor: c.resolve(WeatherDetailInteractor.self)!, city: city)
         }
         presenterDescription.initCompleted { r, p in
-            let presenter = p as! WeatherDetailDefaultPresenter
-            presenter.view = r.resolve(WeatherDetailView.self)
+            if let presenter = p as? WeatherDetailDefaultPresenter {
+                presenter.view = r.resolve(WeatherDetailView.self)
+            }
+            
         }
     }
     
