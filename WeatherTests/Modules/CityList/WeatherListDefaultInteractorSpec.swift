@@ -27,9 +27,9 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
                     expect(result).notTo(beNil())
                     if case .Success(let weather) = result {
                         expect(weather).notTo(beNil())
-                        expect(weather[0]).to(equal(CityWeather(cityName: "Rome", weatherData: expectedWeatherDataList[0])))
-                        expect(weather[1]).to(equal(CityWeather(cityName: "London", weatherData: expectedWeatherDataList[1])))
-                        expect(weather[2]).to(equal(CityWeather(cityName: "Dublin", weatherData: expectedWeatherDataList[2])))
+                        expect(weather[0]).to(equal(CityWeatherData(cityName: "Rome", weatherData: expectedWeatherDataList[0])))
+                        expect(weather[1]).to(equal(CityWeatherData(cityName: "London", weatherData: expectedWeatherDataList[1])))
+                        expect(weather[2]).to(equal(CityWeatherData(cityName: "Dublin", weatherData: expectedWeatherDataList[2])))
                     } else {
                         fail()
                     }
@@ -53,9 +53,9 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
                     expect(result).notTo(beNil())
                     if case .Success(let weather) = result {
                         expect(weather).notTo(beNil())
-                        expect(weather[0]).to(equal(CityWeather(cityName: "Rome", weatherData: expectedWeatherDataList[0])))
-                        expect(weather[1]).to(equal(CityWeather(cityName: "London", weatherData: nil)))
-                        expect(weather[2]).to(equal(CityWeather(cityName: "Dublin", weatherData: nil)))
+                        expect(weather[0]).to(equal(CityWeatherData(cityName: "Rome", weatherData: expectedWeatherDataList[0])))
+                        expect(weather[1]).to(equal(CityWeatherData(cityName: "London", weatherData: nil)))
+                        expect(weather[2]).to(equal(CityWeatherData(cityName: "Dublin", weatherData: nil)))
                     } else {
                         fail()
                     }
