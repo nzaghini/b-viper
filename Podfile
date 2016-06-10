@@ -7,3 +7,8 @@ source 'https://github.com/CocoaPods/Specs.git'
 target :Weather do
   pod 'Swinject'
 end
+
+target :WeatherTests do
+  pod 'Quick'
+  pod 'Nimble'
+end
