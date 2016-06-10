@@ -6,7 +6,7 @@ struct WeatherListDefaultBuilder : WeatherListBuilder {
     func buildWeatherListModule() -> UIViewController? {
         
             let view            = WeatherListViewController()
-            let router          = WeatherListDefaultRouter()
+            let router          = WeatherListDefaultRouter(viewController: view)
         
             router.viewController = view
         

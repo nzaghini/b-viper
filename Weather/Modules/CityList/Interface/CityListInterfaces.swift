@@ -23,6 +23,21 @@ protocol WeatherListBuilder {
 
 protocol WeatherListRouter {
     
+    /// Just so router can do its navigation job
+    /// with UIKit navigation stack.
+    // ???: Is that a good idea to declare this dependency in a protocol?
+    
+    unowned var viewController: UIViewController {get set}
+    
+    /// An initializer instantiating router with required viewController.
+    /// The idea is to make it explicit what init should be used
+    /// to initialize router with controller needed for it to work properly.
+    // ???: Is that a good idea to declare such initializer in protocol,
+    // ???: Or should they be a part of contrete implementation instead?
+    
+    init(viewController: UIViewController)
+    
+    
     func navigateToWeatherDetail(city: String)
     func navigateToAddWeatherLocation()
 }
