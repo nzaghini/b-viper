@@ -1,8 +1,8 @@
 import Foundation
-import Swinject
+import UIKit
 
 class WeatherListDefaultRouter: WeatherListRouter {
-    
+
     weak var viewController: UIViewController?
     
     func navigateToWeatherDetail(city: String) {
@@ -16,7 +16,6 @@ class WeatherListDefaultRouter: WeatherListRouter {
     }
     
     private func weatherDetailBuilder() -> WeatherDetailBuilder?{
-        return Container.sharedContainer.resolve(WeatherDetailBuilder.self)
+        return WeatherDetailDefaultBuilder()
     }
-    
 }

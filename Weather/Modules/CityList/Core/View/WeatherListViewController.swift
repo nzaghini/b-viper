@@ -69,5 +69,5 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     func addWeatherLocation() {
         self.presenter?.presentAddWeatherLocation()
     }
-    
 }
+

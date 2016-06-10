@@ -1,14 +1,5 @@
 import Foundation
 
-enum FetchCityWeatherResult {
-    case Success(weather: WeatherData)
-    case Failure(reason: NSError)
-}
-
-protocol WeatherDetailInteractor {
-    func fetchCityWeather(city: String, completion: (FetchCityWeatherResult) -> ())
-}
-
 class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
     
     let weatherService: WeatherService
@@ -28,5 +19,4 @@ class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
             }
         }
     }
-    
 }
