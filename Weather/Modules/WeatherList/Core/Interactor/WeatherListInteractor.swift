@@ -1,18 +1,18 @@
 import Foundation
 
-public struct CityWeather {
+public struct CityWeatherData {
     let cityName: String
     let weatherData: WeatherData?
 }
 
-extension CityWeather: Equatable { }
+extension CityWeatherData: Equatable { }
 
-public func == (lhs: CityWeather, rhs: CityWeather) -> Bool {
+public func == (lhs: CityWeatherData, rhs: CityWeatherData) -> Bool {
     return lhs.cityName == rhs.cityName && lhs.weatherData == rhs.weatherData
 }
 
 public enum FetchWeatherResult {
-    case Success(weather: [CityWeather])
+    case Success(weather: [CityWeatherData])
     case Failure(reason: NSError)
 }
 
@@ -32,12 +32,12 @@ public class WeatherListDefaultInteractor: WeatherListInteractor {
         
         let cities = self.allCities()
         
-        let citiesWeather = cities.map { (cityName) -> CityWeather in
+        let citiesWeather = cities.map { (cityName) -> CityWeatherData in
             switch self.weatherService.weatherData(cityName) {
             case .Success(let weather):
-                return CityWeather(cityName: cityName, weatherData: weather)
+                return CityWeatherData(cityName: cityName, weatherData: weather)
             case .Failure(_):
-                return CityWeather(cityName: cityName, weatherData: nil)
+                return CityWeatherData(cityName: cityName, weatherData: nil)
             }
         }
         

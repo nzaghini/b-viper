@@ -45,7 +45,7 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         self.router.navigateToAddWeatherLocation()
     }
     
-    private func buildViewModelForWeatherData(weatherData: [CityWeather]) -> WeatherListViewModel {
+    private func buildViewModelForWeatherData(weatherData: [CityWeatherData]) -> WeatherListViewModel {
         let weatherItems = weatherData.map { (item) -> WeatherItem in
             return WeatherItem(cityName: item.cityName, temperature: item.weatherData?.temperature ?? "n/a" )
         }
