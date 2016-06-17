@@ -25,11 +25,11 @@ class WeatherDetailViewController: UIViewController, WeatherDetailView {
         self.todayTemperatureLabel.text = viewModel.temperature
         
         for forecast in viewModel.forecasts {
-            let forecastView = NSBundle.mainBundle().loadNibNamed("WeatherForecastView", owner: nil, options: nil).first as! WeatherForecastView
-            forecastView.dayLabel.text = forecast.day
-            forecastView.tempLabel.text = forecast.temp
-            
-            self.stackView.addArrangedSubview(forecastView)
+            if let forecastView = NSBundle.mainBundle().loadNibNamed("WeatherForecastView", owner: nil, options: nil).first as? WeatherForecastView {
+                forecastView.dayLabel.text = forecast.day
+                forecastView.tempLabel.text = forecast.temp
+                self.stackView.addArrangedSubview(forecastView)
+            }
         }
     }
     

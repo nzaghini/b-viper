@@ -1,14 +1,14 @@
 import Foundation
 
-struct WeatherListViewModel{
-    let weatherItems : [WeatherItem]
+struct WeatherListViewModel {
+    let weatherItems: [WeatherItem]
 }
-struct WeatherItem{
+struct WeatherItem {
     let cityName: String
     let temperature: String
 }
 
-protocol WeatherListPresenter: class{
+protocol WeatherListPresenter {
     func loadContent()
     func presentWeatherDetail(city: String)
     func presentAddWeatherLocation()
@@ -20,14 +20,14 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
     let router: WeatherListRouter
     weak var view: WeatherListView?
     
-    init(interactor: WeatherListInteractor, router: WeatherListRouter){
+    init(interactor: WeatherListInteractor, router: WeatherListRouter) {
         self.interactor = interactor
         self.router = router
     }
     
-    func loadContent(){
+    func loadContent() {
         self.interactor.fetchWeather { (result) in
-            switch result{
+            switch result {
             case .Success(let fetchedWeather):
                 self.view?.displayWeatherList(self.buildViewModelForWeatherData(fetchedWeather))
                 break
@@ -37,17 +37,17 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         }
     }
     
-    func presentWeatherDetail(city: String){
+    func presentWeatherDetail(city: String) {
         self.router.navigateToWeatherDetail(city)
     }
     
-    func presentAddWeatherLocation(){
+    func presentAddWeatherLocation() {
         self.router.navigateToAddWeatherLocation()
     }
     
-    private func buildViewModelForWeatherData(weatherData: [WeatherData]) -> WeatherListViewModel {
+    private func buildViewModelForWeatherData(weatherData: [CityWeatherData]) -> WeatherListViewModel {
         let weatherItems = weatherData.map { (item) -> WeatherItem in
-            return WeatherItem(cityName: item.cityName, temperature: item.temperature)
+            return WeatherItem(cityName: item.cityName, temperature: item.weatherData?.temperature ?? "n/a" )
         }
         return WeatherListViewModel(weatherItems: weatherItems)
     }
