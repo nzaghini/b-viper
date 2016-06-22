@@ -363,12 +363,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3DDDB621CCD024300C71A8F /* Build configuration list for PBXNativeTarget "Weather" */;
 			buildPhases = (
-				127C988D6C5E361B7FE2A4F5 /* 📦 Check Pods Manifest.lock */,
+				127C988D6C5E361B7FE2A4F5 /* [CP] Check Pods Manifest.lock */,
 				B3DDDB411CCD024300C71A8F /* Sources */,
 				B3DDDB421CCD024300C71A8F /* Frameworks */,
 				B3DDDB431CCD024300C71A8F /* Resources */,
-				545C26CD147DDE53AAA21C47 /* 📦 Embed Pods Frameworks */,
-				5869B7EEDC7622F5597C8E9C /* 📦 Copy Pods Resources */,
+				545C26CD147DDE53AAA21C47 /* [CP] Embed Pods Frameworks */,
+				5869B7EEDC7622F5597C8E9C /* [CP] Copy Pods Resources */,
 				23B747F68D89645E3F9E417C /* Embed Pods Frameworks */,
 				B32631F71D0AF79100AB7FF9 /* ShellScript */,
 			);
@@ -385,12 +385,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B3DDDB651CCD024300C71A8F /* Build configuration list for PBXNativeTarget "WeatherTests" */;
 			buildPhases = (
-				D807DB946E781B0143912DA5 /* Check Pods Manifest.lock */,
+				D807DB946E781B0143912DA5 /* [CP] Check Pods Manifest.lock */,
 				B3DDDB551CCD024300C71A8F /* Sources */,
-				B3DDDB561CCD024300C71A8F /* Frameworks */,
 				B3DDDB571CCD024300C71A8F /* Resources */,
-				6897757D77FAE4B2CC86D78A /* Embed Pods Frameworks */,
-				FFA48EB6A9D03D19F21EC2E8 /* Copy Pods Resources */,
+				B3DDDB561CCD024300C71A8F /* Frameworks */,
+				6897757D77FAE4B2CC86D78A /* [CP] Embed Pods Frameworks */,
+				FFA48EB6A9D03D19F21EC2E8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -463,14 +463,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		127C988D6C5E361B7FE2A4F5 /* 📦 Check Pods Manifest.lock */ = {
+		127C988D6C5E361B7FE2A4F5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -493,14 +493,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		545C26CD147DDE53AAA21C47 /* 📦 Embed Pods Frameworks */ = {
+		545C26CD147DDE53AAA21C47 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,14 +508,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		5869B7EEDC7622F5597C8E9C /* 📦 Copy Pods Resources */ = {
+		5869B7EEDC7622F5597C8E9C /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -523,14 +523,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Weather/Pods-Weather-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		6897757D77FAE4B2CC86D78A /* Embed Pods Frameworks */ = {
+		6897757D77FAE4B2CC86D78A /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -551,14 +551,14 @@
 			shellPath = /bin/sh;
 			shellScript = "if which swiftlint >/dev/null; then\nswiftlint\nelse\necho \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
 		};
-		D807DB946E781B0143912DA5 /* Check Pods Manifest.lock */ = {
+		D807DB946E781B0143912DA5 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -566,14 +566,14 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		FFA48EB6A9D03D19F21EC2E8 /* Copy Pods Resources */ = {
+		FFA48EB6A9D03D19F21EC2E8 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
