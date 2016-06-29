@@ -1,0 +1,33 @@
+default_platform :ios
+
+platform :ios do
+
+  before_all do
+  end
+
+  desc "Creates sonar reports"
+  lane :sonar do
+    cocoapods
+    scan(code_coverage: true)
+    slather
+    swiftlint(output_file: ENV['FL_SWIFTLINT_OUTPUT'], ignore_exit_status: true)
+    sh("lizard #{ENV['SCAN_SCHEME']} -l swift --xml > #{ENV['FL_LIZARD_OUTPUT']}")
+
+    # create again the junit reports that can be used by sonar
+    sh("cat ../build/logs/scan/Weather-Weather.log | ocunit2junit > /dev/null 2>&1")
+    sh("mv ../fastlane/test-reports ../build/reports/test")
+  end
+
+  desc "Install dependencies"
+  lane :installdeps do
+    sh("bundle install")
+    sh("sudo easy_install lizard")
+  end
+
+  after_all do |lane|
+  end
+
+  error do |lane, exception|
+  end
+
+end
