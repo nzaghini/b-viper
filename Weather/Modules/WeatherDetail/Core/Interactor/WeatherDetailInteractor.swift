@@ -13,7 +13,7 @@ class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
     
     let weatherService: WeatherService
     
-    init(weatherService: WeatherService) {
+    required init(weatherService: WeatherService) {
         self.weatherService = weatherService
     }
     

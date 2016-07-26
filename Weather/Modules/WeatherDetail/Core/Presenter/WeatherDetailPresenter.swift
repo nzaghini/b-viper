@@ -19,11 +19,11 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     
     let interactor: WeatherDetailInteractor
     let city: String
-    
     weak var view: WeatherDetailView?
     
-    init(interactor: WeatherDetailInteractor, city: String) {
+    required init(interactor: WeatherDetailInteractor, view: WeatherDetailView, city: String) {
         self.interactor = interactor
+        self.view = view
         self.city = city
     }
     

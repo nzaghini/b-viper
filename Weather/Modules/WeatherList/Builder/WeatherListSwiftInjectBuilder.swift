@@ -28,26 +28,18 @@ struct WeatherListSwiftInjectBuilder: WeatherListBuilder {
     }
     
     func registerRouter() {
-        let routerDescription = Container.sharedContainer.register(WeatherListRouter.self) { _ in WeatherListDefaultRouter()}
-        routerDescription.initCompleted { r, router in
-            if let listRouter = router as? WeatherListDefaultRouter {
-                let viewController = r.resolve(WeatherListView.self)
-                listRouter.viewController = viewController as? UIViewController
-            }
-        }
-
+        Container.sharedContainer.register(WeatherListRouter.self) { c in
+            WeatherListDefaultRouter(viewController: (c.resolve(WeatherListView.self) as? UIViewController)!)}
+        
+        
     }
     
     func registerPresenter() {
-        let presenterDescription = Container.sharedContainer.register(WeatherListPresenter.self) { c in
-            WeatherListDefaultPresenter(interactor: c.resolve(WeatherListInteractor.self)!, router:c.resolve(WeatherListRouter.self)!)}
-        presenterDescription.initCompleted { r, p in
-            if let presenter = p as? WeatherListDefaultPresenter {
-                presenter.view = r.resolve(WeatherListView.self)
-            }
-        }
-
+        Container.sharedContainer.register(WeatherListPresenter.self) { c in
+            WeatherListDefaultPresenter(interactor: c.resolve(WeatherListInteractor.self)!,
+                                        router: c.resolve(WeatherListRouter.self)!,
+                                        view: c.resolve(WeatherListView.self)!)}
+        
     }
-    
     
 }

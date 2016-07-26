@@ -20,9 +20,10 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
     let router: WeatherListRouter
     weak var view: WeatherListView?
     
-    init(interactor: WeatherListInteractor, router: WeatherListRouter) {
+    required init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView) {
         self.interactor = interactor
         self.router = router
+        self.view = view
     }
     
     func loadContent() {

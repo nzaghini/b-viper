@@ -20,15 +20,15 @@ public protocol WeatherListInteractor {
     func fetchWeather(completion: (FetchWeatherResult) -> ())
 }
 
-public class WeatherListDefaultInteractor: WeatherListInteractor {
+class WeatherListDefaultInteractor: WeatherListInteractor {
     
     let weatherService: WeatherService
     
-    public init(weatherService: WeatherService) {
+    required  init(weatherService: WeatherService) {
         self.weatherService = weatherService
     }
     
-    public func fetchWeather(completion: (FetchWeatherResult) -> ()) {
+    func fetchWeather(completion: (FetchWeatherResult) -> ()) {
         
         let cities = self.allCities()
         

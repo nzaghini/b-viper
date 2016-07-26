@@ -15,8 +15,7 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
             self.city = "City"
             self.viewMock = WeatherDetailViewMock()
             self.interactorMock = WeatherDetailInteractorMock()
-            self.presenter = WeatherDetailDefaultPresenter(interactor: self.interactorMock, city: self.city)
-            self.presenter.view = self.viewMock
+            self.presenter = WeatherDetailDefaultPresenter(interactor: self.interactorMock, view: self.viewMock, city: self.city)
         }
         
         context("When loadContent is called") {
