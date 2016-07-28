@@ -12,6 +12,7 @@ extension Container {
         
         c.register(WeatherListBuilder.self) { _ in WeatherListSwiftInjectBuilder()}
         c.register(WeatherDetailBuilder.self) { _ in WeatherDetailSwiftInjectBuilder()}
+        c.register(WeatherLocationBuilder.self) { _ in WeatherLocationSwiftInjectBuilder()}
         
         return c
     }()
