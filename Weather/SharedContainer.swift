@@ -9,6 +9,7 @@ extension Container {
         let c = Container()
         
         c.register(WeatherService.self) { _ in YahooWeatherService()}
+        c.register(CitiesService.self) { _ in ApixuCitiesService()}
         
         c.register(WeatherListBuilder.self) { _ in WeatherListSwiftInjectBuilder()}
         c.register(WeatherDetailBuilder.self) { _ in WeatherDetailSwiftInjectBuilder()}

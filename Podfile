@@ -6,6 +6,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 
 target :Weather do
   pod 'Swinject'
+  pod 'Alamofire'
+  pod 'ModelMapper'
+  pod 'ASToast'
 end
 
 target :WeatherTests do
