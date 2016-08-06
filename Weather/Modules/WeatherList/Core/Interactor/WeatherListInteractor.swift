@@ -1,18 +1,23 @@
 import Foundation
 
-public struct CityWeatherData {
-    let cityName: String
+
+public struct WeatherLocationData {
+    let locationId: String
+    let name: String
+    let region: String
+    let country: String
     let weatherData: WeatherData?
 }
 
-extension CityWeatherData: Equatable { }
+extension WeatherLocationData: Equatable { }
 
-public func == (lhs: CityWeatherData, rhs: CityWeatherData) -> Bool {
-    return lhs.cityName == rhs.cityName && lhs.weatherData == rhs.weatherData
+public func == (lhs: WeatherLocationData, rhs: WeatherLocationData) -> Bool {
+    return lhs.locationId == rhs.locationId
 }
 
+
 public enum FetchWeatherResult {
-    case Success(weather: [CityWeatherData])
+    case Success(weather: [WeatherLocationData])
     case Failure(reason: NSError)
 }
 
@@ -20,36 +25,37 @@ public protocol WeatherListInteractor {
     func fetchWeather(completion: (FetchWeatherResult) -> ())
 }
 
+
 class WeatherListDefaultInteractor: WeatherListInteractor {
     
     let weatherService: WeatherService
+    let userLocationsService: UserLocationsService
     
-    required  init(weatherService: WeatherService) {
+    required init(weatherService: WeatherService, userLocationsService: UserLocationsService) {
         self.weatherService = weatherService
+        self.userLocationsService = userLocationsService
     }
+    
+    // MARK: <WeatherListInteractor>
     
     func fetchWeather(completion: (FetchWeatherResult) -> ()) {
+        var result: FetchWeatherResult
         
-        let cities = self.allCities()
-        
-        let citiesWeather = cities.map { (cityName) -> CityWeatherData in
-            switch self.weatherService.weatherData(cityName) {
-            case .Success(let weather):
-                return CityWeatherData(cityName: cityName, weatherData: weather)
-            case .Failure(_):
-                return CityWeatherData(cityName: cityName, weatherData: nil)
-            }
+        if let locations = self.userLocationsService.allLocations() {
+            let weatherData = locations.map({ (location) -> WeatherLocationData in
+                return WeatherLocationData(locationId: location.locationId,
+                    name: location.name,
+                    region: location.region,
+                    country: location.country,
+                    weatherData: nil)
+            })
+            result = FetchWeatherResult.Success(weather: weatherData)
+        } else {
+            let error = NSError(domain: NSURLErrorKey, code: 500, userInfo: nil)
+            result = FetchWeatherResult.Failure(reason: error)
         }
         
-        //TODO: properly handle offline error
-        
-        completion(FetchWeatherResult.Success(weather: citiesWeather))
-        
-    }
-    
-    private func allCities() -> [String] {
-        // Access actual storage
-        return ["Rome", "London", "Dublin"]
+        completion(result)
     }
     
 }
