@@ -4,7 +4,12 @@ import Foundation
 public struct WeatherLocation {
     let locationId: String
     let name: String
-    let geolocation: WeatherGeolocation
+    var geolocation: WeatherGeolocation?
+    
+    init(locationId: String, name: String, geolocation: WeatherGeolocation? = nil) {
+        self.locationId = locationId
+        self.name = name
+    }
 }
 
 public struct WeatherGeolocation {
@@ -21,14 +26,17 @@ public enum FetchWeatherLocationResult {
 
 public protocol WeatherLocationInteractor {
     func locationsWithText(text: String, completion: (FetchWeatherLocationResult) -> ())
+    func selectLocation(location: WeatherLocation)
 }
 
 
 class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     let citiesService: CitiesService
+    let userLocationsService: UserLocationsService
     
-    init(citiesService: CitiesService) {
+    init(citiesService: CitiesService, userLocationsService: UserLocationsService) {
         self.citiesService = citiesService
+        self.userLocationsService = userLocationsService
     }
     
     // MARK: <CitiesService>
@@ -49,6 +57,10 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
             
             completion(result)
         }
+    }
+    
+    func selectLocation(location: WeatherLocation) {
+        self.userLocationsService.storeLocation(location)
     }
     
     // MARK: Private

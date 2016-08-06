@@ -9,6 +9,7 @@ target :Weather do
   pod 'Alamofire'
   pod 'ModelMapper'
   pod 'ASToast'
+  pod 'RealmSwift'
 end
 
 target :WeatherTests do

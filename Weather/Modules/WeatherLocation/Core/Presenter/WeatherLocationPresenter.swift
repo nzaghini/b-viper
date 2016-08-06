@@ -52,10 +52,9 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     }
     
     func userSelectLocation(location: WeatherLocationViewModel) {
-        if let index = self.locations?.indexOf({ $0.locationId == location.locationId}) {
-            let _ = self.locations![index]
-            
-            // TODO: save location
+        if let index = self.locations?.indexOf({ $0.locationId == location.locationId }) {
+            let location = self.locations![index]
+            self.interactor.selectLocation(location)
         }
         
         self.router.navigateBack()
