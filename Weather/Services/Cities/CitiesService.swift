@@ -4,6 +4,7 @@ import Foundation
 struct City {
     let cityId: String
     let name: String
+    let region: String
     let country: String
     let latitude: Double
     let longitude: Double

@@ -58,8 +58,9 @@ class RealmUserLocationsService: UserLocationsService {
         
         realmLocation.locationId = location.locationId
         realmLocation.name = location.name
-//        realmLocation.region = location.region
-//        realmLocation.country = location.country
+        realmLocation.region = location.region
+        realmLocation.country = location.country
+        
         if let geolocation = location.geolocation {
             realmLocation.latitude.value = geolocation.latitude
             realmLocation.longitude.value = geolocation.longitude
@@ -69,8 +70,12 @@ class RealmUserLocationsService: UserLocationsService {
     }
     
     private func mapRealmLocation(realmLocation: RealmWeatherLocation) -> WeatherLocation {
-        var location = WeatherLocation(locationId: realmLocation.locationId, name: realmLocation.name)
-        if let latitude = realmLocation.latitude.value, let longitude = realmLocation.longitude.value {
+        var location = WeatherLocation(locationId: realmLocation.locationId,
+                                       name: realmLocation.name,
+                                       region: realmLocation.region,
+                                       country: realmLocation.country)
+        if let latitude = realmLocation.latitude.value,
+           let longitude = realmLocation.longitude.value {
             location.geolocation = WeatherGeolocation(latitude: latitude, longitude: longitude)
         }
         

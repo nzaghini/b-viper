@@ -4,6 +4,7 @@ import Foundation
 public struct WeatherLocationViewModel {
     let locationId: String
     let name: String
+    let detail: String
 }
 
 

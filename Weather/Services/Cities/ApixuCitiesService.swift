@@ -7,6 +7,7 @@ extension City: Mappable {
     init(map: Mapper) throws {
         try cityId = map.from("id", transformation: { return String($0!) })
         try name = map.from("name")
+        try region = map.from("region")
         try country = map.from("country")
         try latitude = map.from("lat")
         try longitude = map.from("lon")

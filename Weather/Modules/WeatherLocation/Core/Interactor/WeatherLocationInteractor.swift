@@ -4,11 +4,16 @@ import Foundation
 public struct WeatherLocation {
     let locationId: String
     let name: String
+    let region: String
+    let country: String
     var geolocation: WeatherGeolocation?
     
-    init(locationId: String, name: String, geolocation: WeatherGeolocation? = nil) {
+    init(locationId: String, name: String, region: String, country: String, geolocation: WeatherGeolocation? = nil) {
         self.locationId = locationId
         self.name = name
+        self.region = region
+        self.country = country
+        self.geolocation = geolocation
     }
 }
 
@@ -68,8 +73,17 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     private func mapCities(cities: [City]) -> [WeatherLocation] {
         return cities.map { (city) -> WeatherLocation in
             let geolocation = WeatherGeolocation(latitude: city.latitude, longitude: city.longitude)
-            return WeatherLocation(locationId: city.cityId, name: city.name, geolocation: geolocation)
+            let location = WeatherLocation(locationId: city.cityId,
+                name: self.stripCityName(city.name),
+                region: city.region,
+                country: city.country,
+                geolocation: geolocation)
+            
+            return location
         }
     }
     
+    private func stripCityName(name: String) -> String {
+        return name.componentsSeparatedByString(",").first ?? name
+    }
 }

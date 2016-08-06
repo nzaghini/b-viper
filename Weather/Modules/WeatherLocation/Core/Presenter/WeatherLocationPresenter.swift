@@ -68,8 +68,18 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     
     private func mapLocations(locations: [WeatherLocation]) -> [WeatherLocationViewModel] {
         return locations.map({ (location) -> WeatherLocationViewModel in
-            return WeatherLocationViewModel(locationId: location.locationId, name: location.name)
+            return WeatherLocationViewModel(locationId: location.locationId,
+                name: location.name,
+                detail: self.detailTextFromLocation(location))
         })
+    }
+    
+    private func detailTextFromLocation(location: WeatherLocation) -> String {
+        if location.region.isEmpty {
+            return location.country
+        }
+        
+        return "\(location.region), \(location.country)"
     }
     
 }

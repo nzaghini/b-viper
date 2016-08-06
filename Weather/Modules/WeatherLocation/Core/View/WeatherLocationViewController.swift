@@ -104,11 +104,12 @@ class WeatherLocationViewController: UIViewController,
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("WeatherLocationCell")
         if cell == nil {
-            cell = UITableViewCell(style: .Default, reuseIdentifier: "WeatherLocationCell")
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "WeatherLocationCell")
         }
         
         if let location = self.locations?[indexPath.row] {
             cell?.textLabel?.text = location.name
+            cell?.detailTextLabel?.text = location.detail
         }
         
         return cell!
