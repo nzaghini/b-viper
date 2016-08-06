@@ -13,6 +13,12 @@ class WeatherListViewController: UITableViewController, WeatherListView {
         self.presenter?.loadContent()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        self.presenter?.loadContent()
+    }
+    
     // MARK: - CityListView
     
     func displayWeatherList(viewModel: WeatherListViewModel) {
