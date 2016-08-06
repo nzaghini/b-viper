@@ -9,7 +9,6 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.rightBarButtonItem = self.addButtonItem()
-        self.tableView.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         
         self.presenter?.loadContent()
     }
@@ -45,12 +44,18 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath)
-        if let viewModel = self.viewModel {
-            cell.textLabel?.text = viewModel.weatherItems[indexPath.row].name
-            cell.detailTextLabel?.text = viewModel.weatherItems[indexPath.row].temperature
+        var cell = tableView.dequeueReusableCellWithIdentifier("WeatherCell")
+        if cell == nil {
+            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "WeatherCell")
+            cell?.accessoryType = .DisclosureIndicator
         }
-        return cell
+        
+        if let item = self.viewModel?.weatherItems[indexPath.row] {
+            cell?.textLabel?.text = item.name
+            cell?.detailTextLabel?.text = item.detail
+        }
+        
+        return cell!
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {

@@ -59,11 +59,19 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         let weatherItems = weatherData.map { (data) -> WeatherItem in
             return WeatherItem(itemId: data.locationId,
                 name: data.name,
-                detail: data.country,
+                detail: self.detailTextFromLocationData(data),
                 temperature: data.weatherData?.temperature ?? "--")
         }
         
         return WeatherListViewModel(weatherItems: weatherItems)
+    }
+    
+    private func detailTextFromLocationData(locationData: WeatherLocationData) -> String {
+        if locationData.region.isEmpty {
+            return locationData.country
+        }
+        
+        return "\(locationData.region), \(locationData.country)"
     }
     
 }
