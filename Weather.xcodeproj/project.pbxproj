@@ -21,6 +21,7 @@
 		5A4973F01D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973EF1D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift */; };
 		5A4973F21D5A51DD00517470 /* CitiesServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F11D5A51DD00517470 /* CitiesServiceMock.swift */; };
 		5A4973F41D5A554500517470 /* CitiesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F31D5A554500517470 /* CitiesHelper.swift */; };
+		5A4973F61D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F51D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift */; };
 		5AAE8AF61D54844900B69877 /* ApixuCitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AF41D54844900B69877 /* ApixuCitiesService.swift */; };
 		5AAE8AF71D54844900B69877 /* CitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AF51D54844900B69877 /* CitiesService.swift */; };
 		5AAE8AFD1D54D53300B69877 /* WeatherLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AFC1D54D53300B69877 /* WeatherLocationRouter.swift */; };
@@ -80,6 +81,7 @@
 		5A4973EF1D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationCitiesInteractorSpec.swift; path = Modules/WeatherLocation/WeatherLocationCitiesInteractorSpec.swift; sourceTree = "<group>"; };
 		5A4973F11D5A51DD00517470 /* CitiesServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesServiceMock.swift; path = Mocks/CitiesServiceMock.swift; sourceTree = "<group>"; };
 		5A4973F31D5A554500517470 /* CitiesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesHelper.swift; path = Helpers/CitiesHelper.swift; sourceTree = "<group>"; };
+		5A4973F51D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationDefaultPresenterSpec.swift; path = Modules/WeatherLocation/WeatherLocationDefaultPresenterSpec.swift; sourceTree = "<group>"; };
 		5AAE8AF41D54844900B69877 /* ApixuCitiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApixuCitiesService.swift; path = Cities/ApixuCitiesService.swift; sourceTree = "<group>"; };
 		5AAE8AF51D54844900B69877 /* CitiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesService.swift; path = Cities/CitiesService.swift; sourceTree = "<group>"; };
 		5AAE8AFC1D54D53300B69877 /* WeatherLocationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationRouter.swift; path = WeatherLocation/Router/WeatherLocationRouter.swift; sourceTree = "<group>"; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				5A4973EF1D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift */,
+				5A4973F51D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift */,
 			);
 			name = WeatherLocation;
 			sourceTree = "<group>";
@@ -786,6 +789,7 @@
 				492B9B671D0698C3004057C0 /* WeatherServiceMock.swift in Sources */,
 				5A4973F01D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift in Sources */,
 				5AD99B441D56395600D1EE2D /* UserLocationsServiceMock.swift in Sources */,
+				5A4973F61D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift in Sources */,
 				5A4973F41D5A554500517470 /* CitiesHelper.swift in Sources */,
 				B32631C51D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift in Sources */,
 				B32631C61D0AE9F200AB7FF9 /* WeatherDetailDefaultInteractorTests.swift in Sources */,
