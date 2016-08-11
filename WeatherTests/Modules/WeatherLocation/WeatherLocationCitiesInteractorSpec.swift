@@ -62,22 +62,13 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
         }
         
         context("When returns a city") {
-            it("Should be returned to the caller stripping the region and the country from the location name") {
+            it("Should be returned to the caller") {
                 let city = City.cityWithIndex(1)
                 self.citiesServiceMock.citiesToReturn = [city]
                 
                 self.interactor.locationsWithText("City") { (result) in
                     if case .Success(let locations) = result {
                         expect(locations.count).to(equal(1))
-                        let location = locations[0]
-                        expect(location.locationId).to(equal("city1"))
-                        expect(location.name).to(equal("City1"))
-                        expect(location.region).to(equal("Region1"))
-                        expect(location.country).to(equal("Country1"))
-                        
-                        expect(location.geolocation).notTo(beNil())
-                        expect(location.geolocation!.latitude).to(equal(1.0))
-                        expect(location.geolocation!.longitude).to(equal(1.0))
                     } else {
                         fail()
                     }

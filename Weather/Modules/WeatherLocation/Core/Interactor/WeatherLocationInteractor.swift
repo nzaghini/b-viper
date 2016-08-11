@@ -39,6 +39,8 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     let citiesService: CitiesService
     let userLocationsService: UserLocationsService
     
+    let mapper = WeatherLocationCitiesInteractorMapper()
+    
     init(citiesService: CitiesService, userLocationsService: UserLocationsService) {
         self.citiesService = citiesService
         self.userLocationsService = userLocationsService
@@ -53,7 +55,7 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
             if error != nil {
                 result = FetchWeatherLocationResult.Failure(reason: error!)
             } else if let cities = cities {
-                let locations = self.mapCities(cities)
+                let locations = self.mapper.mapCities(cities)
                 result = FetchWeatherLocationResult.Success(locations: locations)
             } else {
                 let error = NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)
@@ -68,22 +70,27 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
         self.userLocationsService.storeLocation(location)
     }
     
-    // MARK: Private
+}
+
+
+class WeatherLocationCitiesInteractorMapper {
     
-    private func mapCities(cities: [City]) -> [WeatherLocation] {
-        return cities.map { (city) -> WeatherLocation in
-            let geolocation = WeatherGeolocation(latitude: city.latitude, longitude: city.longitude)
-            let location = WeatherLocation(locationId: city.cityId,
-                name: self.stripCityName(city.name),
-                region: city.region,
-                country: city.country,
-                geolocation: geolocation)
-            
-            return location
-        }
+    func mapCities(cities: [City]) -> [WeatherLocation] {
+        return cities.map(self.mapCity)
     }
     
-    private func stripCityName(name: String) -> String {
-        return name.componentsSeparatedByString(",").first ?? name
+    func mapCity(city: City) -> WeatherLocation {
+        let geolocation = WeatherGeolocation(latitude: city.latitude, longitude: city.longitude)
+        let location = WeatherLocation(locationId: city.cityId,
+                                       name: self.cleanCityName(city.name),
+                                       region: city.region,
+                                       country: city.country,
+                                       geolocation: geolocation)
+        
+        return location
+    }
+    
+    func cleanCityName(name: String) -> String {
+        return name.componentsSeparatedByString(",").first!
     }
 }
