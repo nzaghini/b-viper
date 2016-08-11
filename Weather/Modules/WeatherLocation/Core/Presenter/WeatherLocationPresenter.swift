@@ -13,11 +13,13 @@ public protocol WeatherLocationPresenter {
 
 class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     
-    weak var view: WeatherLocationView?
+    private weak var view: WeatherLocationView?
     private let interactor: WeatherLocationInteractor
     private let router: WeatherLocationRouter
     
     private var locations: [WeatherLocation]?
+    
+    private let mapper = WeatherLocationDefaultPresenterMapper()
     
     init(view: WeatherLocationView, interactor: WeatherLocationInteractor, router: WeatherLocationRouter) {
         self.view = view
@@ -39,7 +41,7 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
                 case .Success(let locations):
                     if locations.count > 0 {
                         self.locations = locations
-                        let locationVieWModels = self.mapLocations(locations)
+                        let locationVieWModels = self.mapper.mapLocations(locations)
                         self.view?.displayLocations(locationVieWModels)
                     } else {
                         self.view?.displayNoResults()
@@ -64,17 +66,22 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
         self.router.navigateBack()
     }
     
-    // MARK: Private
+}
+
+
+class WeatherLocationDefaultPresenterMapper {
     
-    private func mapLocations(locations: [WeatherLocation]) -> [WeatherLocationViewModel] {
-        return locations.map({ (location) -> WeatherLocationViewModel in
-            return WeatherLocationViewModel(locationId: location.locationId,
-                name: location.name,
-                detail: self.detailTextFromLocation(location))
-        })
+    func mapLocations(locations: [WeatherLocation]) -> [WeatherLocationViewModel] {
+        return locations.map(self.mapLocation)
     }
     
-    private func detailTextFromLocation(location: WeatherLocation) -> String {
+    func mapLocation(location: WeatherLocation) -> WeatherLocationViewModel {
+        return WeatherLocationViewModel(locationId: location.locationId,
+                                        name: location.name,
+                                        detail: self.detailTextFromLocation(location))
+    }
+    
+    func detailTextFromLocation(location: WeatherLocation) -> String {
         if location.region.isEmpty {
             return location.country
         }
