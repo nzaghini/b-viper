@@ -34,12 +34,12 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     }
     
     func userSearchText(text: String) {
-        if text.characters.count > 0 {
+        if !text.characters.isEmpty {
             self.view?.displayLoading()
             self.interactor.locationsWithText(text, completion: { (result) in
                 switch result {
                 case .Success(let locations):
-                    if locations.count > 0 {
+                    if !locations.isEmpty {
                         self.locations = locations
                         let locationVieWModels = self.mapper.mapLocations(locations)
                         self.view?.displayLocations(locationVieWModels)

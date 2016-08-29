@@ -2,8 +2,7 @@ import UIKit
 import ASToast
 
 
-class WeatherLocationViewController: UIViewController,
-    WeatherLocationView, UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate {
+class WeatherLocationViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -35,14 +34,26 @@ class WeatherLocationViewController: UIViewController,
         self.presenter?.userCancel()
     }
     
-    // MARK: <WeatherLocationView>
+    // MARK: Helpers
+    
+    private func showToastWithText(text: String) {
+        self.view.makeToast(text,
+                            duration: NSTimeInterval(3.0),
+                            position: ASToastPosition.ASToastPositionCenter.rawValue,
+                            backgroundColor: nil)
+    }
+    
+}
+
+// MARK: - <WeatherLocationView>
+extension WeatherLocationViewController: WeatherLocationView {
     
     func displayLoading() {
         self.searchBar.hidden = false
         self.tableView.hidden = true
         self.spinner.startAnimating()
     }
-    
+
     func displaySearch() {
         self.searchBar.hidden = false
         self.tableView.hidden = false
@@ -50,7 +61,7 @@ class WeatherLocationViewController: UIViewController,
         
         self.searchBar.becomeFirstResponder()
     }
-    
+
     func displayNoResults() {
         self.searchBar.hidden = false
         self.tableView.hidden = false
@@ -61,7 +72,7 @@ class WeatherLocationViewController: UIViewController,
         
         self.showToastWithText("No Results")
     }
-    
+
     func displayErrorMessage(errorMessage: String) {
         self.searchBar.hidden = false
         self.tableView.hidden = false
@@ -69,7 +80,7 @@ class WeatherLocationViewController: UIViewController,
         
         self.showToastWithText(errorMessage)
     }
-    
+
     func displayLocations(locations: [WeatherLocationViewModel]) {
         self.searchBar.hidden = false
         self.tableView.hidden = false
@@ -79,7 +90,10 @@ class WeatherLocationViewController: UIViewController,
         self.tableView.reloadData()
     }
     
-    // MARK: <UISearchBarDelegate>
+}
+
+// MARK: - <UISearchBarDelegate>
+extension WeatherLocationViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if let text = searchBar.text {
@@ -87,7 +101,10 @@ class WeatherLocationViewController: UIViewController,
         }
     }
     
-    // MARK: <UITableViewDelegate>
+}
+
+// MARK: - <UITableViewDelegate>
+extension WeatherLocationViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let location = self.locations?[indexPath.row] {
@@ -95,12 +112,15 @@ class WeatherLocationViewController: UIViewController,
         }
     }
     
-    // MARK: <UITableViewDataSource>
+}
+
+// MARK: - <UITableViewDataSource>
+extension WeatherLocationViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.locations?.count ?? 0
     }
-    
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         var cell = tableView.dequeueReusableCellWithIdentifier("WeatherLocationCell")
         if cell == nil {
@@ -114,13 +134,5 @@ class WeatherLocationViewController: UIViewController,
         
         return cell!
     }
-    
-    // MARK: Helpers
-    
-    private func showToastWithText(text: String) {
-        self.view.makeToast(text,
-                            duration: NSTimeInterval(3.0),
-                            position: ASToastPosition.ASToastPositionCenter.rawValue)
-    }
-    
+
 }

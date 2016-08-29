@@ -22,9 +22,9 @@ class ApixuCitiesService: CitiesService {
     
     // MARK: <CitiesService>
     
-    func fetchCitiesWithText(text: String, completion: CitiesServiceCompletion) {
+    func fetchCities(withName name: String, completion: CitiesServiceCompletion) {
         let parameters = ["key": self.apixuKey,
-                          "q": text]
+                          "q": name]
         Alamofire.request(.GET, self.apixuCitiesUrl, parameters: parameters)
             .responseJSON { (response) in
                 switch response.result {

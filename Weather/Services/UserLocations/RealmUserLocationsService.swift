@@ -75,7 +75,7 @@ class RealmUserLocationsService: UserLocationsService {
                                        region: realmLocation.region,
                                        country: realmLocation.country)
         if let latitude = realmLocation.latitude.value,
-           let longitude = realmLocation.longitude.value {
+           longitude = realmLocation.longitude.value {
             location.geolocation = WeatherGeolocation(latitude: latitude, longitude: longitude)
         }
         

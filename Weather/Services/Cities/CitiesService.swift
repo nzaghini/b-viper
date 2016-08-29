@@ -15,5 +15,5 @@ typealias CitiesServiceCompletion = (cities: [City]?, error: NSError?) -> Void
 
 
 protocol CitiesService {
-    func fetchCitiesWithText(text: String, completion: CitiesServiceCompletion)
+    func fetchCities(withName name: String, completion: CitiesServiceCompletion)
 }

@@ -11,9 +11,9 @@ class CitiesServiceMock: CitiesService {
     var calledWithText: String?
     
     
-    func fetchCitiesWithText(text: String, completion: CitiesServiceCompletion) {
+    func fetchCities(withName name: String, completion: CitiesServiceCompletion) {
         self.fetchCitiesCalled = true
-        self.calledWithText = text
+        self.calledWithText = name
         
         completion(cities: citiesToReturn, error: errorToReturn)
     }

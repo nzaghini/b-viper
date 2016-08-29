@@ -49,7 +49,7 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     // MARK: <CitiesService>
     
     func locationsWithText(text: String, completion: (FetchWeatherLocationResult) -> ()) {
-        self.citiesService.fetchCitiesWithText(text) { (cities, error) in
+        self.citiesService.fetchCities(withName: text) { (cities, error) in
             var result: FetchWeatherLocationResult!
             
             if error != nil {
