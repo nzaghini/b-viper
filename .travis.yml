@@ -2,6 +2,8 @@ language: objective-c
 
 osx_image: xcode7.3
 
+install: true
+
 notifications:
 email:
   on_success: never
