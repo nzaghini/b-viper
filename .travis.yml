@@ -7,5 +7,3 @@ email:
   on_success: never
 
 script:
-- bundle exec pod repo update
-- bundle exec fastlane test
