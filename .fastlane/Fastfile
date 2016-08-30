@@ -3,12 +3,14 @@ default_platform :ios
 platform :ios do
 
   before_all do
+    cocoapods
   end
 
   desc "Creates sonar reports"
   lane :sonar do
-    cocoapods
-    scan(code_coverage: true)
+    
+    test
+
     slather
     swiftlint(output_file: ENV['FL_SWIFTLINT_OUTPUT'], ignore_exit_status: true)
     sh("lizard #{ENV['SCAN_SCHEME']} -l swift --xml > #{ENV['FL_LIZARD_OUTPUT']}")
@@ -22,6 +24,16 @@ platform :ios do
   lane :installdeps do
     sh("bundle install")
     sh("sudo easy_install lizard")
+  end
+
+  lane :test do
+    scan(
+      workspace: "Weather.xcworkspace",
+      scheme: "WeatherTests",
+      clean: true,
+      output_directory: "build",
+      code_coverage: true
+    )
   end
 
   after_all do |lane|
