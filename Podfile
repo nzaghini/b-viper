@@ -1,8 +1,7 @@
+source 'https://github.com/CocoaPods/Specs.git'
+
 platform :ios, '8.0'
 use_frameworks!
-
-
-source 'https://github.com/CocoaPods/Specs.git'
 
 target :Weather do
   pod 'Swinject'
@@ -13,4 +12,3 @@ target :WeatherTests do
   pod 'Nimble'
   pod 'Swinject'
 end
-

@@ -1,7 +1,7 @@
 PODS:
   - Nimble (4.1.0)
   - Quick (0.9.3)
-  - Swinject (1.1.2)
+  - Swinject (1.1.3)
 
 DEPENDENCIES:
   - Nimble
@@ -11,7 +11,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
   Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
-  Swinject: 3debc5ac926dcd1be00947265a9db7a5f31b272a
+  Swinject: 69273c2419f93d52603c3a546f5d2792ee1a5e98
 
 PODFILE CHECKSUM: a4cec3c7371af2356fea2e29061e7314fd664927
 
