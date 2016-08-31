@@ -10,13 +10,13 @@ cache:
 
 before_script:
 - bundle install
-- bundle exec pod repo update
+#- bundle exec pod repo update
 
 notifications:
 email:
   on_success: never
 
 script:
-- bundle install
+#- bundle install
 #- bundle exec pod repo update
 - bundle exec fastlane test
