@@ -10,5 +10,5 @@ email:
 
 script:
 - bundle install
-- bundle exec pod repo update
+#- bundle exec pod repo update
 - bundle exec fastlane test
