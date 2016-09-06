@@ -2,7 +2,7 @@ import Foundation
 @testable import Weather
 
 
-class UserLocationsServiceMock: UserLocationsService {
+class LocationStoreServiceMock: LocationStoreService {
     
     var locationsList: [WeatherLocation]?
     var locationStored: WeatherLocation?
@@ -11,17 +11,17 @@ class UserLocationsServiceMock: UserLocationsService {
     var deleteAllLocationsCalled = false
     
     
-    func storeLocation(location: WeatherLocation) {
+    func addLocation(location: WeatherLocation) {
         self.storeLocationCalled = true
         self.locationStored = location
     }
     
-    func allLocations() -> [WeatherLocation]? {
+    func locations() -> [WeatherLocation]? {
         self.allLocationsCalled = true
         return self.locationsList
     }
     
-    func deleteAllLocations() {
+    func deleteLocations() {
         self.deleteAllLocationsCalled = true
     }
     

@@ -37,13 +37,13 @@ public protocol WeatherLocationInteractor {
 
 class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     let citiesService: CitiesService
-    let userLocationsService: UserLocationsService
+    let locationStoreService: LocationStoreService
     
     let mapper = WeatherLocationCitiesInteractorMapper()
     
-    init(citiesService: CitiesService, userLocationsService: UserLocationsService) {
+    init(citiesService: CitiesService, locationStoreService: LocationStoreService) {
         self.citiesService = citiesService
-        self.userLocationsService = userLocationsService
+        self.locationStoreService = locationStoreService
     }
     
     // MARK: <CitiesService>
@@ -67,7 +67,7 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     }
     
     func selectLocation(location: WeatherLocation) {
-        self.userLocationsService.storeLocation(location)
+        self.locationStoreService.addLocation(location)
     }
     
 }

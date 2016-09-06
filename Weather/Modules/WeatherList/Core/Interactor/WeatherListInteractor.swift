@@ -29,11 +29,11 @@ public protocol WeatherListInteractor {
 class WeatherListDefaultInteractor: WeatherListInteractor {
     
     let weatherService: WeatherService
-    let userLocationsService: UserLocationsService
+    let locationStoreService: LocationStoreService
     
-    required init(weatherService: WeatherService, userLocationsService: UserLocationsService) {
+    required init(weatherService: WeatherService, locationStoreService: LocationStoreService) {
         self.weatherService = weatherService
-        self.userLocationsService = userLocationsService
+        self.locationStoreService = locationStoreService
     }
     
     // MARK: <WeatherListInteractor>
@@ -41,7 +41,7 @@ class WeatherListDefaultInteractor: WeatherListInteractor {
     func fetchWeather(completion: (FetchWeatherResult) -> ()) {
         var result: FetchWeatherResult
         
-        if let locations = self.userLocationsService.allLocations() {
+        if let locations = self.locationStoreService.locations() {
             let weatherData = locations.map({ (location) -> WeatherLocationData in
                 return WeatherLocationData(locationId: location.locationId,
                     name: location.name,

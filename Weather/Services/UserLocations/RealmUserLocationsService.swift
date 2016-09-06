@@ -12,7 +12,7 @@ class RealmWeatherLocation: Object {
 }
 
 
-class RealmUserLocationsService: UserLocationsService {
+class RealmLocationStoreService: LocationStoreService {
     
     private let realm: Realm?
     
@@ -25,10 +25,10 @@ class RealmUserLocationsService: UserLocationsService {
         }
     }
     
-    // MARK: <UserLocationsService>
+    // MARK: <LocationStoreService>
     
-    func storeLocation(location: WeatherLocation) {
-        let realmLocation = self.mapLocation(location)
+    func addLocation(location: WeatherLocation) {
+        let realmLocation = self.realmLocation(fromLocation: location)
         
         do {
             try self.realm?.write {
@@ -39,13 +39,13 @@ class RealmUserLocationsService: UserLocationsService {
         }
     }
     
-    func allLocations() -> [WeatherLocation]? {
+    func locations() -> [WeatherLocation]? {
         return self.realm?.objects(RealmWeatherLocation.self).map({ (realmLocation) -> WeatherLocation in
-            return self.mapRealmLocation(realmLocation)
+            return self.location(fromRealmLocation: realmLocation)
         })
     }
     
-    func deleteAllLocations() {
+    func deleteLocations() {
         if let locations = self.realm?.objects(RealmWeatherLocation.self) {
             self.realm?.delete(locations)
         }
@@ -53,7 +53,7 @@ class RealmUserLocationsService: UserLocationsService {
     
     // MARK: Private
     
-    private func mapLocation(location: WeatherLocation) -> RealmWeatherLocation {
+    private func realmLocation(fromLocation location: WeatherLocation) -> RealmWeatherLocation {
         let realmLocation = RealmWeatherLocation()
         
         realmLocation.locationId = location.locationId
@@ -69,7 +69,7 @@ class RealmUserLocationsService: UserLocationsService {
         return realmLocation
     }
     
-    private func mapRealmLocation(realmLocation: RealmWeatherLocation) -> WeatherLocation {
+    private func location(fromRealmLocation realmLocation: RealmWeatherLocation) -> WeatherLocation {
         var location = WeatherLocation(locationId: realmLocation.locationId,
                                        name: realmLocation.name,
                                        region: realmLocation.region,

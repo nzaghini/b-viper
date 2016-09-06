@@ -13,13 +13,14 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
             WeatherLocation.locationWithIndex(3)
         ]
         let weatherService = WeatherServiceMock()
-        let userLocationService = UserLocationsServiceMock()
-        let interactor: WeatherListInteractor = WeatherListDefaultInteractor(weatherService: weatherService, userLocationsService: userLocationService)
+        let locationStoreService = LocationStoreServiceMock()
+        let interactor: WeatherListInteractor = WeatherListDefaultInteractor(weatherService: weatherService,
+                                                                             locationStoreService: locationStoreService)
         
         context("When locations are loaded succesfully", {
             
             it("Should provide the same locations to the caller") {
-                userLocationService.locationsList = expectedLocations
+                locationStoreService.locationsList = expectedLocations
                 
                 interactor.fetchWeather { (result) in
                     
@@ -46,7 +47,7 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
         context("When there is an error loading the locations", {
             
             it("Should return the error to the caller") {
-                userLocationService.locationsList = nil
+                locationStoreService.locationsList = nil
                 
                 interactor.fetchWeather { (result) in
                     

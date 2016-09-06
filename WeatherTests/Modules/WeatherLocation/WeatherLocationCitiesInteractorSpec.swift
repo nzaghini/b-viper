@@ -6,7 +6,7 @@ import Nimble
 class WeatherLocationCitiesInteractorSpec: QuickSpec {
     
     var citiesServiceMock: CitiesServiceMock!
-    var userLocationsServiceMock: UserLocationsServiceMock!
+    var locationStoreServiceMock: LocationStoreServiceMock!
     
     var interactor: WeatherLocationCitiesInteractor!
     
@@ -14,10 +14,10 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
         
         beforeEach {
             self.citiesServiceMock = CitiesServiceMock()
-            self.userLocationsServiceMock = UserLocationsServiceMock()
+            self.locationStoreServiceMock = LocationStoreServiceMock()
             
             self.interactor = WeatherLocationCitiesInteractor(citiesService: self.citiesServiceMock,
-                userLocationsService: self.userLocationsServiceMock)
+                                                              locationStoreService: self.locationStoreServiceMock)
         }
         
         context("When locationsWithText is called") {
@@ -77,11 +77,11 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
         }
         
         context("When selectCity is called") {
-            it("Should call userLocationsService with the same location") {
+            it("Should call locationStoreService with the same location") {
                 let location = WeatherLocation.locationWithIndex(1)
                 self.interactor.selectLocation(location)
                 
-                expect(self.userLocationsServiceMock.locationStored?.locationId).to(equal(location.locationId))
+                expect(self.locationStoreServiceMock.locationStored?.locationId).to(equal(location.locationId))
             }
         }
     }

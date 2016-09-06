@@ -24,7 +24,7 @@ struct WeatherListSwiftInjectBuilder: WeatherListBuilder {
     func registerInteractor() {
         Container.sharedContainer.register(WeatherListInteractor.self) { c in
             WeatherListDefaultInteractor(weatherService: c.resolve(WeatherService.self)!,
-                                         userLocationsService: c.resolve(UserLocationsService.self)!)
+                                         locationStoreService: c.resolve(LocationStoreService.self)!)
         }
     }
     
