@@ -10,7 +10,7 @@ cache:
 
 before_script:
 - bundle install
-- bundle exec pod repo update
+# - bundle exec pod repo update
 
 notifications:
 email:
