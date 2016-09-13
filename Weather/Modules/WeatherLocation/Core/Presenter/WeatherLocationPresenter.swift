@@ -34,23 +34,24 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     }
     
     func userSearchText(text: String) {
-        if !text.characters.isEmpty {
-            self.view?.displayLoading()
-            self.interactor.locationsWithText(text, completion: { (result) in
-                switch result {
-                case .Success(let locations):
-                    if !locations.isEmpty {
-                        self.locations = locations
-                        let locationVieWModels = self.mapper.mapLocations(locations)
-                        self.view?.displayLocations(locationVieWModels)
-                    } else {
-                        self.view?.displayNoResults()
-                    }
-                case .Failure(let error):
-                    self.view?.displayErrorMessage(error.localizedDescription)
-                }
-            })
+        if text.characters.isEmpty {
+            return
         }
+        self.view?.displayLoading()
+        self.interactor.locationsWithText(text, completion: { (result) in
+            switch result {
+            case .Success(let locations):
+                if !locations.isEmpty {
+                    self.locations = locations
+                    let locationVieWModels = self.mapper.mapLocations(locations)
+                    self.view?.displayLocations(locationVieWModels)
+                } else {
+                    self.view?.displayNoResults()
+                }
+            case .Failure(let error):
+                self.view?.displayErrorMessage(error.localizedDescription)
+            }
+        })
     }
     
     func userSelectLocation(location: WeatherLocationViewModel) {

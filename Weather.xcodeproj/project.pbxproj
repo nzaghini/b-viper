@@ -28,7 +28,7 @@
 		5AAE8AF71D54844900B69877 /* CitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AF51D54844900B69877 /* CitiesService.swift */; };
 		5AAE8AFD1D54D53300B69877 /* WeatherLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AFC1D54D53300B69877 /* WeatherLocationRouter.swift */; };
 		5AAE8B001D54E57500B69877 /* LocationStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AFF1D54E57500B69877 /* LocationStoreService.swift */; };
-		5AAE8B021D54E60700B69877 /* RealmUserLocationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8B011D54E60700B69877 /* RealmUserLocationsService.swift */; };
+		5AAE8B021D54E60700B69877 /* RealmLocationStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8B011D54E60700B69877 /* RealmLocationStoreService.swift */; };
 		5AD99B441D56395600D1EE2D /* UserLocationsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99B431D56395600D1EE2D /* UserLocationsServiceMock.swift */; };
 		5AD99B471D563C1D00D1EE2D /* WeatherLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99B461D563C1D00D1EE2D /* WeatherLocationHelper.swift */; };
 		B32631C51D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631C11D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift */; };
@@ -90,7 +90,7 @@
 		5AAE8AF51D54844900B69877 /* CitiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesService.swift; path = Cities/CitiesService.swift; sourceTree = "<group>"; };
 		5AAE8AFC1D54D53300B69877 /* WeatherLocationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationRouter.swift; path = WeatherLocation/Router/WeatherLocationRouter.swift; sourceTree = "<group>"; };
 		5AAE8AFF1D54E57500B69877 /* LocationStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationStoreService.swift; path = UserLocations/LocationStoreService.swift; sourceTree = "<group>"; };
-		5AAE8B011D54E60700B69877 /* RealmUserLocationsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmUserLocationsService.swift; path = UserLocations/RealmUserLocationsService.swift; sourceTree = "<group>"; };
+		5AAE8B011D54E60700B69877 /* RealmLocationStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmLocationStoreService.swift; path = UserLocations/RealmLocationStoreService.swift; sourceTree = "<group>"; };
 		5AD99B431D56395600D1EE2D /* UserLocationsServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserLocationsServiceMock.swift; path = Mocks/UserLocationsServiceMock.swift; sourceTree = "<group>"; };
 		5AD99B461D563C1D00D1EE2D /* WeatherLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationHelper.swift; path = Helpers/WeatherLocationHelper.swift; sourceTree = "<group>"; };
 		9D2E2B8741B0E764605451D7 /* Pods-WeatherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherTests/Pods-WeatherTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -269,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				5AAE8AFF1D54E57500B69877 /* LocationStoreService.swift */,
-				5AAE8B011D54E60700B69877 /* RealmUserLocationsService.swift */,
+				5AAE8B011D54E60700B69877 /* RealmLocationStoreService.swift */,
 			);
 			name = UserLocations;
 			sourceTree = "<group>";
@@ -641,7 +641,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		23B747F68D89645E3F9E417C /* Embed Pods Frameworks */ = {
@@ -729,7 +729,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 		FFA48EB6A9D03D19F21EC2E8 /* [CP] Copy Pods Resources */ = {
@@ -783,7 +783,7 @@
 				C1AB6068EEAD9D8CC4F9B579 /* WeatherService.swift in Sources */,
 				495C854D1D49F3B700A57AFC /* WeatherLocationSwiftInjectBuilder.swift in Sources */,
 				B32631F31D0AF6A700AB7FF9 /* WeatherListRouter.swift in Sources */,
-				5AAE8B021D54E60700B69877 /* RealmUserLocationsService.swift in Sources */,
+				5AAE8B021D54E60700B69877 /* RealmLocationStoreService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
