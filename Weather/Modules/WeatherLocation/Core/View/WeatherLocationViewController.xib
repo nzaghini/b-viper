@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -7,6 +7,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WeatherLocationViewController" customModule="Weather" customModuleProvider="target">
             <connections>
+                <outlet property="searchBar" destination="C56-hm-QwV" id="May-eq-iwd"/>
+                <outlet property="spinner" destination="001-ol-CtO" id="CtN-ee-JMl"/>
+                <outlet property="tableView" destination="un8-wR-ax9" id="rZR-QP-PFE"/>
                 <outlet property="view" destination="iN0-l3-epB" id="zQK-bf-hfU"/>
             </connections>
         </placeholder>
@@ -14,7 +17,31 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="C56-hm-QwV">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                    <textInputTraits key="textInputTraits"/>
+                </searchBar>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="un8-wR-ax9">
+                    <rect key="frame" x="0.0" y="44" width="600" height="556"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+                <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="001-ol-CtO">
+                    <rect key="frame" x="290" y="290" width="20" height="20"/>
+                </activityIndicatorView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="un8-wR-ax9" secondAttribute="bottom" id="EGz-1h-Dec"/>
+                <constraint firstItem="001-ol-CtO" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="HC4-Es-LlM"/>
+                <constraint firstAttribute="trailing" secondItem="C56-hm-QwV" secondAttribute="trailing" id="UxL-0K-H1B"/>
+                <constraint firstItem="C56-hm-QwV" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="kM0-mS-BNv"/>
+                <constraint firstItem="un8-wR-ax9" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="o5g-7N-0fs"/>
+                <constraint firstItem="un8-wR-ax9" firstAttribute="top" secondItem="C56-hm-QwV" secondAttribute="bottom" id="qqm-Mq-O1l"/>
+                <constraint firstItem="C56-hm-QwV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ryE-Tu-15C"/>
+                <constraint firstItem="001-ol-CtO" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="uEC-uo-ilG"/>
+                <constraint firstAttribute="trailing" secondItem="un8-wR-ax9" secondAttribute="trailing" id="vxa-MM-ncf"/>
+            </constraints>
         </view>
     </objects>
 </document>

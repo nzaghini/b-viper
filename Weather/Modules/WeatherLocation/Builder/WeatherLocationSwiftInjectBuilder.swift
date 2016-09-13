@@ -7,6 +7,7 @@ class WeatherLocationSwiftInjectBuilder: WeatherLocationBuilder {
         registerView()
         registerInteractor()
         registerPresenter()
+        registerRouter()
         
         return Container.sharedContainer.resolve(WeatherLocationView.self) as? UIViewController
     }
@@ -25,14 +26,24 @@ class WeatherLocationSwiftInjectBuilder: WeatherLocationBuilder {
     
     private func registerInteractor() {
         Container.sharedContainer.register(WeatherLocationInteractor.self) { c in
-            WeatherLocationDefaultInteractor()
+            WeatherLocationCitiesInteractor(citiesService: c.resolve(CitiesService.self)!,
+                                            locationStoreService: c.resolve(LocationStoreService.self)!)
         }
     }
     
     private func registerPresenter() {
         Container.sharedContainer.register(WeatherLocationPresenter.self) { c in
             WeatherLocationDefaultPresenter(view: c.resolve(WeatherLocationView.self)!,
-                                            interactor: c.resolve(WeatherLocationInteractor.self)!)
+                                            interactor: c.resolve(WeatherLocationInteractor.self)!,
+                                            router: c.resolve(WeatherLocationRouter.self)!)
         }
     }
+    
+    private func registerRouter() {
+        Container.sharedContainer.register(WeatherLocationRouter.self) { c in
+            let viewController = (c.resolve(WeatherLocationView.self) as? UIViewController)!
+            return WeatherLocationModalRouter(viewController: viewController)
+        }
+    }
+    
 }

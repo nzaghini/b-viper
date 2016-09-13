@@ -4,3 +4,4 @@ disabled_rules: # rule identifiers to exclude from running
    - line_length
    - trailing_whitespace
    - function_body_length
+   - type_name

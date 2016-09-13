@@ -3,16 +3,21 @@ import Foundation
 struct WeatherListViewModel {
     let weatherItems: [WeatherItem]
 }
+
 struct WeatherItem {
-    let cityName: String
+    let itemId: String
+    let name: String
+    let detail: String
     let temperature: String
 }
+
 
 protocol WeatherListPresenter {
     func loadContent()
     func presentWeatherDetail(city: String)
     func presentAddWeatherLocation()
 }
+
 
 class WeatherListDefaultPresenter: WeatherListPresenter {
     
@@ -25,6 +30,8 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         self.router = router
         self.view = view
     }
+    
+    // MARK: <WeatherListPresenter>
     
     func loadContent() {
         self.interactor.fetchWeather { (result) in
@@ -46,11 +53,25 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         self.router.navigateToAddWeatherLocation()
     }
     
-    private func buildViewModelForWeatherData(weatherData: [CityWeatherData]) -> WeatherListViewModel {
-        let weatherItems = weatherData.map { (item) -> WeatherItem in
-            return WeatherItem(cityName: item.cityName, temperature: item.weatherData?.temperature ?? "n/a" )
+    // MARK: Private
+    
+    private func buildViewModelForWeatherData(weatherData: [WeatherLocationData]) -> WeatherListViewModel {
+        let weatherItems = weatherData.map { (data) -> WeatherItem in
+            return WeatherItem(itemId: data.locationId,
+                name: data.name,
+                detail: self.detailTextFromLocationData(data),
+                temperature: data.weatherData?.temperature ?? "--")
         }
+        
         return WeatherListViewModel(weatherItems: weatherItems)
+    }
+    
+    private func detailTextFromLocationData(locationData: WeatherLocationData) -> String {
+        if locationData.region.isEmpty {
+            return locationData.country
+        }
+        
+        return "\(locationData.region), \(locationData.country)"
     }
     
 }

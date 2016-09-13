@@ -7,29 +7,35 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
     
     override func spec() {
         
-        let service = WeatherServiceMock()
-        let interactor: WeatherListInteractor = WeatherListDefaultInteractor(weatherService: service)
+        let expectedLocations = [
+            WeatherLocation.locationWithIndex(1),
+            WeatherLocation.locationWithIndex(2),
+            WeatherLocation.locationWithIndex(3)
+        ]
+        let weatherService = WeatherServiceMock()
+        let locationStoreService = LocationStoreServiceMock()
+        let interactor: WeatherListInteractor = WeatherListDefaultInteractor(weatherService: weatherService,
+                                                                             locationStoreService: locationStoreService)
         
-        context("Weather data is available for all cities", {
+        context("When locations are loaded succesfully", {
             
-            let expectedWeatherDataList = [
-                WeatherData(cityName:"Rome", temperature:"18", forecastInDays:["10", "12"], temperatureUnit:"C"),
-                WeatherData(cityName:"London", temperature:"20", forecastInDays:["10", "12"], temperatureUnit:"C"),
-                WeatherData(cityName:"Dublin", temperature:"20", forecastInDays:["10", "12"], temperatureUnit:"C")]
-            
-            beforeEach({
-                service.weatherDataList = expectedWeatherDataList
-            })
-            
-            it("Should provide weather data to caller for each avaiable city") {
+            it("Should provide the same locations to the caller") {
+                locationStoreService.locationsList = expectedLocations
+                
                 interactor.fetchWeather { (result) in
                     
                     expect(result).notTo(beNil())
                     if case .Success(let weather) = result {
                         expect(weather).notTo(beNil())
-                        expect(weather[0]).to(equal(CityWeatherData(cityName: "Rome", weatherData: expectedWeatherDataList[0])))
-                        expect(weather[1]).to(equal(CityWeatherData(cityName: "London", weatherData: expectedWeatherDataList[1])))
-                        expect(weather[2]).to(equal(CityWeatherData(cityName: "Dublin", weatherData: expectedWeatherDataList[2])))
+                        
+                        let expectedData0 = WeatherLocationData(locationId: "1", name: "City1", region: "Region1", country: "Country1", weatherData: nil)
+                        expect(weather[0]).to(equal(expectedData0))
+                        
+                        let expectedData1 = WeatherLocationData(locationId: "2", name: "City2", region: "Region2", country: "Country2", weatherData: nil)
+                        expect(weather[1]).to(equal(expectedData1))
+                            
+                        let expectedData2 = WeatherLocationData(locationId: "3", name: "City3", region: "Region3", country: "Country3", weatherData: nil)
+                        expect(weather[2]).to(equal(expectedData2))
                     } else {
                         fail()
                     }
@@ -38,24 +44,16 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
             }
         })
         
-        context("Weather data is not available for all cities", {
+        context("When there is an error loading the locations", {
             
-            let expectedWeatherDataList = [
-                WeatherData(cityName:"Rome", temperature:"18", forecastInDays:["10", "12"], temperatureUnit: "C")]
-            
-            beforeEach({
-                service.weatherDataList = expectedWeatherDataList
-            })
-            
-            it("Should provide weather data only for available cities") {
+            it("Should return the error to the caller") {
+                locationStoreService.locationsList = nil
+                
                 interactor.fetchWeather { (result) in
                     
                     expect(result).notTo(beNil())
-                    if case .Success(let weather) = result {
-                        expect(weather).notTo(beNil())
-                        expect(weather[0]).to(equal(CityWeatherData(cityName: "Rome", weatherData: expectedWeatherDataList[0])))
-                        expect(weather[1]).to(equal(CityWeatherData(cityName: "London", weatherData: nil)))
-                        expect(weather[2]).to(equal(CityWeatherData(cityName: "Dublin", weatherData: nil)))
+                    if case .Failure(let error) = result {
+                        expect(error.code).to(equal(500))
                     } else {
                         fail()
                     }

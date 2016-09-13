@@ -14,16 +14,17 @@ struct WeatherListSwiftInjectBuilder: WeatherListBuilder {
     
     func registerView() {
         let viewDescription = Container.sharedContainer.register(WeatherListView.self) { _ in WeatherListViewController()}
-        viewDescription.initCompleted { r, v in
+        viewDescription.initCompleted { c, v in
             if let view = v as? WeatherListViewController {
-                view.presenter = r.resolve(WeatherListPresenter.self)
+                view.presenter = c.resolve(WeatherListPresenter.self)
             }
         }
     }
     
     func registerInteractor() {
-        Container.sharedContainer.register(WeatherListInteractor.self) { r in
-            WeatherListDefaultInteractor(weatherService: r.resolve(WeatherService.self)!)
+        Container.sharedContainer.register(WeatherListInteractor.self) { c in
+            WeatherListDefaultInteractor(weatherService: c.resolve(WeatherService.self)!,
+                                         locationStoreService: c.resolve(LocationStoreService.self)!)
         }
     }
     
