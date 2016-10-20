@@ -27,7 +27,7 @@ class RealmLocationStoreService: LocationStoreService {
 
     // MARK: <CityStoreService>
 
-    func addLocation(location:Location) {
+    func addLocation(location: Location) {
         let realmCity = self.realmLocation(fromLocation: location)
 
         do {
@@ -58,7 +58,7 @@ class RealmLocationStoreService: LocationStoreService {
 
     // MARK: Private
 
-    private func realmLocation(fromLocation location:Location) -> RealmLocation {
+    private func realmLocation(fromLocation location: Location) -> RealmLocation {
         let realmLocation = RealmLocation()
 
         realmLocation.locationId = location.locationId
@@ -74,7 +74,7 @@ class RealmLocationStoreService: LocationStoreService {
         return realmLocation
     }
 
-    private func location(fromRealmLocation realmLocation:RealmLocation) -> Location {
+    private func location(fromRealmLocation realmLocation: RealmLocation) -> Location {
         let location = Location(locationId: realmLocation.locationId,
                 name: realmLocation.name,
                 region: realmLocation.region,
