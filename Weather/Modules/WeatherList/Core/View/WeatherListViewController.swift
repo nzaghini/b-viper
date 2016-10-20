@@ -3,7 +3,7 @@ import UIKit
 
 class WeatherListViewController: UITableViewController, WeatherListView {
     
-    var viewModel: WeatherListViewModel?
+    var viewModel: LocationListViewModel?
     var presenter: WeatherListPresenter?
     
     override func viewDidLoad() {
@@ -21,7 +21,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     
     // MARK: - CityListView
     
-    func displayWeatherList(viewModel: WeatherListViewModel) {
+    func displayLocationList(viewModel: LocationListViewModel) {
         self.viewModel = viewModel
         self.tableView.reloadData()
     }
@@ -43,7 +43,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let viewModel = self.viewModel {
-            return viewModel.weatherItems.count
+            return viewModel.locations.count
         }
         return 0
     }
@@ -56,7 +56,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
             cell?.accessoryType = .DisclosureIndicator
         }
         
-        if let item = self.viewModel?.weatherItems[indexPath.row] {
+        if let item = self.viewModel?.locations[indexPath.row] {
             cell?.textLabel?.text = item.name
             cell?.detailTextLabel?.text = item.detail
         }
@@ -66,8 +66,8 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if let viewModel = self.viewModel {
-            let city = viewModel.weatherItems[indexPath.row].name
-            self.presenter?.presentWeatherDetail(city)
+            let locationId = viewModel.locations[indexPath.row].locationId
+            self.presenter?.presentWeatherDetail(locationId)
         }
     }
     

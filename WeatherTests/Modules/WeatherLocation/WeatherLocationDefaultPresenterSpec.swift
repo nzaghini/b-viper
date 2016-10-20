@@ -25,7 +25,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When viewIsReady is called") {
             it("Should call displaySearch to the view") {
-                self.presenter.viewIsReady()
+                self.presenter.loadContent()
                 
                 expect(self.viewMock.displaySearchCalled).to(beTrue())
             }
@@ -33,7 +33,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When userSearchText is called with empty text") {
             it("Should do nothing") {
-                self.presenter.userSearchText("")
+                self.presenter.searchLocation("")
                 
                 expect(self.viewMock.displayLocationsCalled).to(beFalse())
                 expect(self.interactorMock.locationsWithTextCalled).to(beFalse())
@@ -42,7 +42,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When userSearchText is called with text") {
             it("Should call the interactor with the text") {
-                self.presenter.userSearchText("text")
+                self.presenter.searchLocation("text")
                 
                 expect(self.viewMock.displayLoadingCalled).to(beTrue())
                 expect(self.interactorMock.locationsWithTextCalled).to(beTrue())
@@ -52,10 +52,10 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When userSearchText is called and the interactor returns no locations") {
             it("Should call displayNoResults on the view") {
-                let result = FetchWeatherLocationResult.Success(locations: [])
+                let result = FindLocationResult.Success(locations: [])
                 self.interactorMock.resultToReturn = result
                 
-                self.presenter.userSearchText("text")
+                self.presenter.searchLocation("text")
                 
                 expect(self.viewMock.displayNoResultsCalled).to(beTrue())
             }
@@ -64,9 +64,9 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         context("When userSearchText is called and the interactor returns an error") {
             it("Should call displayErrorMessage on the view") {
                 let error = NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)
-                self.interactorMock.resultToReturn = FetchWeatherLocationResult.Failure(reason: error)
+                self.interactorMock.resultToReturn = FindLocationResult.Failure(reason: error)
                 
-                self.presenter.userSearchText("text")
+                self.presenter.searchLocation("text")
                 
                 expect(self.viewMock.displayErrorMessageCalled).to(beTrue())
             }
@@ -74,31 +74,26 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When userSearchText is called and the interactor returns some locations") {
             it("Should call displayLocations on the view") {
-                let location = WeatherLocation.locationWithIndex(1)
-                self.interactorMock.resultToReturn = FetchWeatherLocationResult.Success(locations: [location])
+                let location = Location.locationWithIndex(1)
+                self.interactorMock.resultToReturn = FindLocationResult.Success(locations: [location])
                 
-                self.presenter.userSearchText("text")
+                self.presenter.searchLocation("text")
                 
                 expect(self.viewMock.displayLocationsCalled).to(beTrue())
-                if let locations = self.viewMock.locationsCalled {
-                    expect(locations.count).to(equal(1))
+                if let viewModel = self.viewMock.locationsCalled {
+                    expect(viewModel.locations.count).to(equal(1))
                 }
             }
         }
         
         context("When userSelectLocation is called") {
             it("Should call the interactor and navigate back") {
-                let location = WeatherLocation.locationWithIndex(1)
-                self.interactorMock.resultToReturn = FetchWeatherLocationResult.Success(locations: [location])
+                let location = Location.locationWithIndex(1)
+                self.interactorMock.resultToReturn = FindLocationResult.Success(locations: [location])
                 
-                self.presenter.userSearchText("text")
+                self.presenter.searchLocation("text")
                 
-                guard let viewModel = self.viewMock.locationsCalled?.first else {
-                    fail()
-                    return
-                }
-                
-                self.presenter.userSelectLocation(viewModel)
+                self.presenter.selectLocation(location.locationId)
                 
                 expect(self.interactorMock.selectLocationCalled).to(beTrue())
                 expect(self.routerMock.navigationBackCalled).to(beTrue())
@@ -114,7 +109,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When userCancel is called") {
             it("Should navigate back") {
-                self.presenter.userCancel()
+                self.presenter.cancelSearchForLocation()
                 
                 expect(self.routerMock.navigationBackCalled).to(beTrue())
             }
@@ -133,10 +128,10 @@ class WeatherLocationInteractorMock: WeatherLocationInteractor {
     var locationsWithTextCalled = false
     var textCalled: String?
     var selectLocationCalled = false
-    var locationCalled: WeatherLocation?
-    var resultToReturn: FetchWeatherLocationResult?
+    var locationCalled: Location?
+    var resultToReturn: FindLocationResult?
     
-    func locationsWithText(text: String, completion: (FetchWeatherLocationResult) -> ()) {
+    func findLocation(text: String, completion: (FindLocationResult) -> ()) {
         self.locationsWithTextCalled = true
         self.textCalled = text
         
@@ -145,7 +140,7 @@ class WeatherLocationInteractorMock: WeatherLocationInteractor {
         }
     }
     
-    func selectLocation(location: WeatherLocation) {
+    func selectLocation(location: Location) {
         self.selectLocationCalled = true
         self.locationCalled = location
     }
@@ -161,7 +156,7 @@ class WeatherLocationViewMock: WeatherLocationView {
     var displayErrorMessageCalled = false
     var errorMessageCalled: String?
     var displayLocationsCalled = false
-    var locationsCalled: [WeatherLocationViewModel]?
+    var locationsCalled: SelectableLocationListViewModel?
     
     func displayLoading() {
         self.displayLoadingCalled = true
@@ -180,9 +175,9 @@ class WeatherLocationViewMock: WeatherLocationView {
         self.errorMessageCalled = errorMessage
     }
     
-    func displayLocations(locations: [WeatherLocationViewModel]) {
+    func displayLocations(viewModel: SelectableLocationListViewModel) {
         self.displayLocationsCalled = true
-        self.locationsCalled = locations
+        self.locationsCalled = viewModel
     }
     
 }

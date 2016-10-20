@@ -1,29 +1,27 @@
 import Foundation
 
-struct WeatherListViewModel {
-    let weatherItems: [WeatherItem]
+struct LocationListViewModel {
+    let locations: [LocationViewModel]
 }
 
-struct WeatherItem {
-    let itemId: String
+struct LocationViewModel {
+    let locationId: String
     let name: String
     let detail: String
-    let temperature: String
 }
-
 
 protocol WeatherListPresenter {
     func loadContent()
-    func presentWeatherDetail(city: String)
+    func presentWeatherDetail(location: String)
     func presentAddWeatherLocation()
 }
 
-
 class WeatherListDefaultPresenter: WeatherListPresenter {
     
-    let interactor: WeatherListInteractor
-    let router: WeatherListRouter
-    weak var view: WeatherListView?
+    private let interactor: WeatherListInteractor
+    private let router: WeatherListRouter
+    private weak var view: WeatherListView?
+    private let viewModelBuilder = LocationListViewModelBuilder()
     
     required init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView) {
         self.interactor = interactor
@@ -34,44 +32,42 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
     // MARK: <WeatherListPresenter>
     
     func loadContent() {
-        self.interactor.fetchWeather { (result) in
-            switch result {
-            case .Success(let fetchedWeather):
-                self.view?.displayWeatherList(self.buildViewModelForWeatherData(fetchedWeather))
-                break
-            case .Failure(let reason):
-                self.view?.displayError(reason.localizedDescription)
-            }
-        }
+        let locations = self.interactor.locations()
+        self.view?.displayLocationList(self.viewModelBuilder.buildViewModel(locations))
     }
     
-    func presentWeatherDetail(city: String) {
-        self.router.navigateToWeatherDetail(city)
+    func presentWeatherDetail(locationId: String) {
+        let index = self.interactor.locations().indexOf({$0.locationId == locationId})
+        if let index = index {
+            self.router.navigateToWeatherDetail(withLocation: self.interactor.locations()[index])
+        }
+        
     }
     
     func presentAddWeatherLocation() {
         self.router.navigateToAddWeatherLocation()
     }
     
-    // MARK: Private
-    
-    private func buildViewModelForWeatherData(weatherData: [WeatherLocationData]) -> WeatherListViewModel {
-        let weatherItems = weatherData.map { (data) -> WeatherItem in
-            return WeatherItem(itemId: data.locationId,
-                name: data.name,
-                detail: self.detailTextFromLocationData(data),
-                temperature: data.weatherData?.temperature ?? "--")
+}
+
+//TODO: can this be a struct
+class LocationListViewModelBuilder {
+
+    func buildViewModel(locations: [Location]) -> LocationListViewModel {
+        let locationViewModels = locations.map { (location) -> LocationViewModel in
+            return LocationViewModel(locationId: location.locationId,
+                    name: location.name,
+                    detail: self.detailTextFromLocationData(location))
         }
-        
-        return WeatherListViewModel(weatherItems: weatherItems)
+
+        return LocationListViewModel(locations: locationViewModels)
     }
-    
-    private func detailTextFromLocationData(locationData: WeatherLocationData) -> String {
-        if locationData.region.isEmpty {
-            return locationData.country
+
+    private func detailTextFromLocationData(location: Location) -> String {
+        if location.region.isEmpty {
+            return location.country
         }
-        
-        return "\(locationData.region), \(locationData.country)"
+        return "\(location.region), \(location.country)"
     }
-    
+
 }

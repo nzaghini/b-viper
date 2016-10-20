@@ -1,12 +1,13 @@
 @testable import Weather
 
 
-extension WeatherLocation {
-    static func locationWithIndex(index: Int) -> WeatherLocation {
-        return WeatherLocation(locationId: "\(index)",
+extension Location {
+    static func locationWithIndex(index: Int) -> Location {
+        return Location(locationId: "\(index)",
                                name: "City\(index)",
                                region: "Region\(index)",
                                country: "Country\(index)",
-                               geolocation: nil)
+                               latitude: nil,
+                               longitude: nil)
     }
 }

@@ -3,9 +3,9 @@ import Alamofire
 import Mapper
 
 
-extension City: Mappable {
-    init(map: Mapper) throws {
-        try cityId = map.from("id", transformation: { return String($0!) })
+extension Location: Mappable {
+    public init(map: Mapper) throws {
+        try locationId = map.from("id", transformation: { return String($0!) })
         try name = map.from("name")
         try region = map.from("region")
         try country = map.from("country")
@@ -15,14 +15,14 @@ extension City: Mappable {
 }
 
 
-class ApixuCitiesService: CitiesService {
+class ApixuLocationService: LocationService {
     
     private let apixuCitiesUrl = "https://api.apixu.com/v1/search.json"
     private let apixuKey = "6dbb6fcfa4b74a599f580222160508"
     
     // MARK: <CitiesService>
     
-    func fetchCities(withName name: String, completion: CitiesServiceCompletion) {
+    func fetchLocations(withName name: String, completion: LocationServiceCompletion) {
         let parameters = ["key": self.apixuKey,
                           "q": name]
         Alamofire.request(.GET, self.apixuCitiesUrl, parameters: parameters)
@@ -30,11 +30,11 @@ class ApixuCitiesService: CitiesService {
                 switch response.result {
                 case .Success(let JSON):
                     if let JSON = JSON as? [NSDictionary] {
-                        let cities = City.from(JSON)
-                        completion(cities: cities, error: nil)
+                        let cities = Location.from(JSON)
+                        completion(locations: cities, error: nil)
                     }
                 case .Failure(let error):
-                    completion(cities: nil, error: error)
+                    completion(locations: nil, error: error)
                 }
             }
     }

@@ -6,21 +6,22 @@ class WeatherDetailDefaultInteractorTests: XCTestCase {
     
     var weatherServiceMock: WeatherServiceMock!
     var interactor: WeatherDetailDefaultInteractor!
+    var location: Location!
 
     override func setUp() {
         super.setUp()
-        
+        self.location = Location.locationWithIndex(1)
         self.weatherServiceMock = WeatherServiceMock()
-        self.interactor = WeatherDetailDefaultInteractor(weatherService: self.weatherServiceMock)
+        self.interactor = WeatherDetailDefaultInteractor(weatherService: self.weatherServiceMock, location: location)
     }
 
     func testFetchCitySuccess() {
-        self.weatherServiceMock.weatherDataList = [WeatherData(cityName: "City", temperature: "", forecastInDays: [], temperatureUnit: "")]
+        self.weatherServiceMock.weatherList = [Weather(locationName: self.location.name, temperature: "", forecastInDays: [], temperatureUnit: "")]
         
-        self.interactor.fetchCityWeather("City") { (result) in
+        self.interactor.fetchWeather() { (result) in
             switch result {
             case .Success(let data):
-                XCTAssertEqual(data.cityName, "City")
+                XCTAssertEqual(data.locationName, self.location.name)
             default:
                 XCTFail()
             }
@@ -32,7 +33,7 @@ class WeatherDetailDefaultInteractorTests: XCTestCase {
     func testFetchCityFailure() {
         self.weatherServiceMock.error = NSError(domain: "", code: 500, userInfo: nil)
         
-        self.interactor.fetchCityWeather("City") { (result) in
+        self.interactor.fetchWeather() { (result) in
             switch result {
             case .Failure(let error):
                 XCTAssertEqual(error.code, 500)

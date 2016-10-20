@@ -18,19 +18,18 @@ protocol WeatherDetailPresenter: class {
 class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
     
     let interactor: WeatherDetailInteractor
-    let city: String
     weak var view: WeatherDetailView?
     
-    required init(interactor: WeatherDetailInteractor, view: WeatherDetailView, city: String) {
+    required init(interactor: WeatherDetailInteractor, view: WeatherDetailView) {
         self.interactor = interactor
         self.view = view
-        self.city = city
     }
     
     // MARK: - WeatherDetailPresenter
     
     func loadContent() {
-        self.interactor.fetchCityWeather(self.city) { (result) in
+        self.view?.displayLoading()
+        self.interactor.fetchWeather {(result) in
             switch result {
             case .Success(let weather):
                 let vm = self.buildViewModel(weather)
@@ -42,7 +41,7 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
         }
     }
     
-    private func buildViewModel(data: WeatherData) -> WeatherDetailViewModel {
+    private func buildViewModel(data: Weather) -> WeatherDetailViewModel {
         var forecasts = [WeatherDetailForecastViewModel]()
         
         let df = NSDateFormatter()
@@ -58,7 +57,7 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
             date = date.dateByAddingTimeInterval(24 * 60 * 60)
         }
         
-        return WeatherDetailViewModel(cityName: data.cityName,
+        return WeatherDetailViewModel(cityName: data.locationName,
                                       temperature: data.temperature + data.temperatureUnit,
                                       forecasts: forecasts)
     }

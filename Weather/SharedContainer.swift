@@ -8,8 +8,8 @@ extension Container {
     static let sharedContainer: Container = {
         let c = Container()
         
-        c.register(WeatherService.self) { _ in YahooWeatherService()}
-        c.register(CitiesService.self) { _ in ApixuCitiesService()}
+        c.register(WeatherService.self) { _ in ApixuWeatherService()}
+        c.register(LocationService.self) { _ in ApixuLocationService()}
         c.register(LocationStoreService.self) { _ in RealmLocationStoreService()}
         
         c.register(WeatherListBuilder.self) { _ in WeatherListSwiftInjectBuilder()}

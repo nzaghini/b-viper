@@ -5,17 +5,17 @@ import Nimble
 
 class WeatherDetailDetaultPresenterSpec: QuickSpec {
     
-    var city: String!
     var viewMock: WeatherDetailViewMock!
     var interactorMock: WeatherDetailInteractorMock!
     var presenter: WeatherDetailDefaultPresenter!
+    var location: Location!
     
     override func spec() {
         beforeEach {
-            self.city = "City"
             self.viewMock = WeatherDetailViewMock()
             self.interactorMock = WeatherDetailInteractorMock()
-            self.presenter = WeatherDetailDefaultPresenter(interactor: self.interactorMock, view: self.viewMock, city: self.city)
+            self.presenter = WeatherDetailDefaultPresenter(interactor: self.interactorMock, view: self.viewMock)
+            self.location = Location.locationWithIndex(1)
         }
         
         context("When loadContent is called") {
@@ -23,7 +23,6 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
                 self.presenter.loadContent()
                 
                 expect(self.interactorMock.fetchCityWeatherCalled).to(beTrue())
-                expect(self.interactorMock.city).to(equal(self.city))
                 expect(self.interactorMock.completion).toNot(beNil())
             }
         }
@@ -32,7 +31,7 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
             it("Should send a view model to the view") {
                 self.presenter.loadContent()
                 
-                let weatherData = WeatherData(cityName: self.city, temperature: "21", forecastInDays: ["20"], temperatureUnit: "C")
+                let weatherData = Weather(locationName: self.location.name, temperature: "21", forecastInDays: ["20"], temperatureUnit: "C")
                 let result = FetchCityWeatherResult.Success(weather: weatherData)
                 
                 self.interactorMock.completion!(result)
@@ -66,13 +65,11 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
 // MARK: Mocks
 
 class WeatherDetailInteractorMock: WeatherDetailInteractor {
-    var city: String?
     var completion: ((FetchCityWeatherResult) -> ())?
     var fetchCityWeatherCalled = false
     
-    func fetchCityWeather(city: String, completion: (FetchCityWeatherResult) -> ()) {
+    func fetchWeather(completion: (FetchCityWeatherResult) -> ()) {
         self.fetchCityWeatherCalled = true
-        self.city = city
         self.completion = completion
     }
 }
@@ -92,6 +89,10 @@ class WeatherDetailViewMock: WeatherDetailView {
     func displayError(errorMessage: String) {
         self.displayErrorCalled = true
         self.errorMessage = errorMessage
+    }
+    
+    func displayLoading() {
+        
     }
     
 }
