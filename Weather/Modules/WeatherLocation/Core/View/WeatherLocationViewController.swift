@@ -9,7 +9,7 @@ class WeatherLocationViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var presenter: WeatherLocationPresenter?
-    var locations: [WeatherLocationViewModel]?
+    var viewModel: SelectableLocationListViewModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,14 +24,14 @@ class WeatherLocationViewController: UIViewController {
         self.searchBar.delegate = self
         self.spinner.hidesWhenStopped = true
         
-        self.presenter?.viewIsReady()
+        self.presenter?.loadContent()
     }
     
     // MARK: Actions
     
     func cancelAction() {
         self.searchBar.resignFirstResponder()
-        self.presenter?.userCancel()
+        self.presenter?.cancelSearchForLocation()
     }
     
     // MARK: Helpers
@@ -67,7 +67,7 @@ extension WeatherLocationViewController: WeatherLocationView {
         self.tableView.hidden = false
         self.spinner.stopAnimating()
         
-        self.locations = nil
+        self.viewModel = nil
         self.tableView.reloadData()
         
         self.showToastWithText("No Results")
@@ -81,12 +81,12 @@ extension WeatherLocationViewController: WeatherLocationView {
         self.showToastWithText(errorMessage)
     }
 
-    func displayLocations(locations: [WeatherLocationViewModel]) {
+    func displayLocations(viewModel: SelectableLocationListViewModel) {
         self.searchBar.hidden = false
         self.tableView.hidden = false
         self.spinner.stopAnimating()
         
-        self.locations = locations
+        self.viewModel = viewModel
         self.tableView.reloadData()
     }
     
@@ -97,7 +97,7 @@ extension WeatherLocationViewController: UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         if let text = searchBar.text {
-            self.presenter?.userSearchText(text)
+            self.presenter?.searchLocation(text)
         }
     }
     
@@ -107,8 +107,8 @@ extension WeatherLocationViewController: UISearchBarDelegate {
 extension WeatherLocationViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        if let location = self.locations?[indexPath.row] {
-            self.presenter?.userSelectLocation(location)
+        if let location = self.viewModel?.locations[indexPath.row] {
+            self.presenter?.selectLocation(location.locationId)
         }
     }
     
@@ -118,7 +118,7 @@ extension WeatherLocationViewController: UITableViewDelegate {
 extension WeatherLocationViewController: UITableViewDataSource {
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.locations?.count ?? 0
+        return self.viewModel?.locations.count ?? 0
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -127,7 +127,7 @@ extension WeatherLocationViewController: UITableViewDataSource {
             cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "WeatherLocationCell")
         }
         
-        if let location = self.locations?[indexPath.row] {
+        if let location = self.viewModel?.locations[indexPath.row] {
             cell?.textLabel?.text = location.name
             cell?.detailTextLabel?.text = location.detail
         }

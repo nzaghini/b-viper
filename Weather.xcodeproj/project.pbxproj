@@ -20,17 +20,13 @@
 		495C85611D49FBD800A57AFC /* WeatherLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 495C85601D49FBD800A57AFC /* WeatherLocationViewController.xib */; };
 		5A4973F01D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973EF1D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift */; };
 		5A4973F21D5A51DD00517470 /* CitiesServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F11D5A51DD00517470 /* CitiesServiceMock.swift */; };
-		5A4973F41D5A554500517470 /* CitiesHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F31D5A554500517470 /* CitiesHelper.swift */; };
 		5A4973F61D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F51D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift */; };
-		5A4973F81D5C47C200517470 /* WeatherLocationCitiesInteractorMapperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F71D5C47C200517470 /* WeatherLocationCitiesInteractorMapperSpec.swift */; };
 		5A4973FA1D5C4BA500517470 /* WeatherLocationDefaultPresenterMapperSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4973F91D5C4BA500517470 /* WeatherLocationDefaultPresenterMapperSpec.swift */; };
-		5AAE8AF61D54844900B69877 /* ApixuCitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AF41D54844900B69877 /* ApixuCitiesService.swift */; };
-		5AAE8AF71D54844900B69877 /* CitiesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AF51D54844900B69877 /* CitiesService.swift */; };
 		5AAE8AFD1D54D53300B69877 /* WeatherLocationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AFC1D54D53300B69877 /* WeatherLocationRouter.swift */; };
-		5AAE8B001D54E57500B69877 /* LocationStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8AFF1D54E57500B69877 /* LocationStoreService.swift */; };
-		5AAE8B021D54E60700B69877 /* RealmLocationStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AAE8B011D54E60700B69877 /* RealmLocationStoreService.swift */; };
 		5AD99B441D56395600D1EE2D /* UserLocationsServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99B431D56395600D1EE2D /* UserLocationsServiceMock.swift */; };
 		5AD99B471D563C1D00D1EE2D /* WeatherLocationHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AD99B461D563C1D00D1EE2D /* WeatherLocationHelper.swift */; };
+		B3051D2C1DB8C2CA00B8C386 /* ApixuLocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3051D2A1DB8C2CA00B8C386 /* ApixuLocationService.swift */; };
+		B3051D2D1DB8C2CA00B8C386 /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3051D2B1DB8C2CA00B8C386 /* LocationService.swift */; };
 		B32631C51D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631C11D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift */; };
 		B32631C61D0AE9F200AB7FF9 /* WeatherDetailDefaultInteractorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631C21D0AE9F200AB7FF9 /* WeatherDetailDefaultInteractorTests.swift */; };
 		B32631C71D0AE9F200AB7FF9 /* WeatherListDefaultInteractorSpec.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631C41D0AE9F200AB7FF9 /* WeatherListDefaultInteractorSpec.swift */; };
@@ -51,6 +47,9 @@
 		B32631F41D0AF6A700AB7FF9 /* WeatherListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631EA1D0AF6A700AB7FF9 /* WeatherListView.swift */; };
 		B32631F51D0AF6A700AB7FF9 /* WeatherListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631EC1D0AF6A700AB7FF9 /* WeatherListViewController.swift */; };
 		B32631F61D0AF6A700AB7FF9 /* WeatherListDefaultRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = B32631EE1D0AF6A700AB7FF9 /* WeatherListDefaultRouter.swift */; };
+		B361C6011DB77775005EC884 /* LocationStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361C5FF1DB77775005EC884 /* LocationStoreService.swift */; };
+		B361C6021DB77775005EC884 /* RealmLocationStoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361C6001DB77775005EC884 /* RealmLocationStoreService.swift */; };
+		B361C6041DB7BAB3005EC884 /* ApixuWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B361C6031DB7BAB3005EC884 /* ApixuWeatherService.swift */; };
 		B36E11841CDDD3D6002BCC8D /* YahooWeatherService.swift in Sources */ = {isa = PBXBuildFile; fileRef = B36E11831CDDD3D6002BCC8D /* YahooWeatherService.swift */; };
 		B3DDDB491CCD024300C71A8F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B3DDDB481CCD024300C71A8F /* AppDelegate.swift */; };
 		B3DDDB501CCD024300C71A8F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B3DDDB4F1CCD024300C71A8F /* Assets.xcassets */; };
@@ -82,19 +81,15 @@
 		495C85601D49FBD800A57AFC /* WeatherLocationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = WeatherLocationViewController.xib; path = WeatherLocation/Core/View/WeatherLocationViewController.xib; sourceTree = "<group>"; };
 		5A4973EF1D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationCitiesInteractorSpec.swift; path = Modules/WeatherLocation/WeatherLocationCitiesInteractorSpec.swift; sourceTree = "<group>"; };
 		5A4973F11D5A51DD00517470 /* CitiesServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesServiceMock.swift; path = Mocks/CitiesServiceMock.swift; sourceTree = "<group>"; };
-		5A4973F31D5A554500517470 /* CitiesHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesHelper.swift; path = Helpers/CitiesHelper.swift; sourceTree = "<group>"; };
 		5A4973F51D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationDefaultPresenterSpec.swift; path = Modules/WeatherLocation/WeatherLocationDefaultPresenterSpec.swift; sourceTree = "<group>"; };
-		5A4973F71D5C47C200517470 /* WeatherLocationCitiesInteractorMapperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationCitiesInteractorMapperSpec.swift; path = Modules/WeatherLocation/WeatherLocationCitiesInteractorMapperSpec.swift; sourceTree = "<group>"; };
 		5A4973F91D5C4BA500517470 /* WeatherLocationDefaultPresenterMapperSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationDefaultPresenterMapperSpec.swift; path = Modules/WeatherLocation/WeatherLocationDefaultPresenterMapperSpec.swift; sourceTree = "<group>"; };
-		5AAE8AF41D54844900B69877 /* ApixuCitiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ApixuCitiesService.swift; path = Cities/ApixuCitiesService.swift; sourceTree = "<group>"; };
-		5AAE8AF51D54844900B69877 /* CitiesService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CitiesService.swift; path = Cities/CitiesService.swift; sourceTree = "<group>"; };
 		5AAE8AFC1D54D53300B69877 /* WeatherLocationRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationRouter.swift; path = WeatherLocation/Router/WeatherLocationRouter.swift; sourceTree = "<group>"; };
-		5AAE8AFF1D54E57500B69877 /* LocationStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationStoreService.swift; path = UserLocations/LocationStoreService.swift; sourceTree = "<group>"; };
-		5AAE8B011D54E60700B69877 /* RealmLocationStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RealmLocationStoreService.swift; path = UserLocations/RealmLocationStoreService.swift; sourceTree = "<group>"; };
 		5AD99B431D56395600D1EE2D /* UserLocationsServiceMock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UserLocationsServiceMock.swift; path = Mocks/UserLocationsServiceMock.swift; sourceTree = "<group>"; };
 		5AD99B461D563C1D00D1EE2D /* WeatherLocationHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WeatherLocationHelper.swift; path = Helpers/WeatherLocationHelper.swift; sourceTree = "<group>"; };
 		9D2E2B8741B0E764605451D7 /* Pods-WeatherTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-WeatherTests/Pods-WeatherTests.release.xcconfig"; sourceTree = "<group>"; };
 		A9ECB7E45D8CCC7BA039E2A9 /* Pods-Weather.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Weather.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Weather/Pods-Weather.debug.xcconfig"; sourceTree = "<group>"; };
+		B3051D2A1DB8C2CA00B8C386 /* ApixuLocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApixuLocationService.swift; sourceTree = "<group>"; };
+		B3051D2B1DB8C2CA00B8C386 /* LocationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		B32631C11D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailDetaultPresenterSpec.swift; sourceTree = "<group>"; };
 		B32631C21D0AE9F200AB7FF9 /* WeatherDetailDefaultInteractorTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherDetailDefaultInteractorTests.swift; sourceTree = "<group>"; };
 		B32631C41D0AE9F200AB7FF9 /* WeatherListDefaultInteractorSpec.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListDefaultInteractorSpec.swift; sourceTree = "<group>"; };
@@ -115,6 +110,9 @@
 		B32631EA1D0AF6A700AB7FF9 /* WeatherListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListView.swift; sourceTree = "<group>"; };
 		B32631EC1D0AF6A700AB7FF9 /* WeatherListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListViewController.swift; sourceTree = "<group>"; };
 		B32631EE1D0AF6A700AB7FF9 /* WeatherListDefaultRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WeatherListDefaultRouter.swift; sourceTree = "<group>"; };
+		B361C5FF1DB77775005EC884 /* LocationStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationStoreService.swift; sourceTree = "<group>"; };
+		B361C6001DB77775005EC884 /* RealmLocationStoreService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RealmLocationStoreService.swift; sourceTree = "<group>"; };
+		B361C6031DB7BAB3005EC884 /* ApixuWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ApixuWeatherService.swift; sourceTree = "<group>"; };
 		B36E11831CDDD3D6002BCC8D /* YahooWeatherService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YahooWeatherService.swift; sourceTree = "<group>"; };
 		B3DDDB451CCD024300C71A8F /* Weather.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Weather.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B3DDDB481CCD024300C71A8F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -241,20 +239,10 @@
 			isa = PBXGroup;
 			children = (
 				5A4973EF1D5A513600517470 /* WeatherLocationCitiesInteractorSpec.swift */,
-				5A4973F71D5C47C200517470 /* WeatherLocationCitiesInteractorMapperSpec.swift */,
 				5A4973F51D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift */,
 				5A4973F91D5C4BA500517470 /* WeatherLocationDefaultPresenterMapperSpec.swift */,
 			);
 			name = WeatherLocation;
-			sourceTree = "<group>";
-		};
-		5AAE8AF31D5483EE00B69877 /* Cities */ = {
-			isa = PBXGroup;
-			children = (
-				5AAE8AF51D54844900B69877 /* CitiesService.swift */,
-				5AAE8AF41D54844900B69877 /* ApixuCitiesService.swift */,
-			);
-			name = Cities;
 			sourceTree = "<group>";
 		};
 		5AAE8AFB1D54D51300B69877 /* Router */ = {
@@ -265,20 +253,10 @@
 			name = Router;
 			sourceTree = "<group>";
 		};
-		5AAE8AFE1D54E4FB00B69877 /* UserLocations */ = {
-			isa = PBXGroup;
-			children = (
-				5AAE8AFF1D54E57500B69877 /* LocationStoreService.swift */,
-				5AAE8B011D54E60700B69877 /* RealmLocationStoreService.swift */,
-			);
-			name = UserLocations;
-			sourceTree = "<group>";
-		};
 		5AD99B451D563BF300D1EE2D /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
 				5AD99B461D563C1D00D1EE2D /* WeatherLocationHelper.swift */,
-				5A4973F31D5A554500517470 /* CitiesHelper.swift */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -421,6 +399,17 @@
 			path = Router;
 			sourceTree = "<group>";
 		};
+		B361C5FE1DB77775005EC884 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				B3051D2A1DB8C2CA00B8C386 /* ApixuLocationService.swift */,
+				B3051D2B1DB8C2CA00B8C386 /* LocationService.swift */,
+				B361C5FF1DB77775005EC884 /* LocationStoreService.swift */,
+				B361C6001DB77775005EC884 /* RealmLocationStoreService.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		B3DDDB3C1CCD024300C71A8F = {
 			isa = PBXGroup;
 			children = (
@@ -470,8 +459,8 @@
 		C1AB63568AA0A753A8BB5344 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				495C85461D49F29C00A57AFC /* WeatherLocation */,
 				B32631E01D0AF6A700AB7FF9 /* WeatherList */,
+				495C85461D49F29C00A57AFC /* WeatherLocation */,
 				B32631C81D0AF69500AB7FF9 /* WeatherDetail */,
 			);
 			path = Modules;
@@ -482,6 +471,7 @@
 			children = (
 				C1AB6A75F8D710C65692D406 /* WeatherService.swift */,
 				B36E11831CDDD3D6002BCC8D /* YahooWeatherService.swift */,
+				B361C6031DB7BAB3005EC884 /* ApixuWeatherService.swift */,
 			);
 			path = Weather;
 			sourceTree = "<group>";
@@ -489,8 +479,7 @@
 		C1AB6E0625A8BDD56127197D /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				5AAE8AFE1D54E4FB00B69877 /* UserLocations */,
-				5AAE8AF31D5483EE00B69877 /* Cities */,
+				B361C5FE1DB77775005EC884 /* Location */,
 				C1AB6AAEAF6D913785C57429 /* Weather */,
 			);
 			path = Services;
@@ -564,9 +553,11 @@
 				TargetAttributes = {
 					B3DDDB441CCD024300C71A8F = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 					};
 					B3DDDB581CCD024300C71A8F = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0800;
 						TestTargetID = B3DDDB441CCD024300C71A8F;
 					};
 				};
@@ -756,16 +747,17 @@
 			files = (
 				B32631DC1D0AF69500AB7FF9 /* WeatherDetailViewController.swift in Sources */,
 				B3DDDB491CCD024300C71A8F /* AppDelegate.swift in Sources */,
+				B3051D2C1DB8C2CA00B8C386 /* ApixuLocationService.swift in Sources */,
+				B361C6011DB77775005EC884 /* LocationStoreService.swift in Sources */,
 				B32631F61D0AF6A700AB7FF9 /* WeatherListDefaultRouter.swift in Sources */,
+				B361C6041DB7BAB3005EC884 /* ApixuWeatherService.swift in Sources */,
 				B32631DA1D0AF69500AB7FF9 /* WeatherDetailPresenter.swift in Sources */,
 				5AAE8AFD1D54D53300B69877 /* WeatherLocationRouter.swift in Sources */,
 				B32631F51D0AF6A700AB7FF9 /* WeatherListViewController.swift in Sources */,
-				5AAE8B001D54E57500B69877 /* LocationStoreService.swift in Sources */,
-				5AAE8AF71D54844900B69877 /* CitiesService.swift in Sources */,
 				B32631F01D0AF6A700AB7FF9 /* WeatherListSwiftInjectBuilder.swift in Sources */,
 				B32631D81D0AF69500AB7FF9 /* WeatherDetailSwiftInjectBuilder.swift in Sources */,
+				B361C6021DB77775005EC884 /* RealmLocationStoreService.swift in Sources */,
 				49314EE41CF84E6E005700C9 /* SharedContainer.swift in Sources */,
-				5AAE8AF61D54844900B69877 /* ApixuCitiesService.swift in Sources */,
 				495C85501D49F48A00A57AFC /* WeatherLocationViewController.swift in Sources */,
 				B36E11841CDDD3D6002BCC8D /* YahooWeatherService.swift in Sources */,
 				495C85571D49F69100A57AFC /* WeatherLocationPresenter.swift in Sources */,
@@ -783,7 +775,7 @@
 				C1AB6068EEAD9D8CC4F9B579 /* WeatherService.swift in Sources */,
 				495C854D1D49F3B700A57AFC /* WeatherLocationSwiftInjectBuilder.swift in Sources */,
 				B32631F31D0AF6A700AB7FF9 /* WeatherListRouter.swift in Sources */,
-				5AAE8B021D54E60700B69877 /* RealmLocationStoreService.swift in Sources */,
+				B3051D2D1DB8C2CA00B8C386 /* LocationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -797,8 +789,6 @@
 				5AD99B441D56395600D1EE2D /* UserLocationsServiceMock.swift in Sources */,
 				5A4973FA1D5C4BA500517470 /* WeatherLocationDefaultPresenterMapperSpec.swift in Sources */,
 				5A4973F61D5A59A200517470 /* WeatherLocationDefaultPresenterSpec.swift in Sources */,
-				5A4973F81D5C47C200517470 /* WeatherLocationCitiesInteractorMapperSpec.swift in Sources */,
-				5A4973F41D5A554500517470 /* CitiesHelper.swift in Sources */,
 				B32631C51D0AE9F200AB7FF9 /* WeatherDetailDetaultPresenterSpec.swift in Sources */,
 				B32631C61D0AE9F200AB7FF9 /* WeatherDetailDefaultInteractorTests.swift in Sources */,
 				5A4973F21D5A51DD00517470 /* CitiesServiceMock.swift in Sources */,
@@ -931,6 +921,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nz.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Debug;
 		};
@@ -943,6 +934,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nz.Weather;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 			};
 			name = Release;
 		};
@@ -957,6 +949,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.nz.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
 			};
 			name = Debug;
@@ -971,6 +964,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.nz.WeatherTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 2.3;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Weather.app/Weather";
 			};
 			name = Release;

@@ -20,12 +20,16 @@ class WeatherDetailViewController: UIViewController, WeatherDetailView {
     
     // MARK: - WeatherDetailView
     
+    func displayLoading() {
+        self.cityLabel.text = "Loading ..."
+    }
+    
     func displayWeatherDetail(viewModel: WeatherDetailViewModel) {
         self.cityLabel.text = viewModel.cityName
         self.todayTemperatureLabel.text = viewModel.temperature
         
         for forecast in viewModel.forecasts {
-            if let forecastView = NSBundle.mainBundle().loadNibNamed("WeatherForecastView", owner: nil, options: nil).first as? WeatherForecastView {
+            if let forecastView = NSBundle.mainBundle().loadNibNamed("WeatherForecastView", owner: nil, options: nil)!.first as? WeatherForecastView {
                 forecastView.dayLabel.text = forecast.day
                 forecastView.tempLabel.text = forecast.temp
                 self.stackView.addArrangedSubview(forecastView)

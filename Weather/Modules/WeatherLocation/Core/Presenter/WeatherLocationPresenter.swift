@@ -1,15 +1,22 @@
 import Foundation
 
-
-public protocol WeatherLocationPresenter {
-    
-    func viewIsReady()
-    func userSearchText(text: String)
-    func userSelectLocation(location: WeatherLocationViewModel)
-    func userCancel()
-    
+public struct SelectableLocationListViewModel {
+    let locations: [SelectableLocationViewModel]
 }
 
+public struct SelectableLocationViewModel {
+    let locationId: String
+    let name: String
+    let detail: String
+}
+
+/// The presenter for weather location module
+public protocol WeatherLocationPresenter {
+    func loadContent()
+    func searchLocation(text: String)
+    func selectLocation(locationId: String)
+    func cancelSearchForLocation()
+}
 
 class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     
@@ -17,9 +24,8 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     private let interactor: WeatherLocationInteractor
     private let router: WeatherLocationRouter
     
-    private var locations: [WeatherLocation]?
-    
-    private let mapper = WeatherLocationDefaultPresenterMapper()
+    private var locations: [Location]?
+    private let viewModelBuilder = SelectableLocationListViewModelBuilder()
     
     init(view: WeatherLocationView, interactor: WeatherLocationInteractor, router: WeatherLocationRouter) {
         self.view = view
@@ -29,22 +35,22 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     
     // MARK: <WeatherLocationPresenter>
     
-    func viewIsReady() {
+    func loadContent() {
         self.view?.displaySearch()
     }
     
-    func userSearchText(text: String) {
+    func searchLocation(text: String) {
         if text.characters.isEmpty {
             return
         }
         self.view?.displayLoading()
-        self.interactor.locationsWithText(text, completion: { (result) in
+        self.interactor.findLocation(text, completion: { (result) in
             switch result {
             case .Success(let locations):
                 if !locations.isEmpty {
                     self.locations = locations
-                    let locationVieWModels = self.mapper.mapLocations(locations)
-                    self.view?.displayLocations(locationVieWModels)
+                    let viewModel = self.viewModelBuilder.buildViewModel(locations)
+                    self.view?.displayLocations(viewModel)
                 } else {
                     self.view?.displayNoResults()
                 }
@@ -54,35 +60,36 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
         })
     }
     
-    func userSelectLocation(location: WeatherLocationViewModel) {
-        if let index = self.locations?.indexOf({ $0.locationId == location.locationId }) {
-            let location = self.locations![index]
-            self.interactor.selectLocation(location)
+    func selectLocation(locationId: String) {
+        if let locations = self.locations, index = locations.indexOf({ $0.locationId == locationId }) {
+            let selectedLocation = locations[index]
+            self.interactor.selectLocation(selectedLocation)
         }
         
         self.router.navigateBack()
     }
     
-    func userCancel() {
+    func cancelSearchForLocation() {
         self.router.navigateBack()
     }
     
 }
 
 
-class WeatherLocationDefaultPresenterMapper {
+class SelectableLocationListViewModelBuilder {
     
-    func mapLocations(locations: [WeatherLocation]) -> [WeatherLocationViewModel] {
-        return locations.map(self.mapLocation)
+    func buildViewModel(locations: [Location]) -> SelectableLocationListViewModel {
+        let locationsViewModels = locations.map(self.mapLocation)
+        return SelectableLocationListViewModel(locations: locationsViewModels)
     }
     
-    func mapLocation(location: WeatherLocation) -> WeatherLocationViewModel {
-        return WeatherLocationViewModel(locationId: location.locationId,
+    private func mapLocation(location: Location) -> SelectableLocationViewModel {
+        return SelectableLocationViewModel(locationId: location.locationId,
                                         name: location.name,
                                         detail: self.detailTextFromLocation(location))
     }
     
-    func detailTextFromLocation(location: WeatherLocation) -> String {
+    private func detailTextFromLocation(location: Location) -> String {
         if location.region.isEmpty {
             return location.country
         }

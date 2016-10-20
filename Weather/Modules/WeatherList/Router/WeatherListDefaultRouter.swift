@@ -9,8 +9,8 @@ class WeatherListDefaultRouter: WeatherListRouter {
         self.viewController = viewController
     }
     
-    func navigateToWeatherDetail(city: String) {
-        if let weatherDetailVC = self.weatherDetailBuilder()?.buildWeatherDetailModule(city) {
+    func navigateToWeatherDetail(withLocation location: Location) {
+        if let weatherDetailVC = self.weatherDetailBuilder()?.buildWeatherDetailModule(withLocation: location) {
             self.viewController?.navigationController?.pushViewController(weatherDetailVC, animated: true)
         }
     }

@@ -1,96 +1,52 @@
 import Foundation
 
-
-public struct WeatherLocation {
-    let locationId: String
-    let name: String
-    let region: String
-    let country: String
-    var geolocation: WeatherGeolocation?
-    
-    init(locationId: String, name: String, region: String, country: String, geolocation: WeatherGeolocation? = nil) {
-        self.locationId = locationId
-        self.name = name
-        self.region = region
-        self.country = country
-        self.geolocation = geolocation
-    }
-}
-
-public struct WeatherGeolocation {
-    let latitude: Double
-    let longitude: Double
-}
-
-
-public enum FetchWeatherLocationResult {
-    case Success(locations: [WeatherLocation])
+public enum FindLocationResult {
+    case Success(locations: [Location])
     case Failure(reason: NSError)
 }
 
-
+/// The weather location module interactor
 public protocol WeatherLocationInteractor {
-    func locationsWithText(text: String, completion: (FetchWeatherLocationResult) -> ())
-    func selectLocation(location: WeatherLocation)
+    /// Allows location search based on text
+    ///
+    /// - parameter text:       the location text
+    /// - parameter completion: the result of location search
+    func findLocation(text: String, completion: (FindLocationResult) -> ())
+    /// Allows selection of location
+    ///
+    /// - parameter location: the weather location model
+    func selectLocation(location: Location)
 }
 
 
 class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
-    let citiesService: CitiesService
+    let locationService: LocationService
     let locationStoreService: LocationStoreService
     
-    let mapper = WeatherLocationCitiesInteractorMapper()
-    
-    init(citiesService: CitiesService, locationStoreService: LocationStoreService) {
-        self.citiesService = citiesService
+    init(locationService: LocationService, locationStoreService: LocationStoreService) {
+        self.locationService = locationService
         self.locationStoreService = locationStoreService
     }
     
-    // MARK: <CitiesService>
-    
-    func locationsWithText(text: String, completion: (FetchWeatherLocationResult) -> ()) {
-        self.citiesService.fetchCities(withName: text) { (cities, error) in
-            var result: FetchWeatherLocationResult!
+    func findLocation(text: String, completion: (FindLocationResult) -> ()) {
+        self.locationService.fetchLocations(withName: text) { (locations, error) in
+            var result: FindLocationResult!
             
             if error != nil {
-                result = FetchWeatherLocationResult.Failure(reason: error!)
-            } else if let cities = cities {
-                let locations = self.mapper.mapCities(cities)
-                result = FetchWeatherLocationResult.Success(locations: locations)
+                result = FindLocationResult.Failure(reason: error!)
+            } else if let locations = locations {
+                result = FindLocationResult.Success(locations: locations)
             } else {
                 let error = NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)
-                result = FetchWeatherLocationResult.Failure(reason: error)
+                result = FindLocationResult.Failure(reason: error)
             }
             
             completion(result)
         }
     }
     
-    func selectLocation(location: WeatherLocation) {
+    func selectLocation(location: Location) {
         self.locationStoreService.addLocation(location)
     }
     
-}
-
-
-class WeatherLocationCitiesInteractorMapper {
-    
-    func mapCities(cities: [City]) -> [WeatherLocation] {
-        return cities.map(self.mapCity)
-    }
-    
-    func mapCity(city: City) -> WeatherLocation {
-        let geolocation = WeatherGeolocation(latitude: city.latitude, longitude: city.longitude)
-        let location = WeatherLocation(locationId: city.cityId,
-                                       name: self.cleanCityName(city.name),
-                                       region: city.region,
-                                       country: city.country,
-                                       geolocation: geolocation)
-        
-        return location
-    }
-    
-    func cleanCityName(name: String) -> String {
-        return name.componentsSeparatedByString(",").first!
-    }
 }

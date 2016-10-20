@@ -5,32 +5,32 @@ import Quick
 
 class WeatherLocationDefaultPresenterMapperSpec: QuickSpec {
     
-    var mapper: WeatherLocationDefaultPresenterMapper!
+    var viewModelBuilder: SelectableLocationListViewModelBuilder!
     
     override func spec() {
         
         beforeEach {
-            self.mapper = WeatherLocationDefaultPresenterMapper()
+            self.viewModelBuilder = SelectableLocationListViewModelBuilder()
         }
         
-        context("When mapping one map location") {
+        context("When building with a list of locations") {
             it("Should return one view model") {
-                let location = WeatherLocation.locationWithIndex(1)
-                let viewModel = self.mapper.mapLocation(location)
+                let location = Location.locationWithIndex(1)
+                let viewModel = self.viewModelBuilder.buildViewModel([location])
                 
-                expect(viewModel.locationId).to(equal(location.locationId))
-                expect(viewModel.name).to(equal(location.name))
-                expect(viewModel.detail).to(equal("Region1, Country1"))
+                expect(viewModel.locations[0].locationId).to(equal(location.locationId))
+                expect(viewModel.locations[0].name).to(equal(location.name))
+                expect(viewModel.locations[0].detail).to(equal("Region1, Country1"))
             }
         }
         
         context("When mapping a map location without region") {
             it("Should return a view model with a detail that contains only the country") {
-                let location = WeatherLocation(locationId: "id", name: "name", region: "", country: "country")
+                let location = Location(locationId: "id", name: "name", region: "", country: "country", latitude: nil, longitude: nil)
                 
-                let viewModel = self.mapper.mapLocation(location)
+                    let viewModel = self.viewModelBuilder.buildViewModel([location])
                 
-                expect(viewModel.detail).to(equal("country"))
+                expect(viewModel.locations[0].detail).to(equal("country"))
             }
         }
     }

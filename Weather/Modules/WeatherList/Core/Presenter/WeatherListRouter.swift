@@ -1,6 +1,6 @@
 import Foundation
 
 protocol WeatherListRouter {
-    func navigateToWeatherDetail(city: String)
+    func navigateToWeatherDetail(withLocation location: Location)
     func navigateToAddWeatherLocation()
 }

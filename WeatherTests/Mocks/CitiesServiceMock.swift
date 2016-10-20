@@ -2,20 +2,20 @@ import Foundation
 @testable import Weather
 
 
-class CitiesServiceMock: CitiesService {
+class CitiesServiceMock: LocationService {
     
-    var citiesToReturn: [City]?
+    var citiesToReturn: [Location]?
     var errorToReturn: NSError?
     
     var fetchCitiesCalled = false
     var calledWithText: String?
     
     
-    func fetchCities(withName name: String, completion: CitiesServiceCompletion) {
+    func fetchLocations(withName name: String, completion: LocationServiceCompletion) {
         self.fetchCitiesCalled = true
         self.calledWithText = name
         
-        completion(cities: citiesToReturn, error: errorToReturn)
+        completion(locations: citiesToReturn, error: errorToReturn)
     }
     
 }

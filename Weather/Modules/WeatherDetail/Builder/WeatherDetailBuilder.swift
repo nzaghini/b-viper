@@ -2,5 +2,5 @@ import Foundation
 import UIKit
 
 protocol WeatherDetailBuilder {
-    func buildWeatherDetailModule(city: String) -> UIViewController?
+    func buildWeatherDetailModule(withLocation location: Location) -> UIViewController?
 }

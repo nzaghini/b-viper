@@ -16,14 +16,14 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
             self.citiesServiceMock = CitiesServiceMock()
             self.locationStoreServiceMock = LocationStoreServiceMock()
             
-            self.interactor = WeatherLocationCitiesInteractor(citiesService: self.citiesServiceMock,
+            self.interactor = WeatherLocationCitiesInteractor(locationService: self.citiesServiceMock,
                                                               locationStoreService: self.locationStoreServiceMock)
         }
         
         context("When locationsWithText is called") {
             it("Should call the cities service with the text provided") {
                 
-                self.interactor.locationsWithText("London") { (result) in
+                self.interactor.findLocation("London") { (result) in
                     
                 }
                 
@@ -36,7 +36,7 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
             it("Should return an empty array to the caller") {
                 self.citiesServiceMock.citiesToReturn = []
                 
-                self.interactor.locationsWithText("London") { (result) in
+                self.interactor.findLocation("London") { (result) in
                     if case .Success(let locations) = result {
                         expect(locations.count).to(equal(0))
                     } else {
@@ -51,7 +51,7 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
                 let error = NSError(domain: NSURLErrorDomain, code: 404, userInfo: nil)
                 self.citiesServiceMock.errorToReturn = error
                 
-                self.interactor.locationsWithText("City") { (result) in
+                self.interactor.findLocation("City") { (result) in
                     if case .Failure(let error) = result {
                         expect(error.code).to(equal(404))
                     } else {
@@ -63,10 +63,10 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
         
         context("When returns a city") {
             it("Should be returned to the caller") {
-                let city = City.cityWithIndex(1)
+                let city = Location.locationWithIndex(1)
                 self.citiesServiceMock.citiesToReturn = [city]
                 
-                self.interactor.locationsWithText("City") { (result) in
+                self.interactor.findLocation("City") { (result) in
                     if case .Success(let locations) = result {
                         expect(locations.count).to(equal(1))
                     } else {
@@ -78,7 +78,7 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
         
         context("When selectCity is called") {
             it("Should call locationStoreService with the same location") {
-                let location = WeatherLocation.locationWithIndex(1)
+                let location = Location.locationWithIndex(1)
                 self.interactor.selectLocation(location)
                 
                 expect(self.locationStoreServiceMock.locationStored?.locationId).to(equal(location.locationId))
