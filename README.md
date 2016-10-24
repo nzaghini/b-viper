@@ -1,6 +1,8 @@
+[![Build Status](https://travis-ci.org/nzaghini/mastering-reuse-viper.svg?branch=master)](https://travis-ci.org/nzaghini/mastering-reuse-viper)
+
 # Mastering Reuse with VIPER
 
-This repo is related to "Mastering Reuse: a journey into application modularisation with VIPER" talk from #iOSCon 2016.   
+This repo is related to "Mastering Reuse: a journey into application modularisation with VIPER" talk from #iOSCon 2016 and "Break the monolith with (B)VIPER modules" talk from Mobilization.pl 2016.   
 Collects experiments and ideas of application engineering with VIPER, Swift, MicroService Style design, DI, BDD and more.  
 
 The goal is to showcase the (B)VIPER architecture on a simple Weather application.
@@ -17,7 +19,7 @@ To run the example project, clone the repo, and run `pod install` from the root 
 
 - [x] WeatherListModule: shows the list of cities with weather overview
 - [x] WeatherDetailModule: shows details of the weather and forecast for a specific city
-- [ ] WeatheAddCityModule: allows the user to select a new city 
+- [x] WeatheAddCityModule: allows the user to select a new city 
 
 ## Author
 
