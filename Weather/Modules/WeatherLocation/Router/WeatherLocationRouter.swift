@@ -10,7 +10,7 @@ protocol WeatherLocationRouter {
 
 class WeatherLocationModalRouter: WeatherLocationRouter {
     
-    let viewController: UIViewController
+    weak var viewController: UIViewController?
     
     init(viewController: UIViewController) {
         self.viewController = viewController
@@ -19,6 +19,6 @@ class WeatherLocationModalRouter: WeatherLocationRouter {
     // MARK: <WeatherLocationRouter>
     
     func navigateBack() {
-        self.viewController.dismissViewControllerAnimated(true, completion: nil)
+        self.viewController?.dismissViewControllerAnimated(true, completion: nil)
     }
 }
