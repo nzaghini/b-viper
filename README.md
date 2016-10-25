@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/nzaghini/mastering-reuse-viper.svg?branch=master)](https://travis-ci.org/nzaghini/mastering-reuse-viper)
+[![Build Status](https://travis-ci.org/nzaghini/b-viper.svg?branch=master)](https://travis-ci.org/nzaghini/b-viper)
 
 # Mastering Reuse with VIPER
 
