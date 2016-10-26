@@ -9,7 +9,7 @@ The goal is to showcase the (B)VIPER architecture on a simple Weather applicatio
 
 You can watch the full presentation at [Skills Matter iOSCon 2016](https://skillsmatter.com/skillscasts/7931-mastering-reuse-a-journey-into-application-modularization-with-viper)
 
-You can download slides of the presentation from [Speaker Deck]( https://speakerdeck.com/nzaghini/mastering-reuse-a-journey-into-application-modularization-with-viper)
+You can download slides of the presentation from [SlideShare](http://www.slideshare.net/nzaghini/break-the-monolith-with-bviper-modules)
 
 ## Usage
 
@@ -19,7 +19,7 @@ To run the example project, clone the repo, and run `pod install` from the root 
 
 - [x] WeatherListModule: shows the list of cities with weather overview
 - [x] WeatherDetailModule: shows details of the weather and forecast for a specific city
-- [x] WeatheAddCityModule: allows the user to select a new city 
+- [x] WeatheAddCityModule: allows the user to select and add a new city 
 
 ## Author
 
