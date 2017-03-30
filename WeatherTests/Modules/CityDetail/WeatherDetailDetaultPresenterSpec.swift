@@ -2,7 +2,6 @@ import Quick
 import Nimble
 @testable import Weather
 
-
 class WeatherDetailDetaultPresenterSpec: QuickSpec {
     
     var viewMock: WeatherDetailViewMock!
@@ -32,7 +31,7 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
                 self.presenter.loadContent()
                 
                 let weatherData = Weather(locationName: self.location.name, temperature: "21", forecastInDays: ["20"], temperatureUnit: "C")
-                let result = FetchCityWeatherResult.Success(weather: weatherData)
+                let result = FetchCityWeatherResult.success(weather: weatherData)
                 
                 self.interactorMock.completion!(result)
                 
@@ -49,7 +48,7 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
                 let errorMessage = "Error Message"
                 let userInfo = [NSLocalizedDescriptionKey: errorMessage]
                 let error = NSError(domain: "", code: 500, userInfo: userInfo)
-                let result = FetchCityWeatherResult.Failure(reason: error)
+                let result = FetchCityWeatherResult.failure(reason: error)
                 
                 self.interactorMock.completion!(result)
                 
@@ -61,14 +60,13 @@ class WeatherDetailDetaultPresenterSpec: QuickSpec {
     }
 }
 
-
 // MARK: Mocks
 
 class WeatherDetailInteractorMock: WeatherDetailInteractor {
-    var completion: ((FetchCityWeatherResult) -> ())?
+    var completion: ((FetchCityWeatherResult) -> Void)?
     var fetchCityWeatherCalled = false
     
-    func fetchWeather(completion: (FetchCityWeatherResult) -> ()) {
+    func fetchWeather(_ completion: @escaping (FetchCityWeatherResult) -> Void) {
         self.fetchCityWeatherCalled = true
         self.completion = completion
     }
@@ -81,12 +79,12 @@ class WeatherDetailViewMock: WeatherDetailView {
     var displayErrorCalled = false
     var errorMessage: String?
     
-    func displayWeatherDetail(viewModel: WeatherDetailViewModel) {
+    func displayWeatherDetail(_ viewModel: WeatherDetailViewModel) {
         self.displayWeatherDetailCalled = true
         self.viewModel = viewModel
     }
     
-    func displayError(errorMessage: String) {
+    func displayError(_ errorMessage: String) {
         self.displayErrorCalled = true
         self.errorMessage = errorMessage
     }

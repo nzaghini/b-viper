@@ -1,7 +1,6 @@
 import Foundation
 import RealmSwift
 
-
 class RealmLocation: Object {
     dynamic var locationId: String = ""
     dynamic var name: String = ""
@@ -11,10 +10,9 @@ class RealmLocation: Object {
     var longitude = RealmOptional<Double>()
 }
 
-
 class RealmLocationStoreService: LocationStoreService {
 
-    private let realm: Realm?
+    fileprivate let realm: Realm?
 
     init() {
         do {
@@ -27,7 +25,7 @@ class RealmLocationStoreService: LocationStoreService {
 
     // MARK: <CityStoreService>
 
-    func addLocation(location: Location) {
+    func addLocation(_ location: Location) {
         let realmCity = self.realmLocation(fromLocation: location)
 
         do {
@@ -41,8 +39,7 @@ class RealmLocationStoreService: LocationStoreService {
 
     func locations() -> [Location] {
         if let realm = self.realm {
-            return realm.objects(RealmLocation.self).map({
-                (realmLocation) -> Location in
+            return realm.objects(RealmLocation.self).map({ (realmLocation) -> Location in
                 return self.location(fromRealmLocation: realmLocation)
             })
         } else {
@@ -58,7 +55,7 @@ class RealmLocationStoreService: LocationStoreService {
 
     // MARK: Private
 
-    private func realmLocation(fromLocation location: Location) -> RealmLocation {
+    fileprivate func realmLocation(fromLocation location: Location) -> RealmLocation {
         let realmLocation = RealmLocation()
 
         realmLocation.locationId = location.locationId
@@ -66,7 +63,7 @@ class RealmLocationStoreService: LocationStoreService {
         realmLocation.region = location.region
         realmLocation.country = location.country
 
-        if let latitude = location.latitude, longitude = location.longitude {
+        if let latitude = location.latitude, let longitude = location.longitude {
             realmLocation.latitude.value = latitude
             realmLocation.longitude.value = longitude
         }
@@ -74,7 +71,7 @@ class RealmLocationStoreService: LocationStoreService {
         return realmLocation
     }
 
-    private func location(fromRealmLocation realmLocation: RealmLocation) -> Location {
+    fileprivate func location(fromRealmLocation realmLocation: RealmLocation) -> Location {
         let location = Location(locationId: realmLocation.locationId,
                 name: realmLocation.name,
                 region: realmLocation.region,

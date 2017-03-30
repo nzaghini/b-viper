@@ -13,7 +13,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
         self.presenter?.loadContent()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.presenter?.loadContent()
@@ -21,39 +21,38 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     
     // MARK: - CityListView
     
-    func displayLocationList(viewModel: LocationListViewModel) {
+    func displayLocationList(_ viewModel: LocationListViewModel) {
         self.viewModel = viewModel
         self.tableView.reloadData()
     }
     
-    func displayError(errorMessage: String) {
-        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "OK", style: .Cancel, handler: nil)
+    func displayError(_ errorMessage: String) {
+        let alert = UIAlertController(title: "Error", message: errorMessage, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
 
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if let viewModel = self.viewModel {
             return viewModel.locations.count
         }
         return 0
     }
     
-    
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("WeatherCell")
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "WeatherCell")
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "WeatherCell")
-            cell?.accessoryType = .DisclosureIndicator
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "WeatherCell")
+            cell?.accessoryType = .disclosureIndicator
         }
         
         if let item = self.viewModel?.locations[indexPath.row] {
@@ -64,7 +63,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
         return cell!
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let viewModel = self.viewModel {
             let locationId = viewModel.locations[indexPath.row].locationId
             self.presenter?.presentWeatherDetail(locationId)
@@ -74,7 +73,7 @@ class WeatherListViewController: UITableViewController, WeatherListView {
     // MARK: - Utils
     
     func addButtonItem() -> UIBarButtonItem {
-        return UIBarButtonItem(barButtonSystemItem: .Add, target: self, action: #selector(self.addWeatherLocation))
+        return UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addWeatherLocation))
     }
     
     func addWeatherLocation() {

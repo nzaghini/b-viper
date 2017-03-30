@@ -1,8 +1,8 @@
 import Foundation
 
 public enum FindLocationResult {
-    case Success(locations: [Location])
-    case Failure(reason: NSError)
+    case success(locations: [Location])
+    case failure(reason: Error)
 }
 
 /// The weather location module interactor
@@ -11,13 +11,12 @@ public protocol WeatherLocationInteractor {
     ///
     /// - parameter text:       the location text
     /// - parameter completion: the result of location search
-    func findLocation(text: String, completion: (FindLocationResult) -> ())
+    func findLocation(_ text: String, completion: @escaping (FindLocationResult) -> Void)
     /// Allows selection of location
     ///
     /// - parameter location: the weather location model
-    func selectLocation(location: Location)
+    func selectLocation(_ location: Location)
 }
-
 
 class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
     let locationService: LocationService
@@ -28,24 +27,24 @@ class WeatherLocationCitiesInteractor: WeatherLocationInteractor {
         self.locationStoreService = locationStoreService
     }
     
-    func findLocation(text: String, completion: (FindLocationResult) -> ()) {
+    func findLocation(_ text: String, completion: @escaping (FindLocationResult) -> Void) {
         self.locationService.fetchLocations(withName: text) { (locations, error) in
             var result: FindLocationResult!
             
-            if error != nil {
-                result = FindLocationResult.Failure(reason: error!)
+            if let error = error {
+                result = FindLocationResult.failure(reason: error)
             } else if let locations = locations {
-                result = FindLocationResult.Success(locations: locations)
+                result = FindLocationResult.success(locations: locations)
             } else {
                 let error = NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)
-                result = FindLocationResult.Failure(reason: error)
+                result = FindLocationResult.failure(reason: error)
             }
             
             completion(result)
         }
     }
     
-    func selectLocation(location: Location) {
+    func selectLocation(_ location: Location) {
         self.locationStoreService.addLocation(location)
     }
     

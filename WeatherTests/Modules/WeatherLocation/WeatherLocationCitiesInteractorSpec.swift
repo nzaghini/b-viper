@@ -2,7 +2,6 @@ import Quick
 import Nimble
 @testable import Weather
 
-
 class WeatherLocationCitiesInteractorSpec: QuickSpec {
     
     var citiesServiceMock: CitiesServiceMock!
@@ -23,7 +22,7 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
         context("When locationsWithText is called") {
             it("Should call the cities service with the text provided") {
                 
-                self.interactor.findLocation("London") { (result) in
+                self.interactor.findLocation("London") { _ in
                     
                 }
                 
@@ -37,7 +36,7 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
                 self.citiesServiceMock.citiesToReturn = []
                 
                 self.interactor.findLocation("London") { (result) in
-                    if case .Success(let locations) = result {
+                    if case .success(let locations) = result {
                         expect(locations.count).to(equal(0))
                     } else {
                         fail()
@@ -52,8 +51,8 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
                 self.citiesServiceMock.errorToReturn = error
                 
                 self.interactor.findLocation("City") { (result) in
-                    if case .Failure(let error) = result {
-                        expect(error.code).to(equal(404))
+                    if case .failure(let error) = result {
+                        expect((error as NSError).code).to(equal(404))
                     } else {
                         fail()
                     }
@@ -67,7 +66,7 @@ class WeatherLocationCitiesInteractorSpec: QuickSpec {
                 self.citiesServiceMock.citiesToReturn = [city]
                 
                 self.interactor.findLocation("City") { (result) in
-                    if case .Success(let locations) = result {
+                    if case .success(let locations) = result {
                         expect(locations.count).to(equal(1))
                     } else {
                         fail()

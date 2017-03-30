@@ -2,7 +2,6 @@ import Quick
 import Nimble
 @testable import Weather
 
-
 class WeatherLocationDefaultPresenterSpec: QuickSpec {
     
     var viewMock: WeatherLocationViewMock!
@@ -52,7 +51,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         
         context("When userSearchText is called and the interactor returns no locations") {
             it("Should call displayNoResults on the view") {
-                let result = FindLocationResult.Success(locations: [])
+                let result = FindLocationResult.success(locations: [])
                 self.interactorMock.resultToReturn = result
                 
                 self.presenter.searchLocation("text")
@@ -64,7 +63,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         context("When userSearchText is called and the interactor returns an error") {
             it("Should call displayErrorMessage on the view") {
                 let error = NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)
-                self.interactorMock.resultToReturn = FindLocationResult.Failure(reason: error)
+                self.interactorMock.resultToReturn = FindLocationResult.failure(reason: error)
                 
                 self.presenter.searchLocation("text")
                 
@@ -75,7 +74,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         context("When userSearchText is called and the interactor returns some locations") {
             it("Should call displayLocations on the view") {
                 let location = Location.locationWithIndex(1)
-                self.interactorMock.resultToReturn = FindLocationResult.Success(locations: [location])
+                self.interactorMock.resultToReturn = FindLocationResult.success(locations: [location])
                 
                 self.presenter.searchLocation("text")
                 
@@ -89,7 +88,7 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
         context("When userSelectLocation is called") {
             it("Should call the interactor and navigate back") {
                 let location = Location.locationWithIndex(1)
-                self.interactorMock.resultToReturn = FindLocationResult.Success(locations: [location])
+                self.interactorMock.resultToReturn = FindLocationResult.success(locations: [location])
                 
                 self.presenter.searchLocation("text")
                 
@@ -119,8 +118,6 @@ class WeatherLocationDefaultPresenterSpec: QuickSpec {
     
 }
 
-
-
 // MARK: Mocks
 
 class WeatherLocationInteractorMock: WeatherLocationInteractor {
@@ -131,7 +128,7 @@ class WeatherLocationInteractorMock: WeatherLocationInteractor {
     var locationCalled: Location?
     var resultToReturn: FindLocationResult?
     
-    func findLocation(text: String, completion: (FindLocationResult) -> ()) {
+    func findLocation(_ text: String, completion: @escaping (FindLocationResult) -> Void) {
         self.locationsWithTextCalled = true
         self.textCalled = text
         
@@ -140,13 +137,12 @@ class WeatherLocationInteractorMock: WeatherLocationInteractor {
         }
     }
     
-    func selectLocation(location: Location) {
+    func selectLocation(_ location: Location) {
         self.selectLocationCalled = true
         self.locationCalled = location
     }
     
 }
-
 
 class WeatherLocationViewMock: WeatherLocationView {
     
@@ -170,12 +166,12 @@ class WeatherLocationViewMock: WeatherLocationView {
         self.displayNoResultsCalled = true
     }
     
-    func displayErrorMessage(errorMessage: String) {
+    func displayErrorMessage(_ errorMessage: String) {
         self.displayErrorMessageCalled = true
         self.errorMessageCalled = errorMessage
     }
     
-    func displayLocations(viewModel: SelectableLocationListViewModel) {
+    func displayLocations(_ viewModel: SelectableLocationListViewModel) {
         self.displayLocationsCalled = true
         self.locationsCalled = viewModel
     }

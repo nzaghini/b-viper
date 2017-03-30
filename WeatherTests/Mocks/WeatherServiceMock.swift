@@ -1,22 +1,21 @@
 import Foundation
 @testable import Weather
 
-
 class WeatherServiceMock: WeatherService {
     var weatherList: [Weather] = []
-    var error: NSError?
+    var error: Error?
     
     var weatherDataAsyncCalled = false
     var cityNameCalled: String?
     
-    func fetchWeather(forLocationName name: String, completion: FetchWeatherCompletion) {
+    func fetchWeather(forLocationName name: String, completion: @escaping FetchWeatherCompletion) {
         self.cityNameCalled? = name
         self.weatherDataAsyncCalled = true
         
-        completion(weather: self.resultToReturn(name), error: error)
+        completion(self.resultToReturn(name), error)
     }
     
-    private func resultToReturn(name: String) -> Weather? {
+    fileprivate func resultToReturn(_ name: String) -> Weather? {
         let weather = self.weatherList.filter({$0.locationName == name})
         return weather.isEmpty ? nil : weather.first
     }

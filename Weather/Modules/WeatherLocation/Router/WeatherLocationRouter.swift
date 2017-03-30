@@ -1,12 +1,10 @@
 import UIKit
 
-
 protocol WeatherLocationRouter {
     
     func navigateBack()
     
 }
-
 
 class WeatherLocationModalRouter: WeatherLocationRouter {
     
@@ -19,6 +17,6 @@ class WeatherLocationModalRouter: WeatherLocationRouter {
     // MARK: <WeatherLocationRouter>
     
     func navigateBack() {
-        self.viewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.viewController?.dismiss(animated: true, completion: nil)
     }
 }

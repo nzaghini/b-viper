@@ -30,8 +30,6 @@ struct WeatherListSwiftInjectBuilder: WeatherListBuilder {
     func registerRouter() {
         Container.sharedContainer.register(WeatherListRouter.self) { c in
             WeatherListDefaultRouter(viewController: (c.resolve(WeatherListView.self) as? UIViewController)!)}
-        
-        
     }
     
     func registerPresenter() {

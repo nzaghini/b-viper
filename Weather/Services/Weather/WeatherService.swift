@@ -14,8 +14,8 @@ public func == (lhs: Weather, rhs: Weather) -> Bool {
         && lhs.forecastInDays == rhs.forecastInDays && lhs.temperatureUnit == rhs.temperatureUnit
 }
 
-public typealias FetchWeatherCompletion = (weather: Weather?, error: NSError?) -> Void
+public typealias FetchWeatherCompletion = (_ weather: Weather?, _ error: Error?) -> Void
 
 public protocol WeatherService {
-    func fetchWeather(forLocationName name: String, completion: FetchWeatherCompletion)
+    func fetchWeather(forLocationName name: String, completion: @escaping FetchWeatherCompletion)
 }
