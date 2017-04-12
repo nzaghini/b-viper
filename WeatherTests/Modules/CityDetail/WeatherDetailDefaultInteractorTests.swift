@@ -1,7 +1,6 @@
 import XCTest
 @testable import Weather
 
-
 class WeatherDetailDefaultInteractorTests: XCTestCase {
     
     var weatherServiceMock: WeatherServiceMock!
@@ -18,9 +17,9 @@ class WeatherDetailDefaultInteractorTests: XCTestCase {
     func testFetchCitySuccess() {
         self.weatherServiceMock.weatherList = [Weather(locationName: self.location.name, temperature: "", forecastInDays: [], temperatureUnit: "")]
         
-        self.interactor.fetchWeather() { (result) in
+        self.interactor.fetchWeather { (result) in
             switch result {
-            case .Success(let data):
+            case .success(let data):
                 XCTAssertEqual(data.locationName, self.location.name)
             default:
                 XCTFail()
@@ -33,10 +32,10 @@ class WeatherDetailDefaultInteractorTests: XCTestCase {
     func testFetchCityFailure() {
         self.weatherServiceMock.error = NSError(domain: "", code: 500, userInfo: nil)
         
-        self.interactor.fetchWeather() { (result) in
+        self.interactor.fetchWeather { (result) in
             switch result {
-            case .Failure(let error):
-                XCTAssertEqual(error.code, 500)
+            case .failure(let error):
+                XCTAssertEqual((error as NSError).code, 500)
             default:
                 XCTFail()
             }

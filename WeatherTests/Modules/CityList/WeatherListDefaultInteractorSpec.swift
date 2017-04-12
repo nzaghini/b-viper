@@ -15,8 +15,5 @@ class WeatherListDefaultInteractorSpec: QuickSpec {
         let weatherService = WeatherServiceMock()
         let locationStoreService = LocationStoreServiceMock()
         let interactor: WeatherListInteractor = WeatherListDefaultInteractor(locationStoreService: locationStoreService)
-        
-    
-        
     }
 }

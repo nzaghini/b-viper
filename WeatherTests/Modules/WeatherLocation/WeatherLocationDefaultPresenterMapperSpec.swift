@@ -2,7 +2,6 @@ import Nimble
 import Quick
 @testable import Weather
 
-
 class WeatherLocationDefaultPresenterMapperSpec: QuickSpec {
     
     var viewModelBuilder: SelectableLocationListViewModelBuilder!

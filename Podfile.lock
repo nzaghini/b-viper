@@ -1,35 +1,35 @@
 PODS:
-  - Alamofire (3.5.1)
-  - ASToast (1.0.3)
-  - ModelMapper (4.0.0)
-  - Nimble (4.1.0)
-  - Quick (0.9.3)
-  - Realm (2.0.1):
-    - Realm/Headers (= 2.0.1)
-  - Realm/Headers (2.0.1)
-  - RealmSwift (2.0.1):
-    - Realm (= 2.0.1)
-  - Swinject (1.1.4)
+  - Alamofire (4.4.0)
+  - ASToast (1.0.9)
+  - ModelMapper (6.0.0)
+  - Nimble (6.1.0)
+  - Quick (1.1.0)
+  - Realm (2.5.0):
+    - Realm/Headers (= 2.5.0)
+  - Realm/Headers (2.5.0)
+  - RealmSwift (2.5.0):
+    - Realm (= 2.5.0)
+  - Swinject (2.0.0)
 
 DEPENDENCIES:
   - Alamofire
-  - ASToast (= 1.0.3)
+  - ASToast
   - ModelMapper
-  - Nimble (= 4.1.0)
-  - Quick (= 0.9.3)
+  - Nimble (= 6.1)
+  - Quick (= 1.1)
   - RealmSwift
   - Swinject
 
 SPEC CHECKSUMS:
-  Alamofire: 0dfba1184a543e2aa160f4e39cac4e8aba48d223
-  ASToast: 3ca73a088e2c0b4c2cf0af3ef7b83a19cfd98733
-  ModelMapper: 047e26a92f48e3ac16af3ac07e8e049ecc33feae
-  Nimble: 97a0a4cae5124c117115634b2d055d8c97d0af19
-  Quick: 13a2a2b19a5d8e3ed4fd0c36ee46597fd77ebf71
-  Realm: 0557ee0e4ab4f0936c90e370056d1ed6265f93d6
-  RealmSwift: 64e00af79bdcd7d2a7a23fdc1cb3faf22b80ae4c
-  Swinject: 8863ebff588a8574f1bc9af8a6abed11389865f7
+  Alamofire: dc44b1600b800eb63da6a19039a0083d62a6a62d
+  ASToast: 7b0a104bba38264e2525924a6ab60dde972d0c83
+  ModelMapper: 3596a82f26c43491f6a8d3a00bcdba6ba0e62a93
+  Nimble: c53e6903fee94041b90ded74f135820437d8bf59
+  Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
+  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
+  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
 
-PODFILE CHECKSUM: 770f8a93c6bacef89501fc80054f3fd8d8edaddd
+PODFILE CHECKSUM: 32e89618ae8deaf29eee29d2ffdeb793d1b21fe8
 
-COCOAPODS: 1.0.1
+COCOAPODS: 1.2.0

@@ -1,12 +1,17 @@
 import Foundation
 
 enum FetchCityWeatherResult {
-    case Success(weather: Weather)
-    case Failure(reason: NSError)
+    case success(weather: Weather)
+    case failure(reason: Error)
+}
+
+enum FetchCityWeatherError : Error {
+    
+    case unknown
 }
 
 protocol WeatherDetailInteractor {
-    func fetchWeather(completion: (FetchCityWeatherResult) -> ())
+    func fetchWeather(_ completion: @escaping (FetchCityWeatherResult) -> Void)
 }
 
 class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
@@ -19,17 +24,16 @@ class WeatherDetailDefaultInteractor: WeatherDetailInteractor {
         self.location = location
     }
     
-    func fetchWeather(completion: (FetchCityWeatherResult) -> ()) {
+    func fetchWeather(_ completion: @escaping (FetchCityWeatherResult) -> Void) {
         self.weatherService.fetchWeather(forLocationName: location.name) { (weather, error) in
             var result: FetchCityWeatherResult
             
-            if error != nil {
-                result = FetchCityWeatherResult.Failure(reason: error!)
+            if let error = error {
+                result = FetchCityWeatherResult.failure(reason: error)
             } else if let weather = weather {
-                result = FetchCityWeatherResult.Success(weather:  weather)
+                result = FetchCityWeatherResult.success(weather:  weather)
             } else {
-                let error = NSError(domain: NSURLErrorDomain, code: 500, userInfo: nil)
-                result = FetchCityWeatherResult.Failure(reason: error)
+                result = FetchCityWeatherResult.failure(reason: FetchCityWeatherError.unknown)
             }
             
             completion(result)

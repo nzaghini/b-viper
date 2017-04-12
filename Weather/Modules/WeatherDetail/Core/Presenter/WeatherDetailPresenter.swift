@@ -31,30 +31,30 @@ class WeatherDetailDefaultPresenter: WeatherDetailPresenter {
         self.view?.displayLoading()
         self.interactor.fetchWeather {(result) in
             switch result {
-            case .Success(let weather):
+            case .success(let weather):
                 let vm = self.buildViewModel(weather)
                 self.view?.displayWeatherDetail(vm)
                 break
-            case .Failure(let reason):
+            case .failure(let reason):
                 self.view?.displayError(reason.localizedDescription)
             }
         }
     }
     
-    private func buildViewModel(data: Weather) -> WeatherDetailViewModel {
+    fileprivate func buildViewModel(_ data: Weather) -> WeatherDetailViewModel {
         var forecasts = [WeatherDetailForecastViewModel]()
         
-        let df = NSDateFormatter()
+        let df = DateFormatter()
         df.dateFormat = "EEEE"
-        var date = NSDate()
+        var date = Date()
         
         for temp in data.forecastInDays {
-            let day = df.stringFromDate(date)
+            let day = df.string(from: date)
             
             let forecast = WeatherDetailForecastViewModel(day: day, temp: temp + data.temperatureUnit)
             forecasts.append(forecast)
             
-            date = date.dateByAddingTimeInterval(24 * 60 * 60)
+            date = date.addingTimeInterval(24 * 60 * 60)
         }
         
         return WeatherDetailViewModel(cityName: data.locationName,

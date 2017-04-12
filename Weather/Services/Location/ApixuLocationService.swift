@@ -2,10 +2,9 @@ import Foundation
 import Alamofire
 import Mapper
 
-
 extension Location: Mappable {
     public init(map: Mapper) throws {
-        try locationId = map.from("id", transformation: { return String($0!) })
+        try locationId = map.from("id", transformation: { return String(describing: $0) })
         try name = map.from("name")
         try region = map.from("region")
         try country = map.from("country")
@@ -14,29 +13,28 @@ extension Location: Mappable {
     }
 }
 
-
 class ApixuLocationService: LocationService {
     
-    private let apixuCitiesUrl = "https://api.apixu.com/v1/search.json"
-    private let apixuKey = "6dbb6fcfa4b74a599f580222160508"
+    fileprivate let apixuCitiesUrl = "https://api.apixu.com/v1/search.json"
+    fileprivate let apixuKey = "6dbb6fcfa4b74a599f580222160508"
     
     // MARK: <CitiesService>
     
-    func fetchLocations(withName name: String, completion: LocationServiceCompletion) {
+    func fetchLocations(withName name: String, completion: @escaping LocationServiceCompletion) {
         let parameters = ["key": self.apixuKey,
                           "q": name]
-        Alamofire.request(.GET, self.apixuCitiesUrl, parameters: parameters)
-            .responseJSON { (response) in
-                switch response.result {
-                case .Success(let JSON):
-                    if let JSON = JSON as? [NSDictionary] {
-                        let cities = Location.from(JSON)
-                        completion(locations: cities, error: nil)
-                    }
-                case .Failure(let error):
-                    completion(locations: nil, error: error)
+        
+        Alamofire.request(self.apixuCitiesUrl, method: .get, parameters: parameters).responseJSON { response in
+            switch response.result {
+            case .success(let JSON):
+                if let JSON = JSON as? NSArray {
+                    let cities = Location.from(JSON)
+                    completion(cities, nil)
                 }
+            case .failure(let error):
+                completion(nil, error)
             }
+        }
     }
     
 }

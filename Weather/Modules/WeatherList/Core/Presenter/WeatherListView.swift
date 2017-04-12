@@ -1,6 +1,6 @@
 import Foundation
 
 protocol WeatherListView: class {
-    func displayLocationList(viewModel: LocationListViewModel)
-    func displayError(errorMessage: String)
+    func displayLocationList(_ viewModel: LocationListViewModel)
+    func displayError(_ errorMessage: String)
 }

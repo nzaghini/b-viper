@@ -1,7 +1,6 @@
 import Foundation
 @testable import Weather
 
-
 class LocationStoreServiceMock: LocationStoreService {
     
     var locationsList = [Location]()
@@ -10,8 +9,7 @@ class LocationStoreServiceMock: LocationStoreService {
     var allLocationsCalled = false
     var deleteAllLocationsCalled = false
     
-    
-    func addLocation(location: Location) {
+    func addLocation(_ location: Location) {
         self.storeLocationCalled = true
         self.locationStored = location
     }

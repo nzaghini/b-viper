@@ -18,15 +18,15 @@ class WeatherListDefaultRouter: WeatherListRouter {
     func navigateToAddWeatherLocation() {
         if let weatherLocationVC = self.weatherLocationBuilder()?.buildWeatherLocationModule() {
             let navController = UINavigationController(rootViewController: weatherLocationVC)
-            self.viewController?.presentViewController(navController, animated: true, completion: nil)
+            self.viewController?.present(navController, animated: true, completion: nil)
         }
     }
     
-    private func weatherDetailBuilder() -> WeatherDetailBuilder? {
+    fileprivate func weatherDetailBuilder() -> WeatherDetailBuilder? {
         return Container.sharedContainer.resolve(WeatherDetailBuilder.self)
     }
     
-    private func weatherLocationBuilder() -> WeatherLocationBuilder? {
+    fileprivate func weatherLocationBuilder() -> WeatherLocationBuilder? {
         return Container.sharedContainer.resolve(WeatherLocationBuilder.self)
     }
     

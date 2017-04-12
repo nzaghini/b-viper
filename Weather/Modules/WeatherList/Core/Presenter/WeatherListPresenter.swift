@@ -12,16 +12,16 @@ struct LocationViewModel {
 
 protocol WeatherListPresenter {
     func loadContent()
-    func presentWeatherDetail(location: String)
+    func presentWeatherDetail(_ location: String)
     func presentAddWeatherLocation()
 }
 
 class WeatherListDefaultPresenter: WeatherListPresenter {
     
-    private let interactor: WeatherListInteractor
-    private let router: WeatherListRouter
-    private weak var view: WeatherListView?
-    private let viewModelBuilder = LocationListViewModelBuilder()
+    fileprivate let interactor: WeatherListInteractor
+    fileprivate let router: WeatherListRouter
+    fileprivate weak var view: WeatherListView?
+    fileprivate let viewModelBuilder = LocationListViewModelBuilder()
     
     required init(interactor: WeatherListInteractor, router: WeatherListRouter, view: WeatherListView) {
         self.interactor = interactor
@@ -36,8 +36,8 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
         self.view?.displayLocationList(self.viewModelBuilder.buildViewModel(locations))
     }
     
-    func presentWeatherDetail(locationId: String) {
-        let index = self.interactor.locations().indexOf({$0.locationId == locationId})
+    func presentWeatherDetail(_ locationId: String) {
+        let index = self.interactor.locations().index(where: {$0.locationId == locationId})
         if let index = index {
             self.router.navigateToWeatherDetail(withLocation: self.interactor.locations()[index])
         }
@@ -53,7 +53,7 @@ class WeatherListDefaultPresenter: WeatherListPresenter {
 //TODO: can this be a struct
 class LocationListViewModelBuilder {
 
-    func buildViewModel(locations: [Location]) -> LocationListViewModel {
+    func buildViewModel(_ locations: [Location]) -> LocationListViewModel {
         let locationViewModels = locations.map { (location) -> LocationViewModel in
             return LocationViewModel(locationId: location.locationId,
                     name: location.name,
@@ -63,7 +63,7 @@ class LocationListViewModelBuilder {
         return LocationListViewModel(locations: locationViewModels)
     }
 
-    private func detailTextFromLocationData(location: Location) -> String {
+    fileprivate func detailTextFromLocationData(_ location: Location) -> String {
         if location.region.isEmpty {
             return location.country
         }

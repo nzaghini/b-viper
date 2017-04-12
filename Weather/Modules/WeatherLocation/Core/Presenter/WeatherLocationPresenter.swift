@@ -13,19 +13,19 @@ public struct SelectableLocationViewModel {
 /// The presenter for weather location module
 public protocol WeatherLocationPresenter {
     func loadContent()
-    func searchLocation(text: String)
-    func selectLocation(locationId: String)
+    func searchLocation(_ text: String)
+    func selectLocation(_ locationId: String)
     func cancelSearchForLocation()
 }
 
 class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     
-    private weak var view: WeatherLocationView?
-    private let interactor: WeatherLocationInteractor
-    private let router: WeatherLocationRouter
+    fileprivate weak var view: WeatherLocationView?
+    fileprivate let interactor: WeatherLocationInteractor
+    fileprivate let router: WeatherLocationRouter
     
-    private var locations: [Location]?
-    private let viewModelBuilder = SelectableLocationListViewModelBuilder()
+    fileprivate var locations: [Location]?
+    fileprivate let viewModelBuilder = SelectableLocationListViewModelBuilder()
     
     init(view: WeatherLocationView, interactor: WeatherLocationInteractor, router: WeatherLocationRouter) {
         self.view = view
@@ -39,14 +39,14 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
         self.view?.displaySearch()
     }
     
-    func searchLocation(text: String) {
+    func searchLocation(_ text: String) {
         if text.characters.isEmpty {
             return
         }
         self.view?.displayLoading()
         self.interactor.findLocation(text, completion: { (result) in
             switch result {
-            case .Success(let locations):
+            case .success(let locations):
                 if !locations.isEmpty {
                     self.locations = locations
                     let viewModel = self.viewModelBuilder.buildViewModel(locations)
@@ -54,14 +54,14 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
                 } else {
                     self.view?.displayNoResults()
                 }
-            case .Failure(let error):
+            case .failure(let error):
                 self.view?.displayErrorMessage(error.localizedDescription)
             }
         })
     }
     
-    func selectLocation(locationId: String) {
-        if let locations = self.locations, index = locations.indexOf({ $0.locationId == locationId }) {
+    func selectLocation(_ locationId: String) {
+        if let locations = self.locations, let index = locations.index(where: { $0.locationId == locationId }) {
             let selectedLocation = locations[index]
             self.interactor.selectLocation(selectedLocation)
         }
@@ -75,21 +75,20 @@ class WeatherLocationDefaultPresenter: WeatherLocationPresenter {
     
 }
 
-
 class SelectableLocationListViewModelBuilder {
     
-    func buildViewModel(locations: [Location]) -> SelectableLocationListViewModel {
+    func buildViewModel(_ locations: [Location]) -> SelectableLocationListViewModel {
         let locationsViewModels = locations.map(self.mapLocation)
         return SelectableLocationListViewModel(locations: locationsViewModels)
     }
     
-    private func mapLocation(location: Location) -> SelectableLocationViewModel {
+    fileprivate func mapLocation(_ location: Location) -> SelectableLocationViewModel {
         return SelectableLocationViewModel(locationId: location.locationId,
                                         name: location.name,
                                         detail: self.detailTextFromLocation(location))
     }
     
-    private func detailTextFromLocation(location: Location) -> String {
+    fileprivate func detailTextFromLocation(_ location: Location) -> String {
         if location.region.isEmpty {
             return location.country
         }

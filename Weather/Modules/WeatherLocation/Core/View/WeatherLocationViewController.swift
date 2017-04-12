@@ -1,7 +1,6 @@
 import UIKit
 import ASToast
 
-
 class WeatherLocationViewController: UIViewController {
     
     @IBOutlet weak var spinner: UIActivityIndicatorView!
@@ -14,12 +13,12 @@ class WeatherLocationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.edgesForExtendedLayout = UIRectEdge.None
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Cancel, target: self, action: #selector(cancelAction))
+        self.edgesForExtendedLayout = UIRectEdge()
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(cancelAction))
         
         self.tableView.dataSource = self
         self.tableView.delegate = self
-        self.tableView.keyboardDismissMode = .OnDrag
+        self.tableView.keyboardDismissMode = .onDrag
         
         self.searchBar.delegate = self
         self.spinner.hidesWhenStopped = true
@@ -36,11 +35,9 @@ class WeatherLocationViewController: UIViewController {
     
     // MARK: Helpers
     
-    private func showToastWithText(text: String) {
-        self.view.makeToast(text,
-                            duration: NSTimeInterval(3.0),
-                            position: ASToastPosition.ASToastPositionCenter.rawValue,
-                            backgroundColor: nil)
+    fileprivate func showToastWithText(_ text: String) {
+        
+        view.makeToast(message: text, duration: TimeInterval(3.0), position: .center, backgroundColor: nil, messageColor: nil, font: nil)
     }
     
 }
@@ -49,22 +46,22 @@ class WeatherLocationViewController: UIViewController {
 extension WeatherLocationViewController: WeatherLocationView {
     
     func displayLoading() {
-        self.searchBar.hidden = false
-        self.tableView.hidden = true
+        self.searchBar.isHidden = false
+        self.tableView.isHidden = true
         self.spinner.startAnimating()
     }
 
     func displaySearch() {
-        self.searchBar.hidden = false
-        self.tableView.hidden = false
+        self.searchBar.isHidden = false
+        self.tableView.isHidden = false
         self.spinner.stopAnimating()
         
         self.searchBar.becomeFirstResponder()
     }
 
     func displayNoResults() {
-        self.searchBar.hidden = false
-        self.tableView.hidden = false
+        self.searchBar.isHidden = false
+        self.tableView.isHidden = false
         self.spinner.stopAnimating()
         
         self.viewModel = nil
@@ -73,17 +70,17 @@ extension WeatherLocationViewController: WeatherLocationView {
         self.showToastWithText("No Results")
     }
 
-    func displayErrorMessage(errorMessage: String) {
-        self.searchBar.hidden = false
-        self.tableView.hidden = false
+    func displayErrorMessage(_ errorMessage: String) {
+        self.searchBar.isHidden = false
+        self.tableView.isHidden = false
         self.spinner.stopAnimating()
         
         self.showToastWithText(errorMessage)
     }
 
-    func displayLocations(viewModel: SelectableLocationListViewModel) {
-        self.searchBar.hidden = false
-        self.tableView.hidden = false
+    func displayLocations(_ viewModel: SelectableLocationListViewModel) {
+        self.searchBar.isHidden = false
+        self.tableView.isHidden = false
         self.spinner.stopAnimating()
         
         self.viewModel = viewModel
@@ -95,7 +92,7 @@ extension WeatherLocationViewController: WeatherLocationView {
 // MARK: - <UISearchBarDelegate>
 extension WeatherLocationViewController: UISearchBarDelegate {
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         if let text = searchBar.text {
             self.presenter?.searchLocation(text)
         }
@@ -106,7 +103,7 @@ extension WeatherLocationViewController: UISearchBarDelegate {
 // MARK: - <UITableViewDelegate>
 extension WeatherLocationViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let location = self.viewModel?.locations[indexPath.row] {
             self.presenter?.selectLocation(location.locationId)
         }
@@ -117,14 +114,14 @@ extension WeatherLocationViewController: UITableViewDelegate {
 // MARK: - <UITableViewDataSource>
 extension WeatherLocationViewController: UITableViewDataSource {
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.viewModel?.locations.count ?? 0
     }
 
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("WeatherLocationCell")
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell = tableView.dequeueReusableCell(withIdentifier: "WeatherLocationCell")
         if cell == nil {
-            cell = UITableViewCell(style: .Subtitle, reuseIdentifier: "WeatherLocationCell")
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: "WeatherLocationCell")
         }
         
         if let location = self.viewModel?.locations[indexPath.row] {
