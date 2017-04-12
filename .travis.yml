@@ -10,10 +10,12 @@ cache:
 
 rvm:
   - 2.4.0
-  
+
+before_install:
+- pod update
+
 before_script:
 - bundle install
-# - bundle exec pod repo update
 
 notifications:
 email:

@@ -2,13 +2,9 @@ default_platform :ios
 
 platform :ios do
 
-  before_all do
-    cocoapods
-  end
-
   desc "Creates sonar reports"
   lane :sonar do
-    
+
     test
 
     slather
