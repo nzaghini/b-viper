@@ -4,11 +4,11 @@ PODS:
   - ModelMapper (6.0.0)
   - Nimble (6.1.0)
   - Quick (1.1.0)
-  - Realm (2.5.0):
-    - Realm/Headers (= 2.5.0)
-  - Realm/Headers (2.5.0)
-  - RealmSwift (2.5.0):
-    - Realm (= 2.5.0)
+  - Realm (2.5.1):
+    - Realm/Headers (= 2.5.1)
+  - Realm/Headers (2.5.1)
+  - RealmSwift (2.5.1):
+    - Realm (= 2.5.1)
   - Swinject (2.0.0)
 
 DEPENDENCIES:
@@ -26,10 +26,10 @@ SPEC CHECKSUMS:
   ModelMapper: 3596a82f26c43491f6a8d3a00bcdba6ba0e62a93
   Nimble: c53e6903fee94041b90ded74f135820437d8bf59
   Quick: dafc587e21eed9f4cab3249b9f9015b0b7a7f71d
-  Realm: 62abce501668580092d2be9b6ba7324a3d5f906a
-  RealmSwift: 9f1a8f624f2f153410115c2cb7d486be9976565d
+  Realm: 32f86104d37c8521f864d4274050b38ba6190733
+  RealmSwift: f719e7511c902b8908593e8f143f59e47931bdb6
   Swinject: 2e964a80d70ab09b3949c99032711f89147bfd60
 
 PODFILE CHECKSUM: 32e89618ae8deaf29eee29d2ffdeb793d1b21fe8
 
-COCOAPODS: 1.2.0
+COCOAPODS: 1.2.1
