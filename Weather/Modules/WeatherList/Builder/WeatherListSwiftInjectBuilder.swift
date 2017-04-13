@@ -14,29 +14,29 @@ struct WeatherListSwiftInjectBuilder: WeatherListBuilder {
     
     func registerView() {
         let viewDescription = Container.sharedContainer.register(WeatherListView.self) { _ in WeatherListViewController()}
-        viewDescription.initCompleted { c, v in
-            if let view = v as? WeatherListViewController {
-                view.presenter = c.resolve(WeatherListPresenter.self)
+        viewDescription.initCompleted { resolver, view in
+            if let view = view as? WeatherListViewController {
+                view.presenter = resolver.resolve(WeatherListPresenter.self)
             }
         }
     }
     
     func registerInteractor() {
-        Container.sharedContainer.register(WeatherListInteractor.self) { c in
-            WeatherListDefaultInteractor(locationStoreService: c.resolve(LocationStoreService.self)!)
+        Container.sharedContainer.register(WeatherListInteractor.self) { resolver in
+            WeatherListDefaultInteractor(locationStoreService: resolver.resolve(LocationStoreService.self)!)
         }
     }
     
     func registerRouter() {
-        Container.sharedContainer.register(WeatherListRouter.self) { c in
-            WeatherListDefaultRouter(viewController: (c.resolve(WeatherListView.self) as? UIViewController)!)}
+        Container.sharedContainer.register(WeatherListRouter.self) { resolver in
+            WeatherListDefaultRouter(viewController: (resolver.resolve(WeatherListView.self) as? UIViewController)!)}
     }
     
     func registerPresenter() {
-        Container.sharedContainer.register(WeatherListPresenter.self) { c in
-            WeatherListDefaultPresenter(interactor: c.resolve(WeatherListInteractor.self)!,
-                                        router: c.resolve(WeatherListRouter.self)!,
-                                        view: c.resolve(WeatherListView.self)!)}
+        Container.sharedContainer.register(WeatherListPresenter.self) { resolver in
+            WeatherListDefaultPresenter(interactor: resolver.resolve(WeatherListInteractor.self)!,
+                                        router: resolver.resolve(WeatherListRouter.self)!,
+                                        view: resolver.resolve(WeatherListView.self)!)}
         
     }
     

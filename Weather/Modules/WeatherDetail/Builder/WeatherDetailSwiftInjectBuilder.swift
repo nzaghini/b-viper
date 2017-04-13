@@ -15,23 +15,23 @@ struct WeatherDetailSwiftInjectBuilder: WeatherDetailBuilder {
         let viewDescription = Container.sharedContainer.register(WeatherDetailView.self) { _ in
             WeatherDetailViewController()
         }
-        viewDescription.initCompleted { r, v in
-            if let view = v as? WeatherDetailViewController {
-                view.presenter = r.resolve(WeatherDetailPresenter.self)
+        viewDescription.initCompleted { resolver, view in
+            if let view = view as? WeatherDetailViewController {
+                view.presenter = resolver.resolve(WeatherDetailPresenter.self)
             }
         }
     }
     
     fileprivate func registerInteractor(withLocation location: Location) {
-        Container.sharedContainer.register(WeatherDetailInteractor.self) { r in
-            WeatherDetailDefaultInteractor(weatherService: r.resolve(WeatherService.self)!, location: location)
+        Container.sharedContainer.register(WeatherDetailInteractor.self) { resolver in
+            WeatherDetailDefaultInteractor(weatherService: resolver.resolve(WeatherService.self)!, location: location)
         }
     }
     
     fileprivate func registerPresenter() {
-        Container.sharedContainer.register(WeatherDetailPresenter.self) { c in
-            WeatherDetailDefaultPresenter(interactor: c.resolve(WeatherDetailInteractor.self)!,
-                                          view: c.resolve(WeatherDetailView.self)!)
+        Container.sharedContainer.register(WeatherDetailPresenter.self) { resolver in
+            WeatherDetailDefaultPresenter(interactor: resolver.resolve(WeatherDetailInteractor.self)!,
+                                          view: resolver.resolve(WeatherDetailView.self)!)
         }
         
     }
